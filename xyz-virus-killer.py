@@ -107,44 +107,41 @@ def Clean():
 
 
 
-#Main Window
+#Main window
 
-window = tk.Tk()
-window.title("Title")
-window.geometry("1366x720")
+root = tk.Tk()
+root.title("Title")
+root.geometry("1366x720")
 
 
 var = tk.StringVar()
 
-l = tk.Label(window, textvariable = var, bg = "cyan", width = 45, font = ("Arial", 40), height= 2)
+l = tk.Label(root, textvariable = var, bg = "cyan", width = 45, font = ("Arial", 40), height= 2)
 l.pack()
 
-b1 = tk.Button(window, text = "Kill Viruses", font =30, width = 40, height= 2, command= Kill_Viruses)
+b1 = tk.Button(root, text = "Kill Viruses", font =30, width = 40, height= 2, command= Kill_Viruses)
 b1.pack()
 
-b2 = tk.Button(window, text = "Fix What Viruses Make", font =30, width = 40, height= 2, command= Fix_What_Viruses_Make)
+b2 = tk.Button(root, text = "Fix What Viruses Make", font =30, width = 40, height= 2, command= Fix_What_Viruses_Make)
 b2.pack()
 
-b3 = tk.Button(window, text = "Auto Kill(Do #1 And #2)", font =30, width = 40, height= 2, command= Auto_Kill)
+b3 = tk.Button(root, text = "Auto Kill(Do #1 And #2)", font =30, width = 40, height= 2, command= Auto_Kill)
 b3.pack()
 
-b4 = tk.Button(window, text = "Clean Screen", font = (30), width = 40, height= 2 , command= Clean_Button)
+b4 = tk.Button(root, text = "Clean Screen", font = (30), width = 40, height= 2 , command= Clean_Button)
 b4.pack()
 
-l0 = tk.Label(window, width = 10, font =20, height= 2)
+l0 = tk.Label(root, width = 10, font =20, height= 2)
 l0.pack()
 
-# text = "If you want to clean screen, press the Clean Screen buttom",
-l1 = tk.Label(window, text = "Output:", width = 10, font =20, height= 1)
+l1 = tk.Label(root, text = "Output:", width = 10, font =20, height= 1)
 l1.pack()
 
-t = tk.Text(window,  height= 25)
+t = tk.Text(root, height= 25)
 t.pack()
 
-var.set("VIRUS KILLER")
 
-
-window.mainloop()
+root.mainloop()
 
 """
 Copyright © 2030
