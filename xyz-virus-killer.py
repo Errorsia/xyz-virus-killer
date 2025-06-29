@@ -1,36 +1,110 @@
 import os
 import tkinter as tk
 
+
+
+
+
+def return_values(value):
+    if value == 1:
+        return "Success"
+    elif value == 128:
+        return "Error: Fail"
+    else:
+        return "Error: Please tell developers!!  Fail"
+        os.system()
+
+def dir_E():
+    if os.path.exists("E:\\"):
+        return True
+    else:
+        return False
+    # return False
+
+def dir_F():
+    if os.path.exists("F:\\"):
+        return True
+    else:
+        return False
+
+def dir_G():
+    if os.path.exists("G:\\"):
+        return True
+    else:
+        return False
+
+
+
 def Kill_Viruses():
-    var.set("Killing Processes")
-    os.system("TASKKILL -F -IM Rundll32.exe -T")
-    os.system("TASKKILL -F -IM AvastSvc.exe -T")
-    os.system("TASKKILL -F -IM wscript.exe -T")
-    os.system("TASKKILL -F -IM Autolt3.exe -T")
-    os.system("TASKKILL -F -IM cmd.exe -T")
-    print("----------------------FINISH-------------------")
-    print("----------------Renaming Files-----------------")
-    os.system("ren E:\*.lnk *.vir")
-    os.system("ren F:\*.lnk *.vir")
-    os.system("ren G:\*.lnk *.vir")
-    os.system("ren H:\*.lnk *.vir")
-    os.system("ren I:\*.lnk *.vir")
-    os.system("ren J:\*.lnk *.vir")
-    os.system("ren K:\*.lnk *.vir")
+    Clean()
+    # var.set("Killing Processes")
+    # print(var.get())
+    t.insert("end", "Killing Processes:\n")
+    t.insert("end", str(return_values(os.system("TASKKILL -F -IM Rundll32.exe -T")) + " to kill virus\n"))
+    t.insert("end", str(return_values(os.system("TASKKILL -F -IM AvastSvc.exe -T")) + " to kill virus\n"))
+    t.insert("end", str(return_values(os.system("TASKKILL -F -IM wscript.exe -T")) + " to kill virus\n"))
+    t.insert("end", str(return_values(os.system("TASKKILL -F -IM Autolt3.exe -T")) + " to kill virus\n"))
+    t.insert("end", str(return_values(os.system("TASKKILL -F -IM cmd.exe -T")) + " to kill virus\n"))
+    t.insert("end", "\n")
+    var.set("FINSIH")
+    Renaming_Files()
+
+def Renaming_Files():
+
+    # var.set("Renaming Files")
+    # print(var)
+    t.insert("end", "Renaming Files:\n")
+    if dir_E():
+        t.insert("end", str(return_values(os.system("ren E:\\*.lnk *.vir"))) + " to rename Files in E-disk\n")
+    else:
+        t.insert("end", "E-disk not found\n")
+    if dir_F():
+        t.insert("end", str(return_values(os.system("ren F:\\*.lnk *.vir"))) + " to rename Files in E-disk\n")
+    else:
+        t.insert("end", "F-disk not found\n")
+    if dir_G():
+        t.insert("end", str(return_values(os.system("ren G:\\*.lnk *.vir"))) + " to rename Files in E-disk\n")
+    else:
+        t.insert("end", "G-disk not found\n")
+    t.insert("end", "\n")
     var.set("FINSIH")
 
+
 def Fix_What_Viruses_Make():
-    var.set("Showing Hidden Files")
-    os.system("ATTRIB -S -H E:\ /d /l")
-    os.system("ATTRIB -S -H F:\ /d /l")
-    os.system("ATTRIB -S -H G:\ /d /l")
+    # var.set("Showing Hidden Files")
+    t.insert("end", "Showing Hidden Files:\n")
+    if dir_E():
+        os.system("ATTRIB -S -H E:\\*.* /d /l")
+        t.insert("end", "Success to show hidden files in E-disk\n")
+    else:
+        t.insert("end", "E-disk not found\n")
+    if dir_F():
+        os.system("ATTRIB -S -H F:\\*.* /d /l")
+        t.insert("end", "Success to show hidden files in F-disk\n")
+    else:
+        t.insert("end", "F-disk not found\n")
+    if dir_G():
+        os.system("ATTRIB -S -H G:\\*.* /d /l")
+        t.insert("end", "Success to show hidden files in G-disk\n")
+    else:
+        t.insert("end", "G-disk not found\n")
+
+    t.insert("end", "\n")
     # More ATTRIB commands here
     var.set("FINSIH")
 
 def Auto_Kill():
-
     Kill_Viruses()
     Fix_What_Viruses_Make()
+
+def Clean_Button():
+    var.set("")
+    t.delete("1.0", tk.END)
+
+def Clean():
+    t.delete("1.0", tk.END)
+
+
 
 
 #Main Window
@@ -42,68 +116,39 @@ window.geometry("1366x720")
 
 var = tk.StringVar()
 
-
-l = tk.Label(window, textvariable = var, bg = "cyan", font = ("Arial", 40), height= 2)
+l = tk.Label(window, textvariable = var, bg = "cyan", width = 45, font = ("Arial", 40), height= 2)
 l.pack()
 
-b1 = tk.Button(window, text = "Kill Viruses", font = (30), width = 40, height= 2 , command= Kill_Viruses)
+b1 = tk.Button(window, text = "Kill Viruses", font =30, width = 40, height= 2, command= Kill_Viruses)
 b1.pack()
 
-b2 = tk.Button(window, text = "Fix What Viruses Make", font = (30), width = 40, height= 2 , command= Fix_What_Viruses_Make)
+b2 = tk.Button(window, text = "Fix What Viruses Make", font =30, width = 40, height= 2, command= Fix_What_Viruses_Make)
 b2.pack()
 
-b3 = tk.Button(window, text = "Auto Kill(Do #1 And #2)", font = (30), width = 40, height= 2 , command= Auto_Kill)
+b3 = tk.Button(window, text = "Auto Kill(Do #1 And #2)", font =30, width = 40, height= 2, command= Auto_Kill)
 b3.pack()
 
-# b4 = tk.Button(window, text = "Select What Virus You Want To Kill", font = (30), width = 40, height= 2 , command= Select)
-# b4.pack()
+b4 = tk.Button(window, text = "Clean Screen", font = (30), width = 40, height= 2 , command= Clean_Button)
+b4.pack()
+
+l0 = tk.Label(window, width = 10, font =20, height= 2)
+l0.pack()
+
+# text = "If you want to clean screen, press the Clean Screen buttom",
+l1 = tk.Label(window, text = "Output:", width = 10, font =20, height= 1)
+l1.pack()
+
+t = tk.Text(window,  height= 25)
+t.pack()
+
+var.set("VIRUS KILLER")
 
 
 window.mainloop()
 
+"""
+Copyright © 2030
+© 2024-2030 Arthur_xyz版权所有
 
-
-
-while True:
-    print("#1 Kill Viruses")
-    print("#2 Fix What Viruses Make")
-    print("#3 Auto Kill(Do #1 And #2)")
-    print("#4 Select What Virus You Want To Kill")
-    print("#6 Quit")
-    command_var = int(input("What you chose: "))
-
-    if command_var == 1:
-        print("----------------Killing Viruses----------------")
-        print("---------------Killing Processes---------------")
-        os.system("TASKKILL -F -IM Rundll32.exe -T")
-        os.system("TASKKILL -F -IM AvastSvc.exe -T")
-        os.system("TASKKILL -F -IM wscript.exe -T")
-        os.system("TASKKILL -F -IM Autolt3.exe -T")
-        os.system("TASKKILL -F -IM cmd.exe -T")
-        print("----------------------FINISH-------------------")
-        print("----------------Renaming Files-----------------")
-        os.system("ren E:\*.lnk *.vir")
-        os.system("ren F:\*.lnk *.vir")
-        os.system("ren G:\*.lnk *.vir")
-        os.system("ren H:\*.lnk *.vir")
-        os.system("ren I:\*.lnk *.vir")
-        os.system("ren J:\*.lnk *.vir")
-        os.system("ren K:\*.lnk *.vir")
-        # More renaming commands here
-        print("----------------------FINSIH-------------------")
-        print("The Files are Renamed, You can decide To Delete Them Or Not;-)")
-        print("Type 114514 in the main menu to delete them!")
-        print("----------------------FINSIH-------------------")
-
-    elif command_var == 2:
-        print("-------------Showing Hidden Files--------------")
-        os.system("ATTRIB -S -H E:\ /d /l")
-        os.system("ATTRIB -S -H F:\ /d /l")
-        os.system("ATTRIB -S -H G:\ /d /l")
-        # More ATTRIB commands here
-        print("----------------------FINSIH-------------------")
-
-
-
-    else:
-        print("Command Not Found!")
+如果您意外获取了源码，请联系 Arthur_xyz@outlook.com
+"""
