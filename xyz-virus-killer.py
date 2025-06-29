@@ -1,4 +1,68 @@
 import os
+import tkinter as tk
+
+def Kill_Viruses():
+    var.set("Killing Processes")
+    os.system("TASKKILL -F -IM Rundll32.exe -T")
+    os.system("TASKKILL -F -IM AvastSvc.exe -T")
+    os.system("TASKKILL -F -IM wscript.exe -T")
+    os.system("TASKKILL -F -IM Autolt3.exe -T")
+    os.system("TASKKILL -F -IM cmd.exe -T")
+    print("----------------------FINISH-------------------")
+    print("----------------Renaming Files-----------------")
+    os.system("ren E:\*.lnk *.vir")
+    os.system("ren F:\*.lnk *.vir")
+    os.system("ren G:\*.lnk *.vir")
+    os.system("ren H:\*.lnk *.vir")
+    os.system("ren I:\*.lnk *.vir")
+    os.system("ren J:\*.lnk *.vir")
+    os.system("ren K:\*.lnk *.vir")
+    var.set("FINSIH")
+
+def Fix_What_Viruses_Make():
+    var.set("Showing Hidden Files")
+    os.system("ATTRIB -S -H E:\ /d /l")
+    os.system("ATTRIB -S -H F:\ /d /l")
+    os.system("ATTRIB -S -H G:\ /d /l")
+    # More ATTRIB commands here
+    var.set("FINSIH")
+
+def Auto_Kill():
+
+    Kill_Viruses()
+    Fix_What_Viruses_Make()
+
+
+#Main Window
+
+window = tk.Tk()
+window.title("Title")
+window.geometry("1366x720")
+
+
+var = tk.StringVar()
+
+
+l = tk.Label(window, textvariable = var, bg = "cyan", font = ("Arial", 40), height= 2)
+l.pack()
+
+b1 = tk.Button(window, text = "Kill Viruses", font = (30), width = 40, height= 2 , command= Kill_Viruses)
+b1.pack()
+
+b2 = tk.Button(window, text = "Fix What Viruses Make", font = (30), width = 40, height= 2 , command= Fix_What_Viruses_Make)
+b2.pack()
+
+b3 = tk.Button(window, text = "Auto Kill(Do #1 And #2)", font = (30), width = 40, height= 2 , command= Auto_Kill)
+b3.pack()
+
+# b4 = tk.Button(window, text = "Select What Virus You Want To Kill", font = (30), width = 40, height= 2 , command= Select)
+# b4.pack()
+
+
+window.mainloop()
+
+
+
 
 while True:
     print("#1 Kill Viruses")
@@ -39,28 +103,7 @@ while True:
         # More ATTRIB commands here
         print("----------------------FINSIH-------------------")
 
-    elif command_var == 3:
-        # Repeat actions from case 1 and case 2 here
-        pass
 
-    elif command_var == 4:
-        print("Developing...")
-
-    elif command_var == 6:
-        print("---------------------GOODBYE-------------------")
-        input("Press <Enter> to continue...")
-        break
-
-    elif command_var == 114514:
-        print("Are You Sure to Delete the Files? If You Do, Type 1919810 to Prove You Are Not a Robot:")
-        _114514_1919810 = int(input())
-        if _114514_1919810 == 1919810:
-            print("----------------Deleting Files-----------------")
-            os.system("del E:\*.lnk *.vir")
-            os.system("del F:\*.lnk *.vir")
-            # More deletion commands here
-            print("----------------------FINSIH-------------------")
-            break
 
     else:
         print("Command Not Found!")
