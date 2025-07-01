@@ -7,28 +7,36 @@ from tkinter import messagebox
 
 """
 Update Log:
-Add Create & Read config module.
+Add Create & Read & Check config module.
+Change name of some variables.
 
 更新日志:
+添加创建,读取和校验配置模块.
+更改某些变量的名称.
 
 
 Introduction:
-This project mainly depend on 5 main modules:
-    Kill Virus, Rename Virus Files, Repair Files, Log and the GUI (window).
-    The note of each function is below its name.
+This project mainly consists of  6 main modules:
+    Kill Virus, Rename Virus Files, Repair Files, Write Log, Create & Read & Check config and the GUI (window).
+
+And it also contains some other modules:
+    Easter Egg.
+
+The note of each function is below its name.
 
 Author's message:
-    I give up on this version.
-    And I won't fix any bugs of this version.
+    The program is TESTING!
 """
 
-Version = "VIRUS KILLER V1.4"
+Version = "VIRUS KILLER V1.5"
 
 # Build log
 # Condition: Messagebox return
 build_Log = None
 
 current_Log = None
+
+appdata = os.path.expandvars("%APPDATA%")
 
 # Show Easter Egg
 # Current condition: On (If Easter_Egg < 0, it's Off)
@@ -79,6 +87,7 @@ def rename_Virus_Files():
 
     for disk_name in ["E", "F", "G"]:
         # If you want to add other dirs. Add it in here.
+
         rename_Files(disk_name)
 
     t.insert("end", "\n")
@@ -98,7 +107,7 @@ def rename_Files(dir_name):
         write_Log(f"Error: {dir_name}-disk not found  Please check and restart the program")
 
 
-def fix_What_Viruses_Make():
+def repair_infected_files():
     # Virus File Repair Module: Show hidden files
 
     t.insert("end", "Showing Hidden Files:\n")
@@ -121,11 +130,15 @@ def fix_What_Viruses_Make():
 
 
 def Auto_Kill():
+    # Call two functions
+
     Kill_Viruses()
-    fix_What_Viruses_Make()
+    repair_infected_files()
 
 
 def clean_Button():
+    # Clean Screen Module: Clean Screen & Output
+
     global Easter_Egg
 
     var.set("VIRUS KILLER")
@@ -133,7 +146,7 @@ def clean_Button():
 
     # Easter_Egg module
     if Easter_Egg < 0:
-        nothing = None
+        pass
     elif Easter_Egg < 4:
         Easter_Egg += 1
     else:
@@ -145,20 +158,23 @@ def clean_Button():
 
 
 def clean_Output():
+    # Nothing will call this function
     # t.delete("1.0", tk.END)
-    nothing = None
+
+    pass
 
 
 def create_Log():
     # Log Module: Create a log
-    global build_Log, current_Log, Version
+
+    global build_Log, current_Log, Version, appdata
 
     if build_Log:
-        current_time_stamp = time.time()
+        current_time_stamp = "%.7f" % time.time()
         current_Log = f"log{current_time_stamp}"
         current_time = time.asctime()
 
-        with open(f"./log{current_time_stamp}.log.arthur", "x", encoding="UTF-8") as file:
+        with open(f"{appdata}/VIRUS_KILLER/log{current_time_stamp}.log.arthur", "x", encoding="UTF-8") as file:
             file.write(f"{Version}\n")
             file.write(f"{current_Log}:\n")
             file.write(f"Current Work Path: {os.getcwd()}\n\n")
@@ -167,51 +183,95 @@ def create_Log():
             file.write("Operation Log:\n")
 
         # Create a bat to clean Logs
-        if not os.path.exists("./Clean_Log.bat"):
-            with open(f"./Clean_Log.bat", "w", encoding="UTF-8") as file:
+        if not os.path.exists(f"{appdata}/VIRUS_KILLER/Clean_Log.bat"):
+            with open(f"{appdata}/VIRUS_KILLER/Clean_Log.bat", "w", encoding="UTF-8") as file:
                 file.write(f"del /f /q *.arthur ")
 
 
 def write_Log(log):
     # Log Module: Write OperationLog
 
-    global build_Log, current_Log
+    global build_Log, current_Log, appdata
+
     if build_Log:
-        with open(f"./{current_Log}.log.arthur", "a", encoding="UTF-8") as file:
+        with open(f"{appdata}/VIRUS_KILLER/{current_Log}.log.arthur", "a", encoding="UTF-8") as file:
             file.write(f"{log}\n")
 
 
 def log_configuration():
-    global build_Log
+    # Config Module: Read & Check Config
 
-    if os.path.exists("./VIRUS_KILLER_CONFIGURATION.arthur_config"):
-        with open(f"./VIRUS_KILLER_CONFIGURATION.arthur_config", "r", encoding="UTF-8") as file:
+    global build_Log, appdata
+
+    if not os.path.exists(f"{appdata}/VIRUS_KILLER"):
+        os.mkdir(f"{appdata}/VIRUS_KILLER")
+
+    if os.path.exists(f"{appdata}/VIRUS_KILLER/VIRUS_KILLER_CONFIGURATION.arthur_config"):
+        with open(f"{appdata}/VIRUS_KILLER/VIRUS_KILLER_CONFIGURATION.arthur_config", "r", encoding="UTF-8") as file:
             log_config_read = file.read()
             log_enable = log_config_read[:1]
 
             if log_enable == "1":
                 build_Log = True
+
                 create_Log()
-            else:
+            elif log_enable == "0":
                 build_Log = False
+            else:
+                # os.remove("./VIRUS_KILLER_CONFIGURATION.arthur_config")
+                # os.system(f"del /f /q {os.getcwd()}\\VIRUS_KILLER_CONFIGURATION.arthur_config")
+                log_get_message()
 
     else:
-        log_enable_bool = tk.messagebox.askokcancel(title="Save log or not",
-                                                    message="Do you want to save log?\n你想要保存日志吗?")
-        if log_enable_bool:
-            build_Log = True
-            log_config(1)
-            create_Log()
-        else:
-            build_Log = False
-            log_config(0)
+        log_get_message()
+
+
+def log_get_message():
+    # Config Module: If used for the first time, ask users
+
+    global build_Log
+
+    log_enable_bool = tk.messagebox.askokcancel(title="Save log or not",
+                                                message="Do you want to save log?\n你想要保存日志吗?")
+    if log_enable_bool:
+        build_Log = True
+        log_config(1)
+        create_Log()
+    else:
+        build_Log = False
+        log_config(0)
 
 
 def log_config(log_config_value):
-    with open("./VIRUS_KILLER_CONFIGURATION.arthur_config", "x", encoding="UTF-8") as file:
-        file.write(f"{log_config_value};")
-    os.system(f"attrib +h {os.getcwd()}\\VIRUS_KILLER_CONFIGURATION.arthur_config")
+    # Config Module: Create Config
 
+    global appdata
+
+    os.system(f"attrib -r -h {appdata}/VIRUS_KILLER/VIRUS_KILLER_CONFIGURATION.arthur_config")
+    with open(f"{appdata}/VIRUS_KILLER/VIRUS_KILLER_CONFIGURATION.arthur_config", "w", encoding="UTF-8") as file:
+        file.write(f"{log_config_value};")
+    os.system(f"attrib +r +h {appdata}/VIRUS_KILLER/VIRUS_KILLER_CONFIGURATION.arthur_config")
+
+
+"""
+def correct_log_config():
+    # Haven't used
+
+    global appdata
+    content = None
+
+    os.system(f"attrib -h {appdata}/VIRUS_KILLER/VIRUS_KILLER_CONFIGURATION.arthur_config")
+
+    with open(f"{appdata}/VIRUS_KILLER/VIRUS_KILLER_CONFIGURATION.arthur_config", "r", encoding="UTF-8") as file1:
+        content = file.read()
+
+
+
+    with open(f"{appdata}/VIRUS_KILLER/VIRUS_KILLER_CONFIGURATION.arthur_config", "r", encoding="UTF-8") as file2:
+
+
+    os.system(f"attrib +h {appdata}/VIRUS_KILLER/VIRUS_KILLER_CONFIGURATION.arthur_config")
+"""  # Haven't Used
 
 # Main Window (GUI)
 
@@ -227,7 +287,7 @@ label1.grid(row=0, column=0, columnspan=2)
 button1 = tk.Button(window, text="Kill Viruses", font=30, width=40, height=2, command=Kill_Viruses)
 button1.grid(row=1, column=0)
 
-button2 = tk.Button(window, text="Fix What Viruses Make", font=30, width=40, height=2, command=fix_What_Viruses_Make)
+button2 = tk.Button(window, text="Fix What Viruses Make", font=30, width=40, height=2, command=repair_infected_files)
 button2.grid(row=2, column=0)
 
 button3 = tk.Button(window, text="Auto Kill(Do #1 And #2)", font=30, width=40, height=2, command=Auto_Kill)
