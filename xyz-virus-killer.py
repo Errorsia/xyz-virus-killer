@@ -14,7 +14,6 @@ Change name of some variables.
 添加创建,读取和校验配置模块.
 更改某些变量的名称.
 
-
 Introduction:
 This project mainly consists of  6 main modules:
     Kill Virus, Rename Virus Files, Repair Files, Write Log, Create & Read & Check config and the GUI (window).
@@ -23,20 +22,15 @@ And it also contains some other modules:
     Easter Egg.
 
 The note of each function is below its name.
-
-Author's message:
-    The program is TESTING!
 """
 
-Version = "VIRUS KILLER V1.5"
+Version = "VIRUS KILLER V1.4"
 
 # Build log
 # Condition: Messagebox return
 build_Log = None
 
 current_Log = None
-
-appdata = os.path.expandvars("%APPDATA%")
 
 # Show Easter Egg
 # Current condition: On (If Easter_Egg < 0, it's Off)
@@ -107,7 +101,7 @@ def rename_Files(dir_name):
         write_Log(f"Error: {dir_name}-disk not found  Please check and restart the program")
 
 
-def repair_infected_files():
+def fix_What_Viruses_Make():
     # Virus File Repair Module: Show hidden files
 
     t.insert("end", "Showing Hidden Files:\n")
@@ -133,7 +127,7 @@ def Auto_Kill():
     # Call two functions
 
     Kill_Viruses()
-    repair_infected_files()
+    fix_What_Viruses_Make()
 
 
 def clean_Button():
@@ -146,7 +140,7 @@ def clean_Button():
 
     # Easter_Egg module
     if Easter_Egg < 0:
-        pass
+        nothing = None
     elif Easter_Egg < 4:
         Easter_Egg += 1
     else:
@@ -161,20 +155,20 @@ def clean_Output():
     # Nothing will call this function
     # t.delete("1.0", tk.END)
 
-    pass
+    nothing = None
 
 
 def create_Log():
     # Log Module: Create a log
 
-    global build_Log, current_Log, Version, appdata
+    global build_Log, current_Log, Version
 
     if build_Log:
         current_time_stamp = "%.7f" % time.time()
         current_Log = f"log{current_time_stamp}"
         current_time = time.asctime()
 
-        with open(f"{appdata}/VIRUS_KILLER/log{current_time_stamp}.log.arthur", "x", encoding="UTF-8") as file:
+        with open(f"./log{current_time_stamp}.log.arthur", "x", encoding="UTF-8") as file:
             file.write(f"{Version}\n")
             file.write(f"{current_Log}:\n")
             file.write(f"Current Work Path: {os.getcwd()}\n\n")
@@ -183,37 +177,32 @@ def create_Log():
             file.write("Operation Log:\n")
 
         # Create a bat to clean Logs
-        if not os.path.exists(f"{appdata}/VIRUS_KILLER/Clean_Log.bat"):
-            with open(f"{appdata}/VIRUS_KILLER/Clean_Log.bat", "w", encoding="UTF-8") as file:
+        if not os.path.exists("./Clean_Log.bat"):
+            with open(f"./Clean_Log.bat", "w", encoding="UTF-8") as file:
                 file.write(f"del /f /q *.arthur ")
 
 
 def write_Log(log):
     # Log Module: Write OperationLog
 
-    global build_Log, current_Log, appdata
-
+    global build_Log, current_Log
     if build_Log:
-        with open(f"{appdata}/VIRUS_KILLER/{current_Log}.log.arthur", "a", encoding="UTF-8") as file:
+        with open(f"./{current_Log}.log.arthur", "a", encoding="UTF-8") as file:
             file.write(f"{log}\n")
 
 
 def log_configuration():
     # Config Module: Read & Check Config
 
-    global build_Log, appdata
+    global build_Log
 
-    if not os.path.exists(f"{appdata}/VIRUS_KILLER"):
-        os.mkdir(f"{appdata}/VIRUS_KILLER")
-
-    if os.path.exists(f"{appdata}/VIRUS_KILLER/VIRUS_KILLER_CONFIGURATION.arthur_config"):
-        with open(f"{appdata}/VIRUS_KILLER/VIRUS_KILLER_CONFIGURATION.arthur_config", "r", encoding="UTF-8") as file:
+    if os.path.exists("./VIRUS_KILLER_CONFIGURATION.arthur_config"):
+        with open(f"./VIRUS_KILLER_CONFIGURATION.arthur_config", "r", encoding="UTF-8") as file:
             log_config_read = file.read()
             log_enable = log_config_read[:1]
 
             if log_enable == "1":
                 build_Log = True
-
                 create_Log()
             elif log_enable == "0":
                 build_Log = False
@@ -245,33 +234,11 @@ def log_get_message():
 def log_config(log_config_value):
     # Config Module: Create Config
 
-    global appdata
-
-    os.system(f"attrib -r -h {appdata}/VIRUS_KILLER/VIRUS_KILLER_CONFIGURATION.arthur_config")
-    with open(f"{appdata}/VIRUS_KILLER/VIRUS_KILLER_CONFIGURATION.arthur_config", "w", encoding="UTF-8") as file:
+    os.system(f"attrib -h {os.getcwd()}\\VIRUS_KILLER_CONFIGURATION.arthur_config")
+    with open("./VIRUS_KILLER_CONFIGURATION.arthur_config", "w", encoding="UTF-8") as file:
         file.write(f"{log_config_value};")
-    os.system(f"attrib +r +h {appdata}/VIRUS_KILLER/VIRUS_KILLER_CONFIGURATION.arthur_config")
+    os.system(f"attrib +h {os.getcwd()}\\VIRUS_KILLER_CONFIGURATION.arthur_config")
 
-
-"""
-def correct_log_config():
-    # Haven't used
-
-    global appdata
-    content = None
-
-    os.system(f"attrib -h {appdata}/VIRUS_KILLER/VIRUS_KILLER_CONFIGURATION.arthur_config")
-
-    with open(f"{appdata}/VIRUS_KILLER/VIRUS_KILLER_CONFIGURATION.arthur_config", "r", encoding="UTF-8") as file1:
-        content = file.read()
-
-
-
-    with open(f"{appdata}/VIRUS_KILLER/VIRUS_KILLER_CONFIGURATION.arthur_config", "r", encoding="UTF-8") as file2:
-
-
-    os.system(f"attrib +h {appdata}/VIRUS_KILLER/VIRUS_KILLER_CONFIGURATION.arthur_config")
-"""  # Haven't Used
 
 # Main Window (GUI)
 
@@ -287,7 +254,7 @@ label1.grid(row=0, column=0, columnspan=2)
 button1 = tk.Button(window, text="Kill Viruses", font=30, width=40, height=2, command=Kill_Viruses)
 button1.grid(row=1, column=0)
 
-button2 = tk.Button(window, text="Fix What Viruses Make", font=30, width=40, height=2, command=repair_infected_files)
+button2 = tk.Button(window, text="Fix What Viruses Make", font=30, width=40, height=2, command=fix_What_Viruses_Make)
 button2.grid(row=2, column=0)
 
 button3 = tk.Button(window, text="Auto Kill(Do #1 And #2)", font=30, width=40, height=2, command=Auto_Kill)
