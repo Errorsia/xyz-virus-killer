@@ -3,18 +3,25 @@ import time
 import tkinter as tk
 from os import mkdir
 from tkinter import messagebox
-
+import base64
+from icon import img
+"""
+@author Arthur_xyz <Arthur_xyz@outlook.com>
+"""
 
 """
 Update Log:
-Rebuild config module and taskkill module.
-Change GUI layout.
-Change name of some variables.
+Add application icon
+Fix some logical vulnerabilities
+Modify the configuration of the text output box
+Change name of some variables
 
 更新日志:
-重构配置和杀死进程模块.
-更改图形化界面布局.
-更改某些变量的名称.
+加入应用图标
+修复一些逻辑漏洞
+修改文本输出框的配置
+更改某些变量的名称
+
 
 
 Introduction:
@@ -27,8 +34,40 @@ And it also contains some other modules:
 The note of each function is below its name.
 
 Author's message:
-    The program is TESTING!
+    There is no bugs at present!
+    The programme is TESTING!
 """
+
+'''
+File name: xyzvk_v1.6.5_(Elysium)base64.py
+Copyright: Copyright ©  2024 - 2030 Arthur_xyz. All Rights Reserved
+Description: XYZ VIRUS KILLER (Elysium) XYZ virus killer program (code: Elysium)
+Modified by: xyz
+Modified on: October 14, 2024
+Modified content: Addition and refactoring
+
+文件名：xyzvk_v1.6.5_(Elysium)base64.py
+版权：Copyright © 2024 - 2030 Arthur_xyz.All Rights Reserved
+描述：XYZ VIRUS KILLER (Elysium) XYZ病毒杀手程序 (代号: Elysium)
+修改人：xyz
+修改时间：2024-10-14
+修改内容：新增和重构
+'''
+
+'''
+Copyright © 2030
+Copyright © 2024 - 2030 Arthur_xyz.All Rights Reserved
+© 2024 - 2030 Arthur_xyz版权所有
+
+如果您意外获取了源码，请联系 Arthur_xyz (Arthur_xyz@outlook.com)
+If you accidentally obtain the source code, please contact Arthur_xyz (Arthur_xyz@outlook.com)
+
+如果你想创建依赖于(xyz病毒杀手)的项目,
+请联系Arthur_xyz (Arthur_xyz@outlook.com)
+If you want to create your own project depend on this (xyz virus killer),
+please contact Arthur_xyz (Arthur_xyz@outlook.com)
+'''
+
 
 '''
 What is Class:
@@ -51,7 +90,14 @@ What is Class:
 
 类-------解决问题的一类器物。
 '''
-Version = "VIRUS KILLER V1.6 (Elysium)"
+
+
+
+Version = "VIRUS KILLER V1.6.5 (Elysium)"
+
+# Whether or not TSET ENVIRONMENT
+test = True
+
 
 # Build log
 # Condition: Messagebox return
@@ -60,7 +106,7 @@ build_Log = None
 current_Log = None
 
 appdata = os.path.expandvars("%APPDATA%")
-file_directory = appdata + '/VIRUS_KILLER'
+file_directory = appdata + '/Arthur/VirusKiller'
 
 # Show Easter Egg
 # Current condition: On (If Easter_Egg < 0, it's Off)
@@ -72,16 +118,17 @@ Easter_Egg = 0
 
 def generate():
 
-    global build_Log, file_directory
+    global build_Log, file_directory, test
 
-    check_working_path(file_directory)
+    check_path(file_directory)
 
     log(file_directory)
 
-    os.system('chcp 65001')
+    if test:
+        os.system('chcp 65001')
 
 
-def check_working_path(_file_directory):
+def check_path(_file_directory):
 
     dir_list = ['', '/Config', '/Log']
     for dir_tmp in dir_list:
@@ -146,15 +193,15 @@ def log_configuration(_build_log, _file_directory):
 def kill_viruses():
     # Virus killer main module
 
-    t.insert("end", "Killing Processes:\n")
+    set_insert_simplified('\nKilling Processes:')
 
     # If you want to add other viruses' processes. Add it in here.
-    virus_processes = ["Rundll32.exe", "AvastSvc.exe", "wscript.exe", "Autolt3.exe", "cmd.exe"]
+    virus_processes = ['Rundll32.exe', 'AvastSvc.exe', 'wscript.exe', 'Autolt3.exe', 'cmd.exe']
 
     for processes in virus_processes:
         taskkill_processes(processes)
 
-    t.insert("end", "\n")
+
     var.set("FINISH")
 
     rename_virus_files()
@@ -169,38 +216,41 @@ def taskkill_processes(process_name):
     result_taskkill = os.system(f"TASKKILL -F -IM {process_name} -T")
 
     if result_taskkill == 0:
-        t.insert("end", "SUCCESS: The process has been terminated\n")
         condition = 'success'
-        log_content = f'The process  ({process_name}) has been terminated'
+        output_content = f'The process has been terminated'
+        log_content = f'The process ({process_name}) has been terminated'
 
     elif result_taskkill == 128:
-        t.insert("end", "ERROR: The process not found\n")
         condition = 'failed'
+        output_content = f'The process not found'
         log_content = f'The process ({process_name}) not found'
 
     elif result_taskkill == 1:
-        t.insert("end", "ERROR: The process could not be terminated\n")
         condition = 'failed'
+        output_content = 'The process could not be terminated'
         log_content = f'The process ({process_name}) could not be terminated'
 
     else:
-        t.insert("end", "Error: Please tell developers!!\n")
         condition = 'failed'
+        output_content = 'Unknown Error: Please tell developers!!'
         log_content = 'Unknown Error: Please tell developers!!'
 
+
+    set_insert(module_name, condition, output_content)
     write_log(module_name, 'info', condition, result_taskkill, log_content)
+
 
 
 def rename_virus_files():
     # Virus Files Rename Module: Select disks
     # Virus Files Rename Module: Rename the Virus Files
 
-    t.insert("end", "Renaming Files:\n")
+    set_insert_simplified('\nRenaming Files:')
 
     module_name = 'rename_virus_files'
     result_rename_files = 'none'
-    condition = None
-    log_content = None
+    condition_list = []
+    log_content_list = []
 
     # If you want to add other dirs. Add it in here.
     disks = ['E', 'F', 'G']
@@ -209,16 +259,24 @@ def rename_virus_files():
 
         if os.path.exists(f"{disk_name}:\\"):
             result_rename_files = os.system(f"ren {disk_name}:\\*.lnk *.vir")
-            t.insert("end", f"Success to rename virus files in {disk_name}-disk\n")
-            condition = 'success'
-            log_content = f'Success to rename virus files in {disk_name}-disk'
+            # set_insert(f"Success to rename virus files in {disk_name}-disk\n")
+            condition_list.append('success')
+            log_content_list.append(f'Success to rename virus files in {disk_name}-disk')
         else:
-            t.insert("end", f"{disk_name}-disk not found\n")
-            condition = 'failed'
-            log_content = f'{disk_name}-disk not found'
+            # set_insert(f"{disk_name}-disk not found\n")
+            condition_list.append('failed')
+            log_content_list.append(f'{disk_name}-disk not found')
 
-    t.insert("end", "\n")
-    write_log(module_name, 'info', condition, result_rename_files, log_content)
+
+
+    for cnt in range(0, len(log_content_list)):
+
+        log_content = log_content_list[cnt]
+        condition = condition_list[cnt]
+
+        output_content = log_content
+        set_insert(module_name, condition, output_content)
+        write_log(module_name, 'info', condition, result_rename_files, log_content)
 
     var.set("FINISH")
 
@@ -227,34 +285,45 @@ def rename_virus_files():
 def repair_infected_files():
     # Virus File Repair Module: Show hidden files
 
-    t.insert("end", "Showing Hidden Files:\n")
+    set_insert_simplified('\nShowing Hidden Files:')
 
     # If you want to add other dirs. Add it in here.
     disks = ['E', 'F', 'G', 'H']
 
     module_name = 'repair_infected_files'
     result_repair_infected_files = 'none'
-    condition = None
-    log_content = []
+    condition_list = []
+    log_content_list = []
+
 
     for dir_tmp in disks:
 
         if os.path.exists(f"{dir_tmp}:\\"):
             result_repair_infected_files = os.system(f"ATTRIB -S -H {dir_tmp}:\\*.* /d /l")
-            t.insert("end", f"Success to show hidden files in {dir_tmp}-disk\n")
-            condition = 'success'
-            log_content.append(f'Success to rename virus files in {dir_tmp}-disk')
+            # set_insert(f"Success to show hidden files in {dir_tmp}-disk\n")
+            condition_list.append('success')
+            log_content_list.append(f'Virus files in {dir_tmp}-disk was renamed')
 
         else:
-            t.insert("end", f"{dir_tmp}-disk not found\n")
-            condition = 'failed'
-            log_content.append(f'{dir_tmp}-disk not found')
+            # set_insert(f"{dir_tmp}-disk not found\n")
+            condition_list.append('failed')
+            log_content_list.append(f'{dir_tmp}-disk not found')
 
-    t.insert("end", "\n")
+
+
+    for cnt in range(0, len(log_content_list)):
+
+        log_content = log_content_list[cnt]
+        condition = condition_list[cnt]
+
+        output_content = log_content
+        set_insert(module_name, condition, output_content)
+        write_log(module_name, 'info', condition, result_repair_infected_files, log_content)
+
+
+
+    # set_insert("\n")
     var.set("FINISH")
-
-    for _log_content in log_content:
-        write_log(module_name, 'info', condition, result_repair_infected_files, _log_content)
 
 
 def auto_kill():
@@ -270,7 +339,9 @@ def clean_button():
     global Easter_Egg, file_directory, current_Log
 
     var.set("VIRUS KILLER")
-    t.delete("1.0", tk.END)
+    output_text.configure(state='normal')
+    output_text.delete("1.0", tk.END)
+    output_text.configure(state='disabled')
 
     text1 = 'Copyright © 2024 - 2030 Arthur_xyz.All Rights Reserved'
     text2 = 'The Easter Egg was discovered by you!\n被你发现啦!'
@@ -292,6 +363,7 @@ def clean_button():
                 file.write(f'\n\n{text1}\n{text2}\n{text3}\n\n')
         Easter_Egg = 0
 
+    # set_insert('clean_screen', 'none', 'hi')
 
 
 def clean_output():
@@ -325,6 +397,7 @@ def create_log():
                 file.write(f"del /f /q *.avk \ndel /f /q *.bat")
 
 
+
 def write_log(module, level, condition, value, content):
     # Log Module: Write OperationLog
 
@@ -344,7 +417,30 @@ def write_log(module, level, condition, value, content):
 
 
 
+def set_insert_simplified(content):
 
+
+    minus_sign_quantity = '-' * 50
+    output = f'{minus_sign_quantity}{content}\n\n'
+    output_text.configure(state='normal')
+    output_text.insert('end', output)
+    output_text.configure(state='disabled')
+
+
+
+
+def set_insert(module, condition, content):
+
+
+    current_time = time.asctime()[-13:-5]
+
+    module = module.upper()
+    condition = condition.upper()
+
+    output = f'{current_time} | [{module}]\t|\t{condition}\t|\t{content}\n'
+    output_text.configure(state='normal')
+    output_text.insert('end', output)
+    output_text.configure(state='disabled')
 
 
 
@@ -378,7 +474,14 @@ window.title(Version)
 window.geometry("1360x720")
 window.minsize(1360, 720)
 window.maxsize(3840, 2160)
-window.iconbitmap("icon.ico")
+# window.iconbitmap("icon.ico")
+
+# https://www.cnblogs.com/duanminkid/p/14208356.html
+tmp = open("tmp.ico","wb+")
+tmp.write(base64.b64decode(img))
+tmp.close()
+window.iconbitmap("tmp.ico")
+os.remove("tmp.ico")
 
 
 
@@ -422,11 +525,11 @@ button_frame2.grid(row=4, column=0, columnspan=2)
 label3 = tk.Label(window, text="Output:", width=10, font=('TkDefaultFont',20), height=1)
 label3.grid(row=2, column=2, columnspan=2)
 
-t = tk.Text(window, height=30)
-t.grid(row=3, column=2, rowspan=10, columnspan=2)
-output_text = tk.Text(window, height=10)
-# output_text.grid(row=5, column=0, columnspan=2)
-# output_text.configure(state='disabled')
+# t = tk.Text(window, height=10)
+# t.grid(row=5, column=0, columnspan=2)
+output_text = tk.Text(window, height=30)
+output_text.grid(row=3, column=2, rowspan=10, columnspan=2)
+output_text.configure(state='disabled')
 
 var.set("VIRUS KILLER")
 
@@ -485,16 +588,3 @@ if __name__ == '__main__':
     MainWindow(version=Version)
 '''
 
-"""
-Copyright © 2030
-Copyright © 2024 - 2030 Arthur_xyz.All Rights Reserved
-© 2024 - 2030 Arthur_xyz版权所有
-
-如果您意外获取了源码，请联系 Arthur_xyz (Arthur_xyz@outlook.com)
-If you accidentally obtain the source code, please contact Arthur_xyz (Arthur_xyz@outlook.com)
-
-如果你想创建依赖于(xyz病毒杀手)的项目,
-请联系Arthur_xyz (Arthur_xyz@outlook.com)
-If you want to create your own project depend on this (xyz virus killer),
-please contact Arthur_xyz (Arthur_xyz@outlook.com)
-"""
