@@ -25,7 +25,7 @@ If applicable, add screenshots to help explain your problem.
 
 **Desktop (please complete the following information):**
  - OS: [e.g. Windows]
- - Version [e.g. 22]
+ - Version [e.g. 10]
 
 **Version Information (please complete the following information):**
 Please specify the version where the issue occurred. This helps us reproduce and fix the bug more efficiently.
