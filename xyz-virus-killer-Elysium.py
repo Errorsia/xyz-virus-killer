@@ -13,18 +13,10 @@ from icon import img
 
 """
 Update Log:
-Add update module (Local update module)
-Fix some logical vulnerabilities
-Fix issue: Unable to create configuration folder
-Change the order of code execution
-Change name of some variables
+NONE
 
 更新日志:
-添加更新模块(本地更新模块)
-修复一些逻辑漏洞
-修复问题: 无法创建配置文件夹
-更改代码执行顺序
-更改部分变量的名称
+无 纯粹是喜欢'7'用来占位
 
 
 Introduction:
@@ -42,14 +34,14 @@ Author's message:
 """
 
 '''
-File name: xyzvk_v1.7.0base64.py
+File name: xyzvk_v2.0.0.py
 Copyright: Copyright ©  2024 - 2030 Arthur_xyz. All Rights Reserved
 Description: XYZ VIRUS KILLER (Elysium) XYZ virus killer program (code: Elysia)
 Modified by: xyz
 Modified on: December 5, 2024
 Modified content: Addition and refactoring
 
-文件名：xyzvk_v1.7.0base64.py
+文件名：xyzvk_v2.0.0.py
 版权：Copyright © 2024 - 2030 Arthur_xyz.All Rights Reserved
 描述：XYZ VIRUS KILLER (Elysium) XYZ病毒杀手程序 (分支号: Elysia)
 修改人：xyz
@@ -98,15 +90,15 @@ What is Class:
 Code Name List:
 Artemis, Aphrodite, Apollo, Ares, Athena, Poseidon, Hestia, Hephaestus, Zeus, Demeter, Hermes, and Hera
 '''
-# Version
+# Full_version
 name = 'VIRUS KILLER'
-version = '1.7.0'
+version = '1.7.7'
 code_name = 'Artemis'
 nickname = 'Elysia'
-Version = f'{name} V{version}'
-# Version = "VIRUS KILLER V1.7.0 (Elysium)"
+Full_version = f'{name} V{version}'
+# Full_version = "VIRUS KILLER V1.7.7 (Elysium)"
 
-Internal_version = '%03d%03d%03d' %(1,7,0)
+Internal_version = '%03d%03d%03d' %(1,7,7)
 
 
 # Whether or not TSET ENVIRONMENT
@@ -187,7 +179,7 @@ def update():
                                 'Please ask Arthur_xyz<Arthur_xyz@outlook.com> for the update.\n\n'
                                 )
 
-    exit()
+    exit('UPDATE AVAILABLE')
 
 
 
@@ -492,7 +484,7 @@ def clean_output():
 def create_log():
     # Log Module: Create a log
 
-    global build_Log, current_Log, Version, file_directory
+    global build_Log, current_Log, Full_version, file_directory
 
     if build_Log:
         current_time_stamp = "%.7f" % time.time()
@@ -500,7 +492,7 @@ def create_log():
         current_time = time.asctime()
 
         with open(f"{file_directory}/Log/{current_Log}.log.avk", "x", encoding="UTF-8") as file:
-            file.write(f"{Version}\n")
+            file.write(f"{Full_version}\n")
             file.write(f"{current_Log}:\n")
             file.write(f"Current Work Path: {os.getcwd()}\n\n")
             file.write(f"{current_time}  Successfully run the program\n")
@@ -588,7 +580,7 @@ start()
 # Main Window (GUI)
 
 window = tk.Tk()
-window.title(Version)
+window.title(Full_version)
 window.geometry("1360x720")
 window.minsize(1360, 720)
 window.maxsize(3840, 2160)
