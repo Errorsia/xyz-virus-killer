@@ -1,3 +1,7 @@
+"""
+@author Arthur_xyz <Arthur_xyz@outlook.com>
+"""
+
 import os
 import time
 import tkinter as tk
@@ -5,23 +9,22 @@ from os import mkdir
 from tkinter import messagebox
 import base64
 from icon import img
-"""
-@author Arthur_xyz <Arthur_xyz@outlook.com>
-"""
+
 
 """
 Update Log:
-Add application icon
+Add update module (Local update module)
 Fix some logical vulnerabilities
-Modify the configuration of the text output box
+Fix issue: Unable to create configuration folder
+Change the order of code execution
 Change name of some variables
 
 更新日志:
-加入应用图标
+添加更新模块(本地更新模块)
 修复一些逻辑漏洞
-修改文本输出框的配置
-更改某些变量的名称
-
+修复问题: 无法创建配置文件夹
+更改代码执行顺序
+更改部分变量的名称
 
 
 Introduction:
@@ -39,18 +42,18 @@ Author's message:
 """
 
 '''
-File name: xyzvk_v1.6.5_(Elysium)base64.py
+File name: xyzvk_v1.7.0base64.py
 Copyright: Copyright ©  2024 - 2030 Arthur_xyz. All Rights Reserved
-Description: XYZ VIRUS KILLER (Elysium) XYZ virus killer program (code: Elysium)
+Description: XYZ VIRUS KILLER (Elysium) XYZ virus killer program (code: Elysia)
 Modified by: xyz
-Modified on: October 14, 2024
+Modified on: December 5, 2024
 Modified content: Addition and refactoring
 
-文件名：xyzvk_v1.6.5_(Elysium)base64.py
+文件名：xyzvk_v1.7.0base64.py
 版权：Copyright © 2024 - 2030 Arthur_xyz.All Rights Reserved
-描述：XYZ VIRUS KILLER (Elysium) XYZ病毒杀手程序 (代号: Elysium)
+描述：XYZ VIRUS KILLER (Elysium) XYZ病毒杀手程序 (分支号: Elysia)
 修改人：xyz
-修改时间：2024-10-14
+修改时间：2024-12-5
 修改内容：新增和重构
 '''
 
@@ -91,9 +94,20 @@ What is Class:
 类-------解决问题的一类器物。
 '''
 
+'''
+Code Name List:
+Artemis, Aphrodite, Apollo, Ares, Athena, Poseidon, Hestia, Hephaestus, Zeus, Demeter, Hermes, and Hera
+'''
+# Version
+name = 'VIRUS KILLER'
+version = '1.7.0'
+code_name = 'Artemis'
+nickname = 'Elysia'
+Version = f'{name} V{version}'
+# Version = "VIRUS KILLER V1.7.0 (Elysium)"
 
+Internal_version = '%03d%03d%03d' %(1,7,0)
 
-Version = "VIRUS KILLER V1.6.5 (Elysium)"
 
 # Whether or not TSET ENVIRONMENT
 test = True
@@ -113,52 +127,159 @@ file_directory = appdata + '/Arthur/VirusKiller'
 Easter_Egg = 0
 
 
+def start():
+
+    check_path()
+
+    update()
+
+
+
+
+
+def check_path():
+
+    father_directory = appdata + '/Arthur'
+
+    dir_list = ['', '/VirusKiller', '/VirusKiller/Config', '/VirusKiller/Log']
+    for dir_tmp in dir_list:
+        dir_tmp = father_directory + dir_tmp
+        if not os.path.exists(dir_tmp):
+            mkdir(dir_tmp)
+
+
+def update():
+
+    internal_version = int(Internal_version)
+    online_update_version = -1
+    local_update_version = int(local_update())
+    # print(local_update_version)
+
+    if internal_version >= online_update_version and internal_version >= local_update_version:
+        return
+
+
+    if online_update_version >=local_update_version:
+
+        execute_update = tk.messagebox.askokcancel(
+            'Update Available',
+            'A new version is available.\n'
+            f'Do you want to download {online_update_version}'
+            'Please ask Arthur_xyz<Arthur_xyz@outlook.com> for the update.\n\n'
+            )
+
+        if execute_update:
+            print('⚠☣Downloading☣⚠')
+
+
+            return
+
+
+        else:
+            tk.messagebox.showwarning('Update Available',
+                                'A new version is available.\n'
+                                'Please ask Arthur_xyz<Arthur_xyz@outlook.com> for the update.\n\n'
+                                )
+
+    else:
+        tk.messagebox.showwarning('Update Available',
+                                'A new version is available.\n'
+                                'Please ask Arthur_xyz<Arthur_xyz@outlook.com> for the update.\n\n'
+                                )
+
+    exit()
+
+
+
+
+def local_update():
+
+    if os.path.exists(f'{file_directory}/Config/local_update.Elysia'):
+
+        with open(f'{file_directory}/Config/local_update.Elysia', 'r') as local_update_config:
+            local_version = local_update_config.read()
+
+        if is_legal_version(local_version):
+
+            if int(Internal_version) <= int(local_version):
+                return local_version
+
+    build_local_update_config()
+    return -1
+
+
+
+def is_legal_version(local_version):
+    # Check whether local_version is legal
+
+    local_version = str(local_version)
+    digit_is_int = 0
+
+    if len(local_version) != 9:
+        return False
+
+    for tmp_local_version in local_version:
+
+        for tmp_num in range(10):
+
+            if tmp_local_version == str(tmp_num):
+                digit_is_int += 1
+
+
+    if digit_is_int == 9:
+        return True
+    else:
+        return False
+
+
+
+def build_local_update_config():
+
+    if os.path.exists(f'{file_directory}/Config/local_update.Elysia'):
+        os.system(f'attrib -r -h {file_directory}/Config/local_update.Elysia')
+        # os.remove(f'{file_directory}/Config/local_update.Elysia')
+
+    with open(f'{file_directory}/Config/local_update.Elysia', 'w', encoding="UTF-8") as local_version:
+        local_version.write(Internal_version)
+
+    os.system(f'attrib +r +h {file_directory}/Config/local_update.Elysia')
+
 
 
 
 def generate():
 
-    global build_Log, file_directory, test
+    global build_Log, test
 
-    check_path(file_directory)
-
-    log(file_directory)
+    log()
 
     if test:
         os.system('chcp 65001')
 
 
-def check_path(_file_directory):
-
-    dir_list = ['', '/Config', '/Log']
-    for dir_tmp in dir_list:
-        dir_tmp = _file_directory + dir_tmp
-        if not os.path.exists(dir_tmp):
-            mkdir(dir_tmp)
-
-
-def log(_file_directory):
+def log():
     global build_Log
-    build_Log = log_configuration(build_Log, _file_directory)
+    build_Log = log_configuration(build_Log)
     if build_Log:
         create_log()
 
 
-def log_configuration(_build_log, _file_directory):
+def log_configuration(_build_log):
     # Config Module: Read & Check Config
 
-
-    config_path = f'{_file_directory}/Config/VIRUS_KILLER_CONFIGURATION.Elysia'
+    config_path = f'{file_directory}/Config/VIRUS_KILLER_CONFIGURATION.Elysia'
     log_get_message = True
     log_config = None
 
 
     # Try to read config
     if os.path.exists(config_path):
+
         with open(config_path, "r", encoding="UTF-8") as file:
             read_config = file.read()
 
         log_enable = read_config[0]
+
         if log_enable == "1":
             log_get_message = False
             _build_log = True
@@ -168,7 +289,6 @@ def log_configuration(_build_log, _file_directory):
             log_get_message = False
             _build_log = False
             log_config = 0
-
 
 
     if log_get_message:
@@ -181,10 +301,10 @@ def log_configuration(_build_log, _file_directory):
         else:
             log_config = 0
 
-    os.system(f"attrib -r -h {config_path}")
+    os.system(f"attrib -s -r -h {config_path}")
     with open(f"{config_path}", "w", encoding="UTF-8") as file:
         file.write(f"{log_config}")
-    os.system(f"attrib +r +h {config_path}")
+    os.system(f"attrib +s +r +h {config_path}")
 
     return _build_log
 
@@ -195,7 +315,7 @@ def kill_viruses():
 
     set_insert_simplified('\nKilling Processes:')
 
-    # If you want to add other viruses' processes. Add it in here.
+    # If you want to add more viruses' processes. Add them in here.
     virus_processes = ['Rundll32.exe', 'AvastSvc.exe', 'wscript.exe', 'Autolt3.exe', 'cmd.exe']
 
     for processes in virus_processes:
@@ -252,18 +372,17 @@ def rename_virus_files():
     condition_list = []
     log_content_list = []
 
-    # If you want to add other dirs. Add it in here.
+    # If you want to add more dirs. Add them in here.
     disks = ['E', 'F', 'G']
 
     for disk_name in disks:
 
         if os.path.exists(f"{disk_name}:\\"):
             result_rename_files = os.system(f"ren {disk_name}:\\*.lnk *.vir")
-            # set_insert(f"Success to rename virus files in {disk_name}-disk\n")
             condition_list.append('success')
             log_content_list.append(f'Success to rename virus files in {disk_name}-disk')
+
         else:
-            # set_insert(f"{disk_name}-disk not found\n")
             condition_list.append('failed')
             log_content_list.append(f'{disk_name}-disk not found')
 
@@ -300,12 +419,10 @@ def repair_infected_files():
 
         if os.path.exists(f"{dir_tmp}:\\"):
             result_repair_infected_files = os.system(f"ATTRIB -S -H {dir_tmp}:\\*.* /d /l")
-            # set_insert(f"Success to show hidden files in {dir_tmp}-disk\n")
             condition_list.append('success')
             log_content_list.append(f'Virus files in {dir_tmp}-disk was renamed')
 
         else:
-            # set_insert(f"{dir_tmp}-disk not found\n")
             condition_list.append('failed')
             log_content_list.append(f'{dir_tmp}-disk not found')
 
@@ -322,7 +439,6 @@ def repair_infected_files():
 
 
 
-    # set_insert("\n")
     var.set("FINISH")
 
 
@@ -444,9 +560,7 @@ def set_insert(module, condition, content):
 
 
 
-
-
-
+# Haven't Used
 """
 def correct_log_config():
     # Haven't used
@@ -465,7 +579,11 @@ def correct_log_config():
 
 
     os.system(f"attrib +h {file_directory}/Config/VIRUS_KILLER_CONFIGURATION.Elysia")
-"""  # Haven't Used
+"""
+
+
+start()
+
 
 # Main Window (GUI)
 
@@ -474,12 +592,11 @@ window.title(Version)
 window.geometry("1360x720")
 window.minsize(1360, 720)
 window.maxsize(3840, 2160)
-# window.iconbitmap("icon.ico")
 
+# Set icon
 # https://www.cnblogs.com/duanminkid/p/14208356.html
-tmp = open("tmp.ico","wb+")
-tmp.write(base64.b64decode(img))
-tmp.close()
+with open("tmp.ico","wb+") as tmp:
+    tmp.write(base64.b64decode(img))
 window.iconbitmap("tmp.ico")
 os.remove("tmp.ico")
 
@@ -521,70 +638,19 @@ button_frame2.grid(row=4, column=0, columnspan=2)
 # button5.pack()
 
 
-# text = "If you want to clean screen, press the Clean Screen button",
 label3 = tk.Label(window, text="Output:", width=10, font=('TkDefaultFont',20), height=1)
 label3.grid(row=2, column=2, columnspan=2)
 
-# t = tk.Text(window, height=10)
-# t.grid(row=5, column=0, columnspan=2)
+
 output_text = tk.Text(window, height=30)
 output_text.grid(row=3, column=2, rowspan=10, columnspan=2)
 output_text.configure(state='disabled')
 
 var.set("VIRUS KILLER")
 
+
+
+
 generate()
 
 window.mainloop()
-
-'''
-class MainWindow:
-    def __init__(self, version):
-        self.window = tk.Tk()
-        self.window.title(Version)
-        self.window.geometry("1366x720")
-
-        self.var = tk.StringVar()
-
-        label1 = tk.Label(self.window, textvariable=self.var, bg="cyan", width=45, font=("Arial", 40), height=2)
-        label1.grid(row=0, column=0, columnspan=2)
-
-        button1 = tk.Button(self.window, text="Kill Viruses", font=30, width=40, height=2, command=kill_viruses)
-        button1.grid(row=1, column=0)
-
-        button2 = tk.Button(self.window, text="Fix What Viruses Make", font=30, width=40, height=2,
-                            command=repair_infected_files)
-        button2.grid(row=2, column=0)
-
-        button3 = tk.Button(self.window, text="Auto Kill(Do #1 And #2)", font=30, width=40, height=2, command=auto_kill)
-        button3.grid(row=1, column=1)
-
-        button4 = tk.Button(self.window, text="Clean Screen", font=30, width=40, height=2, command=clean_button)
-        button4.grid(row=2, column=1)
-
-        # button5 = tk.Button(window, text = "©", width = 1, height= 1, command= clean_button)
-        # button5.pack()
-
-        label2 = tk.Label(self.window, width=10, font=20, height=2)
-        label2.grid(row=3, column=0, columnspan=2)
-
-        # text = "If you want to clean screen, press the Clean Screen button",
-        label3 = tk.Label(self.window, text="Output:", width=10, font=20, height=1)
-        label3.grid(row=4, column=0, columnspan=2)
-
-        self.t = tk.Text(self.window, height=30)
-        self.t.grid(row=5, column=0, columnspan=2)
-
-        self.var.set("VIRUS KILLER")
-
-        log_configuration()
-
-        self.window.mainloop()
-
-
-
-
-if __name__ == '__main__':
-    MainWindow(version=Version)
-'''
-
