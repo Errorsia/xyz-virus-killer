@@ -1,403 +1,60 @@
+"""
+@author Arthur_xyz <Arthur_xyz@outlook.com>
+"""
+
+import base64
 import os
+import logging
 import time
 import tkinter as tk
-from os import mkdir
+from tkinter import ttk
 from tkinter import messagebox
+import subprocess
+# from win11toast import notify
+
+# Private Libraries
+from icon import img
 
 """
 Update Log:
-Add Create & Read & Check config module.
-Change name of some variables.
+Change the code names
+Add the debug frame & debugger button 
+Fixed the problem of black frame popping up during runtime
+# Use dictionaries to replace some variables (It seems unnecessary)
+Rebuild log module
 
 更新日志:
-添加创建,读取和校验配置模块.
-更改某些变量的名称.
+更改了代号
+新增调试框架和调试按钮
+修复运行时有黑框弹出的问题
+# 使用字典代替了部分变量 (似乎没有必要)
+重构了日志模块
 
-
-Introduction:
-This project mainly consists of  6 main modules:
-    Kill Virus, Rename Virus Files, Repair Files, Write Log, Create & Read & Check config and the GUI (window).
-
-And it also contains some other modules:
-    Easter Egg.
-
-The note of each function is below its name.
 
 Author's message:
-    The program is TESTING!
+    Why the codes is more and more complex, while the lines are fewer and fewer?
+    There is no bugs at present!
+    The programme is TESTING!
 """
 
 '''
-What is Class:
-上帝每次都做抓老鼠的工作很累，所以上帝创造了一个全新类型的动物---猫，
-上帝每次都丢东西很烦，所以上帝创造了一个全新类型的动物---狗，
-女娲每次都捏人很累，所以女娲创造了能够自动生育的人---男人和女人，
-
-上帝抓老鼠------函数模数
-上帝定义了猫类-----内嵌抓老鼠的行为-----类模式------猫抓老鼠很简单。
-
-走路-------函数模式
-汽车-------类模式------走路变简单。
-
-计算---函数
-
-计算器-----类------计算变得简单
-
-
-函数-----一种动作。
-
-类-------解决问题的一类器物。
-'''
-Version = "VIRUS KILLER V1.6"
-
-# Build log
-# Condition: Messagebox return
-build_Log = None
-
-current_Log = None
-
-appdata = os.path.expandvars("%APPDATA%")
-file_directory = appdata + '/VIRUS_KILLER'
-
-# Show Easter Egg
-# Current condition: On (If Easter_Egg < 0, it's Off)
-Easter_Egg = 0
-
-
-def Kill_Viruses():
-    # Virus killer main module
-
-    # clean_Output()
-    t.insert("end", "Killing Processes:\n")
-    write_Log("\nKilling Processes:")
-
-    for processes in ["Rundll32.exe", "AvastSvc.exe", "wscript.exe", "Autolt3.exe", "cmd.exe"]:
-        # If you want to add other viruses' processes. Add it in here.
-        taskkill_Processes(processes)
-
-    t.insert("end", "\n")
-    var.set("FINISH")
-    write_Log("Killing Processes Finished\n")
-    rename_Virus_Files()
-
-
-def taskkill_Processes(process_Name):
-    # Virus killer module: Taskkill virus processes
-
-    return_taskkill = os.system(f"TASKKILL -F -IM {process_Name} -T")
-    if return_taskkill == 1:
-        t.insert("end", "Success to kill virus \n")
-        write_Log(f"Success to kill virus: {process_Name}")
-        return True
-    elif return_taskkill == 128:
-        t.insert("end", "Error: Virus process not Found\n")
-        write_Log(f"Error: Virus process ({process_Name}) not Found")
-        return False
-    else:
-        t.insert("end", "Error: Please tell developers!!\n")
-        tk.messagebox.showerror(title="error", message="Unknown Error: Please tell developers!!")
-        write_Log("Unknown Error: Please tell developers!!")
-        return False
-
-
-def rename_Virus_Files():
-    # Virus Files Rename Module: Select disks
-
-    t.insert("end", "Renaming Files:\n")
-    write_Log("Renaming Files:")
-
-    for disk_name in ["E", "F", "G"]:
-        # If you want to add other dirs. Add it in here.
-
-        rename_Files(disk_name)
-
-    t.insert("end", "\n")
-    var.set("FINISH")
-    write_Log("Renaming Files Finished")
-
-
-def rename_Files(dir_name):
-    # Virus Files Rename Module: Rename the Virus Files
-
-    if os.path.exists(f"{dir_name}:\\"):
-        result = os.system(f"ren {dir_name}:\\*.lnk *.vir")
-        t.insert("end", f"Success to rename virus files in {dir_name}-disk\n")
-        write_Log(f"Success to rename virus files in {dir_name}-disk")
-    else:
-        t.insert("end", f"{dir_name}-disk not found\n")
-        write_Log(f"Error: {dir_name}-disk not found  Please check and restart the program")
-
-
-def repair_infected_files():
-    # Virus File Repair Module: Show hidden files
-
-    t.insert("end", "Showing Hidden Files:\n")
-    write_Log("\nShowing Hidden Files:")
-
-    for dir_tmp in ["E", "F", "G"]:
-        # If you want to add other viruses. Add it in here.
-
-        if os.path.exists(f"{dir_tmp}:\\"):
-            os.system(f"ATTRIB -S -H {dir_tmp}:\\*.* /d /l")
-            t.insert("end", f"Success to show hidden files in {dir_tmp}-disk\n")
-            write_Log(f"Success to show hidden files in {dir_tmp}-disk")
-        else:
-            t.insert("end", f"{dir_tmp}-disk not found\n")
-            write_Log(f"{dir_tmp}-disk not found")
-
-    t.insert("end", "\n")
-    var.set("FINISH")
-    write_Log("Fix Virus Files Finished")
-
-
-def Auto_Kill():
-    # Call two functions
-
-    Kill_Viruses()
-    repair_infected_files()
-
-
-def clean_Button():
-    # Clean Screen Module: Clean Screen & Output
-
-    global Easter_Egg
-
-    var.set("VIRUS KILLER")
-    t.delete("1.0", tk.END)
-
-    # Easter_Egg module
-    if Easter_Egg < 0:
-        pass
-    elif Easter_Egg < 4:
-        Easter_Egg += 1
-    else:
-        var.set("Copyright © 2024 - 2030 Arthur_xyz.All Rights Reserved")
-        write_Log("\n\nCopyright © 2024 - 2030 Arthur_xyz.All Rights Reserved")
-        write_Log("The Easter Egg was discovered by you!\n被你发现啦!")
-        write_Log("Developer: Arthur_xyz\nEmail: Arthur_xyz@outlook.com\n\n")
-        Easter_Egg = 0
-
-
-def clean_Output():
-    # Nothing will call this function
-    # t.delete("1.0", tk.END)
-
-    pass
-
-
-def create_Log():
-    # Log Module: Create a log
-
-    global build_Log, current_Log, Version, file_directory
-
-    if build_Log:
-        current_time_stamp = "%.7f" % time.time()
-        current_Log = f"log{current_time_stamp}"
-        current_time = time.asctime()
-
-        with open(f"{file_directory}/Log/{current_Log}.log.avk", "x", encoding="UTF-8") as file:
-            file.write(f"{Version}\n")
-            file.write(f"{current_Log}:\n")
-            file.write(f"Current Work Path: {os.getcwd()}\n\n")
-            file.write(f"{current_time}  Successfully run the program\n")
-            file.write(f"Your operating system is: {os.name}\n\n\n")
-            file.write("Operation Log:\n")
-
-        # Create a bat to clean Logs
-        if not os.path.exists(f"{file_directory}/Log/Clean_Log.bat"):
-            with open(f"{file_directory}/Log/Clean_Log.bat", "w", encoding="UTF-8") as file:
-                file.write(f"@echo off\ndel /f /q *.*")
-
-
-def write_Log(log):
-    # Log Module: Write OperationLog
-
-    global build_Log, current_Log, appdata
-
-    if build_Log:
-        with open(f"{file_directory}/Log/{current_Log}.log.avk", "a", encoding="UTF-8") as file:
-            file.write(f"{log}\n")
-
-
-def log_configuration():
-    # Config Module: Read & Check Config
-
-    global build_Log, file_directory
-
-    if not os.path.exists(f"{file_directory}"):
-        os.mkdir(f"{file_directory}")
-
-    dir_list = ['/Config', '/Log']
-    for dir_tmp in dir_list:
-        dir_tmp = file_directory + dir_tmp
-        if not os.path.exists(dir_tmp):
-            mkdir(dir_tmp)
-
-    config_path = f'{file_directory}/Config/VIRUS_KILLER_CONFIGURATION.Elysia'
-    if os.path.exists(config_path):
-        with open(config_path, "r", encoding="UTF-8") as file:
-            log_config_read = file.read()
-            log_enable = log_config_read[:1]
-
-            if log_enable == "1":
-                build_Log = True
-
-                create_Log()
-
-            elif log_enable == "0":
-                build_Log = False
-
-            else:
-                log_get_message()
-
-    else:
-        log_get_message()
-
-
-def log_get_message():
-    # Config Module: If used for the first time, ask users
-
-    global build_Log
-
-    log_enable_bool = tk.messagebox.askokcancel(title="Save log or not",
-                                                message="Do you want to save log?\n你想要保存日志吗?")
-    if log_enable_bool:
-        build_Log = True
-        log_config(1)
-        create_Log()
-    else:
-        build_Log = False
-        log_config(0)
-
-
-def log_config(log_config_value):
-    # Config Module: Create Config
-
-    global file_directory
-
-    config_path = f'{file_directory}/Config/VIRUS_KILLER_CONFIGURATION.Elysia'
-    os.system(f"attrib -r -h {config_path}")
-    with open(f"{config_path}", "w", encoding="UTF-8") as file:
-        file.write(f"{log_config_value};")
-    os.system(f"attrib +r +h {config_path}")
-
-
-"""
-def correct_log_config():
-    # Haven't used
-
-    global appdata
-    content = None
-
-    os.system(f"attrib -h {file_directory}/Config/VIRUS_KILLER_CONFIGURATION.Elysia")
-
-    with open(f"{file_directory}/Config/VIRUS_KILLER_CONFIGURATION.Elysia", "r", encoding="UTF-8") as file1:
-        content = file.read()
-
-
-
-    with open(f"{file_directory}/Config/VIRUS_KILLER_CONFIGURATION.Elysia", "r", encoding="UTF-8") as file2:
-
-
-    os.system(f"attrib +h {file_directory}/Config/VIRUS_KILLER_CONFIGURATION.Elysia")
-"""  # Haven't Used
-
-# Main Window (GUI)
-
-window = tk.Tk()
-window.title(Version)
-window.geometry("1366x720")
-window.minsize(1366, 720)
-
-var = tk.StringVar()
-
-label1 = tk.Label(window, textvariable=var, bg="cyan", width=45, font=("Arial", 40), height=2)
-label1.grid(row=0, column=0, columnspan=2)
-
-button1 = tk.Button(window, text="Kill Viruses", font=30, width=40, height=2, command=Kill_Viruses)
-button1.grid(row=1, column=0)
-
-button2 = tk.Button(window, text="Fix What Viruses Make", font=30, width=40, height=2, command=repair_infected_files)
-button2.grid(row=2, column=0)
-
-button3 = tk.Button(window, text="Auto Kill(Do #1 And #2)", font=30, width=40, height=2, command=Auto_Kill)
-button3.grid(row=1, column=1)
-
-button4 = tk.Button(window, text="Clean Screen", font=30, width=40, height=2, command=clean_Button)
-button4.grid(row=2, column=1)
-
-# button5 = tk.Button(window, text = "©", width = 1, height= 1, command= clean_Button)
-# button5.pack()
-
-label2 = tk.Label(window, width=10, font=20, height=2)
-label2.grid(row=3, column=0, columnspan=2)
-
-# text = "If you want to clean screen, press the Clean Screen button",
-label3 = tk.Label(window, text="Output:", width=10, font=20, height=1)
-label3.grid(row=4, column=0, columnspan=2)
-
-t = tk.Text(window, height=30)
-t.grid(row=5, column=0, columnspan=2)
-
-var.set("VIRUS KILLER")
-
-log_configuration()
-
-window.mainloop()
-
-'''
-class MainWindow:
-    def __init__(self, version):
-        self.window = tk.Tk()
-        self.window.title(Version)
-        self.window.geometry("1366x720")
-
-        self.var = tk.StringVar()
-
-        label1 = tk.Label(self.window, textvariable=self.var, bg="cyan", width=45, font=("Arial", 40), height=2)
-        label1.grid(row=0, column=0, columnspan=2)
-
-        button1 = tk.Button(self.window, text="Kill Viruses", font=30, width=40, height=2, command=Kill_Viruses)
-        button1.grid(row=1, column=0)
-
-        button2 = tk.Button(self.window, text="Fix What Viruses Make", font=30, width=40, height=2,
-                            command=repair_infected_files)
-        button2.grid(row=2, column=0)
-
-        button3 = tk.Button(self.window, text="Auto Kill(Do #1 And #2)", font=30, width=40, height=2, command=Auto_Kill)
-        button3.grid(row=1, column=1)
-
-        button4 = tk.Button(self.window, text="Clean Screen", font=30, width=40, height=2, command=clean_Button)
-        button4.grid(row=2, column=1)
-
-        # button5 = tk.Button(window, text = "©", width = 1, height= 1, command= clean_Button)
-        # button5.pack()
-
-        label2 = tk.Label(self.window, width=10, font=20, height=2)
-        label2.grid(row=3, column=0, columnspan=2)
-
-        # text = "If you want to clean screen, press the Clean Screen button",
-        label3 = tk.Label(self.window, text="Output:", width=10, font=20, height=1)
-        label3.grid(row=4, column=0, columnspan=2)
-
-        self.t = tk.Text(self.window, height=30)
-        self.t.grid(row=5, column=0, columnspan=2)
-
-        self.var.set("VIRUS KILLER")
-
-        log_configuration()
-
-        self.window.mainloop()
-
-
-
-
-if __name__ == '__main__':
-    MainWindow(version=Version)
+File name: xyzvk_v2.0.0.py
+Copyright: Copyright ©  2024 - 2030 Arthur_xyz. All Rights Reserved
+Description: XYZ Virus Killer XYZ virus killer program (code: Pardofelis)
+Modified by: xyz
+Modified on: January 29, 2025
+Modified content: Addition and refactoring
+
+文件名：xyzvk_v2.0.0.py
+版权：Copyright © 2024 - 2030 Arthur_xyz.All Rights Reserved
+描述：XYZ Virus Killer XYZ病毒杀手程序 (代号: Pardofelis)
+修改人：xyz
+修改时间：2024-01-29
+修改内容：新增和重构
 '''
 
-"""
-Copyright © 2030
+'''
+Copyright © 2024
 Copyright © 2024 - 2030 Arthur_xyz.All Rights Reserved
 © 2024 - 2030 Arthur_xyz版权所有
 
@@ -408,4 +65,539 @@ If you accidentally obtain the source code, please contact Arthur_xyz (Arthur_xy
 请联系Arthur_xyz (Arthur_xyz@outlook.com)
 If you want to create your own project depend on this (xyz virus killer),
 please contact Arthur_xyz (Arthur_xyz@outlook.com)
-"""
+'''
+
+'''
+What is Class:
+上帝每次都做抓老鼠的工作很累，所以上帝创造了一个全新类型的动物---猫，
+上帝每次都丢东西很烦，所以上帝创造了一个全新类型的动物---狗，
+女娲每次都捏人很累，所以女娲创造了能够自动生育的人---男人和女人，
+
+上帝抓老鼠------函数模数
+
+上帝定义了猫类-----内嵌抓老鼠的行为-----类模式------猫抓老鼠很简单。
+
+计算---函数
+计算器-----类------计算变得简单
+
+函数-----一种动作。
+类-------解决问题的一类器物。
+'''
+
+'''
+Code Name List:
+Kevin, Elysia, Aponia, Eden, Vill-V, Kalpas, Su, Sakura, Kosma, Mobius, Griseo, Hua, Pardofelis
+'''
+
+# General Information
+general = {
+    'Name': 'Virus Killer',
+    'version': '2.0.0',
+    # 'Full_version' : f'{name} V{version}',
+}
+name = 'Virus Killer'
+version = '2.0.0'
+# Full_version = "Virus Killer V1.7.7 (Elysium)"
+Full_version = f'{name} V{version}'
+Internal_version = '%03d%03d%03d' % (2, 0, 0)
+code_name = 'Pardofelis'
+nickname = 'Ego'
+
+# Whether TSET ENVIRONMENT
+# test = True
+
+
+# Build log
+# Condition: Messagebox return
+# log_dictionary = {'build_Log': None}
+build_Log = None
+
+debug_frame_disable = True
+
+appdata = os.path.expandvars("%APPDATA%")
+file_directory = appdata + '/Arthur/VirusKiller'
+
+# Show Easter Egg
+# Current condition: On (If Easter_Egg < 0, it's Off)
+Easter_Egg = 0
+
+
+def start():
+    run_command('chcp 65001')
+
+    check_path()
+
+    log()
+
+    update()
+
+
+def check_path():
+    father_directory = appdata + '/Arthur'
+    dir_list = ['', '/VirusKiller', '/VirusKiller/Config', '/VirusKiller/Log']
+
+    for dir_tmp in dir_list:
+        dir_tmp = father_directory + dir_tmp
+        if not os.path.exists(dir_tmp):
+            os.mkdir(dir_tmp)
+
+
+def run_command(command):
+    return subprocess.call(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+
+def update():
+    internal_version = int(Internal_version)
+    online_update_version = -1
+    local_update_version = int(local_update())
+
+    if internal_version >= online_update_version and internal_version >= local_update_version:
+        return
+
+    if online_update_version >= local_update_version:
+
+        execute_update = tk.messagebox.askokcancel(
+            'Update Available',
+            'A new version is available.\n'
+            f'Do you want to download {online_update_version}'
+            'Please ask Arthur_xyz<Arthur_xyz@outlook.com> for the update.\n\n'
+        )
+
+        if execute_update:
+            print('⚠☣Downloading☣⚠')
+
+            return
+
+        else:
+            tk.messagebox.showwarning(
+                'Update Available',
+                'A new version is available.\n'
+                'Please ask Arthur_xyz<Arthur_xyz@outlook.com> for the update.\n\n'
+            )
+
+    else:
+        tk.messagebox.showwarning(
+            'Update Available',
+            'A new version is available.\n'
+            'Please ask Arthur_xyz<Arthur_xyz@outlook.com> for the update.\n\n'
+        )
+
+    exit('UPDATE AVAILABLE')
+
+
+def local_update():
+    if os.path.exists(f'{file_directory}/Config/Local_Update.Elysia'):
+
+        with open(f'{file_directory}/Config/Local_Update.Elysia', 'r') as local_update_config:
+            local_version = local_update_config.read()
+
+        if is_legal_version(local_version):
+
+            if int(Internal_version) <= int(local_version):
+                return local_version
+
+    build_local_update_config()
+    return -1
+
+
+def is_legal_version(local_version):
+    # Check whether local_version is legal
+
+    local_version = str(local_version)
+    digit_is_int = 0
+
+    if len(local_version) != 9:
+        return False
+
+    for tmp_local_version in local_version:
+
+        for tmp_num in range(10):
+
+            if tmp_local_version == str(tmp_num):
+                digit_is_int += 1
+
+    if digit_is_int == 9:
+        return True
+    else:
+        return False
+
+
+def build_local_update_config():
+    if os.path.exists(f'{file_directory}/Config/Local_Update.Elysia'):
+        run_command(f'attrib -r -h {file_directory}/Config/Local_Update.Elysia')
+
+    with open(f'{file_directory}/Config/Local_Update.Elysia', 'w', encoding="UTF-8") as local_version:
+        local_version.write(Internal_version)
+
+    run_command(f'attrib +r +h {file_directory}/Config/Local_Update.Elysia')
+
+
+def log():
+    global build_Log
+
+    build_Log = log_configuration()
+
+    easy_clean_log()
+
+
+
+# Config Module: Read & Check Config
+def log_configuration():
+    config_path = f'{file_directory}/Config/VirusKiller_Configuration.Elysia'
+    log_get_message = True
+    log_config = None
+    _build_log = None
+
+    # Try to read config
+    if os.path.isfile(config_path):
+
+        with open(config_path, "r", encoding="UTF-8") as file:
+            read_config = file.read()
+
+        enable_log = read_config[0]
+
+        if enable_log == "1":
+            log_get_message = False
+            _build_log = True
+            log_config = 1
+
+        elif enable_log == "0":
+            log_get_message = False
+            _build_log = False
+            log_config = 0
+
+    if log_get_message:
+        _build_log = tk.messagebox.askokcancel(
+            title="Save log or not",
+            message="Do you want to save log?\n你想要保存日志吗?"
+        )
+        if _build_log:
+            log_config = 1
+        else:
+            log_config = 0
+
+    run_command(f"attrib -s -r -h {config_path}")
+    with open(f"{config_path}", "w", encoding="UTF-8") as file:
+        file.write(f"{log_config}")
+    run_command(f"attrib +s +r +h {config_path}")
+
+    return _build_log
+
+
+def easy_clean_log():
+    # Create a bat to clean all the Logs
+    if not os.path.exists(f"{file_directory}/Log/Clean_Log.bat"):
+        with open(f"{file_directory}/Log/Clean_Log.bat", "w", encoding="UTF-8") as file:
+            file.write(f"del /f /q *.avk \ndel /f /q *.bat")
+
+
+
+# Virus killer main module
+def kill_viruses():
+
+    set_insert_simplified('\nKilling Processes:')
+
+    # If you want to add more viruses' processes. Add them in here.
+    virus_processes = ['Rundll32.exe', 'AvastSvc.exe', 'wscript.exe', 'Autolt3.exe']  # 'cmd.exe'
+
+    for processes in virus_processes:
+        taskkill_processes(processes)
+
+    var.set("FINISH")
+
+    # notify('Antivirus completed')
+
+    rename_virus_files()
+
+
+# Virus killer module: Taskkill virus processes
+def taskkill_processes(process_name):
+    module_name = 'taskkill_processes'
+    result_taskkill = run_command(f"TASKKILL -F -IM {process_name} -T")
+
+    if result_taskkill == 0:
+        condition = 'success'
+        output_content = f'The process has been terminated'
+        logger.info(f'The process ({process_name}) has been terminated (With return value {result_taskkill})')
+
+    elif result_taskkill == 128:
+        condition = 'failed'
+        output_content = f'The process not found'
+        logger.warning(f'The process ({process_name}) not found (With return value {result_taskkill})')
+
+    elif result_taskkill == 1:
+        condition = 'failed'
+        output_content = 'The process could not be terminated'
+        logger.warning(f'The process ({process_name}) could not be terminated (With return value {result_taskkill})')
+
+    else:
+        condition = 'failed'
+        output_content = 'Unknown Error: Please tell developers!!'
+        logger.warning(f'Unknown Error (With return value {result_taskkill})')
+
+    set_insert(module_name, condition, output_content)
+
+
+# Virus Files Rename Module: Select disks
+# Virus Files Rename Module: Rename the Virus Files
+def rename_virus_files():
+    module_name = 'rename_virus_files'
+    condition_list = []
+    log_content_list = []
+
+    set_insert_simplified('\nRenaming Files:')
+
+    # If you want to add more dirs. Add them in here.
+    disks = ['E', 'F', 'G']
+
+    for disk_name in disks:
+
+        if os.path.exists(f"{disk_name}:\\"):
+            result_rename_files = run_command(f"ren {disk_name}:\\*.lnk *.vir")
+            condition_list.append('success')
+            log_content_list.append(f'Success to rename virus files in {disk_name}-disk (With return value {result_rename_files})')
+
+        else:
+            condition_list.append('failed')
+            log_content_list.append(f'{disk_name}-disk not found')
+
+    for cnt in range(0, len(log_content_list)):
+        log_content = log_content_list[cnt]
+        condition = condition_list[cnt]
+
+        output_content = log_content
+        set_insert(module_name, condition, output_content)
+
+    var.set("FINISH")
+
+
+# Virus File Repair Module: Show hidden files
+def repair_infected_files():
+    set_insert_simplified('\nShowing Hidden Files:')
+
+    # If you want to add other dirs. Add it in here.
+    disks = ['E', 'F', 'G', 'H']
+
+    module_name = 'repair_infected_files'
+
+    condition_list = []
+    log_content_list = []
+
+    for dir_tmp in disks:
+
+        if os.path.exists(f"{dir_tmp}:\\"):
+            result_repair_infected_files = run_command(f"ATTRIB -S -H {dir_tmp}:\\*.* /d /l")
+            condition_list.append('success')
+            logger.info(f'Virus files in {dir_tmp}-disk was renamed')
+            log_content_list.append(f'Virus files in {dir_tmp}-disk was renamed (With return value {result_repair_infected_files})')
+
+        else:
+            condition_list.append('failed')
+            logger.warning(f'{dir_tmp}-disk not found')
+            log_content_list.append(f'{dir_tmp}-disk not found')
+
+    for cnt in range(0, len(log_content_list)):
+        log_content = log_content_list[cnt]
+        condition = condition_list[cnt]
+
+        output_content = log_content
+        set_insert(module_name, condition, output_content)
+
+    # notify('Repair Infected Files completed')
+
+    var.set("FINISH")
+
+
+def auto_kill():
+    # Call two functions
+
+    kill_viruses()
+    repair_infected_files()
+
+
+# Clean Screen Module: Clean Screen & Output
+def clean_button():
+    global file_directory
+
+    var.set("Virus Killer")
+    output_text.configure(state='normal')
+    output_text.delete("1.0", tk.END)
+    output_text.configure(state='disabled')
+
+    easter_egg()
+
+
+def easter_egg():
+    global Easter_Egg
+
+    # Easter_Egg module
+    if Easter_Egg < 0:
+        pass
+    elif Easter_Egg < 4:
+        Easter_Egg += 1
+    else:
+        var.set("Copyright © 2024 - 2030 Arthur_xyz.All Rights Reserved")
+
+        logger.debug('=' * 52)
+        logger.debug('Copyright 2024 - 2030 Arthur_xyz.All Rights Reserved')
+        logger.debug('The Easter Egg was discovered by you!')
+        logger.debug('Developer:\tArthur_xyz')
+        logger.debug('Email:\tArthur_xyz@outlook.com')
+        logger.debug('=' * 52)
+
+        Easter_Egg = 0
+
+
+def debugger_button():
+    global debug_frame_disable
+
+    if debug_frame_disable:
+        debug_frame.grid(row=2, column=2, rowspan=10, columnspan=2)
+        debug_frame_disable = False
+    else:
+        debug_frame.grid_forget()
+        debug_frame_disable = True
+
+
+# Define a function to get the value of the combobox automatically
+# noinspection PyUnusedLocal
+def debug_combobox_on_select(event):
+    selected_value = debug_combobox1.get()
+
+    if selected_value == 'Debug':
+        handler.setLevel(logging.DEBUG)
+        logger.setLevel(level=logging.DEBUG)
+    elif selected_value == 'Info':
+        handler.setLevel(logging.INFO)
+        logger.setLevel(level=logging.INFO)
+    elif selected_value == 'Warning':
+        handler.setLevel(logging.WARNING)
+        logger.setLevel(level=logging.WARNING)
+    elif selected_value == 'Error':
+        handler.setLevel(logging.ERROR)
+        logger.setLevel(level=logging.ERROR)
+    elif selected_value == 'Critical':
+        handler.setLevel(logging.CRITICAL)
+        logger.setLevel(level=logging.CRITICAL)
+    elif selected_value == 'Silent':
+        handler.setLevel(logging.CRITICAL + 1)
+        logger.setLevel(level=logging.CRITICAL + 1)
+    # print("Current log level:", selected_value)
+    # print(logger)
+
+
+def set_insert_simplified(content):
+    minus_sign_quantity = '-' * 50
+    output = f'{minus_sign_quantity}{content}\n\n'
+
+    output_text.configure(state='normal')
+    output_text.insert('end', output)
+    output_text.configure(state='disabled')
+
+
+def set_insert(module, condition, content):
+    current_time = time.asctime()[-13:-5]
+
+    module = module.upper()
+    condition = condition.upper()
+
+    output = f'{current_time} | [{module}]\t|\t{condition}\t|\t{content}\n'
+    output_text.configure(state='normal')
+    output_text.insert('end', output)
+    output_text.configure(state='disabled')
+
+
+
+start()
+
+# Main Window (GUI)
+window = tk.Tk()
+window.title(Full_version)
+window.geometry("1360x720")
+window.minsize(1360, 720)
+window.maxsize(3840, 2160)
+
+
+# Set icon
+# https://www.cnblogs.com/duanminkid/p/14208356.html
+with open("tmp.ico", "wb+") as tmp:
+    tmp.write(base64.b64decode(img))
+window.iconbitmap("tmp.ico")
+os.remove("tmp.ico")
+
+
+# Set logger
+logger = logging.getLogger(__name__)
+handler = logging.FileHandler(f'{file_directory}/Log/Log{'%.7f' % time.time()}.avk')
+if build_Log:
+    handler.setLevel(logging.DEBUG)
+    logger.setLevel(level=logging.DEBUG)
+else:
+    handler.setLevel(logging.CRITICAL + 1)
+    logger.setLevel(level=logging.CRITICAL + 1)
+formatter = logging.Formatter('%(asctime)s - %(pathname)s - %(name)s - %(funcName)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+
+
+var = tk.StringVar()
+
+
+label1 = tk.Label(window, textvariable=var, bg="lightcyan", width=44, font=("Arial", 40), height=2)
+label1.grid(row=0, column=0, columnspan=4)
+
+label2 = tk.Label(window, width=10, font=20, height=2)
+label2.grid(row=1, column=0, columnspan=4)
+
+
+button_frame = tk.Frame(window)
+
+button1 = tk.Button(button_frame, text="Kill Viruses", font=30, width=40, height=2, command=kill_viruses)
+button1.grid(row=0, column=0, padx=10, pady=20)
+
+button2 = tk.Button(button_frame, text="Repair Infected Files", font=30, width=40, height=2,
+                    command=repair_infected_files)
+button2.grid(row=0, column=1, padx=10, pady=20)
+
+button3 = tk.Button(button_frame, text="Auto Kill(Do #1 And #2)", font=30, width=40, height=2, command=auto_kill)
+button3.grid(row=1, column=0, padx=10, pady=20)
+
+button4 = tk.Button(button_frame, text="Clean Screen", font=30, width=40, height=2, command=clean_button)
+button4.grid(row=1, column=1, padx=10, pady=20)
+
+button5 = tk.Button(button_frame, text="Debugger", font=30, width=40, height=2, command=debugger_button)
+button5.grid(row=2, column=0, padx=10, pady=20)
+
+button_frame.grid(row=2, column=0, rowspan=4, columnspan=2)
+
+
+debug_frame = tk.Frame(window)
+
+debug_label1 = tk.Label(debug_frame, text="Debugger Output:", width=17, font=('TkDefaultFont', 20), height=1)
+debug_label1.pack()
+
+output_text = tk.Text(debug_frame, height=30)
+output_text.pack()
+output_text.configure(state='disabled')
+
+debug_frame_sub1 = tk.Frame(debug_frame)
+
+debug_label2 = tk.Label(debug_frame_sub1, text="Select log output level: ", width=25, font=20, height=1)
+debug_label2.pack(side='left', padx=10)
+
+log_options = ['Debug', 'Info', 'Warning', 'Error', 'Critical', 'Silent']
+debug_combobox1 = ttk.Combobox(debug_frame_sub1, values=log_options)
+debug_combobox1.pack(side='left', padx=10)
+
+# Set default values
+debug_combobox1.current(0)
+
+# Bind events to combobox
+debug_combobox1.bind("<<ComboboxSelected>>", debug_combobox_on_select)
+
+debug_frame_sub1.pack(pady=10)
+
+
+var.set("Virus Killer")
+
+window.mainloop()
