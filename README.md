@@ -3,7 +3,7 @@
 ![Python](https://img.shields.io/badge/python-3.8%2B-blue)
 ![License](https://img.shields.io/badge/license-GPLv3-green)
 ![Stars](https://img.shields.io/github/stars/Errorsia/xyz-virus-killer?style=social)
-![Dependencies](https://img.shields.io/librariesio/github/Errorsia/xyz-virus-killer)
+<!-- [Dependencies](https://img.shields.io/librariesio/github/Errorsia/xyz-virus-killer) -->
 ![Last Update](https://img.shields.io/github/last-commit/Errorsia/xyz-virus-killer)
 
 ---
