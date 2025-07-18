@@ -10,53 +10,61 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 import subprocess
-# from win11toast import notify
+import tempfile
+# import win11toast
 
 # Private Libraries
-from icon import img
+import icon
 
 """
+THE PROGRAMME ONLY RUNS ON WINDOWS(NT) !
+I don't think someone will run an EXE programme on Linux(except wine) and MacOS etc.
+
 Update Log:
-Change the code names
-Add the debug frame & debugger button 
-Fixed the problem of black frame popping up during runtime
-# Use dictionaries to replace some variables (It seems unnecessary)
-Rebuild log module
+Rebuild repair_infected_files module
+Change the name of rename_virus_files to handle_virus_files
+Added logging to handle_virus_files
+Added a module to obtain the drive letters
+Added a module to obtain the drive letter of removable disks
+Added a module to obtain the volume label of disks
+Optimize the logic of judging whether a string can be formatted into an integer
 
 更新日志:
-更改了代号
-新增调试框架和调试按钮
-修复运行时有黑框弹出的问题
-# 使用字典代替了部分变量 (似乎没有必要)
-重构了日志模块
+重构了修复被感染的文件(repair_infected_files)模块
+将rename_virus_files的名字改为handle_virus_files
+在处理病毒文件(handle_virus_files)中加入了日志记录
+新增获取磁盘盘符模块
+新增获取可移动磁盘盘符模块
+新增获取磁盘名称模块
+优化判断字符串是否可以格式化成整型的逻辑
 
 
 Author's message:
     Why the codes is more and more complex, while the lines are fewer and fewer?
     There is no bugs at present!
-    The programme is TESTING!
+    But programme is still TESTING!
 """
 
 '''
-File name: xyzvk_v2.0.0.py
-Copyright: Copyright ©  2024 - 2030 Arthur_xyz. All Rights Reserved
-Description: XYZ Virus Killer XYZ virus killer program (code: Pardofelis)
+File name: xyzvk_v2.0.1.py
+Copyright: Copyright ©  2024 - 2070 Arthur_xyz.All Rights Reserved
+Description: XYZ Virus Killer XYZ virus killer program (Code: Pardofelis)
 Modified by: xyz
-Modified on: January 29, 2025
+Modified on: February 07, 2025
 Modified content: Addition and refactoring
 
-文件名：xyzvk_v2.0.0.py
-版权：Copyright © 2024 - 2030 Arthur_xyz.All Rights Reserved
+文件名：xyzvk_v2.0.1.py
+版权：Copyright © 2024 - 2070 Arthur_xyz.All Rights Reserved
 描述：XYZ Virus Killer XYZ病毒杀手程序 (代号: Pardofelis)
 修改人：xyz
-修改时间：2024-01-29
+修改时间：2024-02-07
 修改内容：新增和重构
 '''
 
 '''
 Copyright © 2024
-Copyright © 2024 - 2030 Arthur_xyz.All Rights Reserved
-© 2024 - 2030 Arthur_xyz版权所有
+Copyright © 2024 - 2070 Arthur_xyz.All Rights Reserved
+© 2024 - 2070 Arthur_xyz版权所有
 
 如果您意外获取了源码，请联系 Arthur_xyz (Arthur_xyz@outlook.com)
 If you accidentally obtain the source code, please contact Arthur_xyz (Arthur_xyz@outlook.com)
@@ -90,39 +98,40 @@ Kevin, Elysia, Aponia, Eden, Vill-V, Kalpas, Su, Sakura, Kosma, Mobius, Griseo, 
 '''
 
 # General Information
-general = {
-    'Name': 'Virus Killer',
-    'version': '2.0.0',
-    # 'Full_version' : f'{name} V{version}',
-}
-name = 'Virus Killer'
-version = '2.0.0'
-# Full_version = "Virus Killer V1.7.7 (Elysium)"
-Full_version = f'{name} V{version}'
-Internal_version = '%03d%03d%03d' % (2, 0, 0)
+# general = {
+#     'Name': 'Virus Killer',
+#     'version': '2.0.0',
+#     # 'Full_version' : f'{name} V{version}',
+# }
+programme_name = 'Virus Killer'
+version = '2.0.1'
+Full_version = f'{programme_name} V{version}'
+Internal_version = '%03d%03d%03d' % (2, 0, 1)
 code_name = 'Pardofelis'
 nickname = 'Ego'
 
 # Whether TSET ENVIRONMENT
 # test = True
 
-
-# Build log
-# Condition: Messagebox return
+# Build log(Messagebox return)
 # log_dictionary = {'build_Log': None}
 build_Log = None
 
 debug_frame_disable = True
 
-appdata = os.path.expandvars("%APPDATA%")
+# Get the value of the environment variable %appdata%
+appdata = os.getenv("APPDATA")
+# appdata = os.path.expandvars("%APPDATA%")
 file_directory = appdata + '/Arthur/VirusKiller'
 
-# Show Easter Egg
+# Whether show Easter Egg
 # Current condition: On (If Easter_Egg < 0, it's Off)
 Easter_Egg = 0
 
 
 def start():
+    check_operate_system()
+
     run_command('chcp 65001')
 
     check_path()
@@ -132,6 +141,13 @@ def start():
     update()
 
 
+# Check whether OS is Windows nt
+def check_operate_system():
+    if os.name != 'nt':
+        exit('UNSUPPORTED SYSTEMS')
+
+
+# Check the working directories
 def check_path():
     father_directory = appdata + '/Arthur'
     dir_list = ['', '/VirusKiller', '/VirusKiller/Config', '/VirusKiller/Log']
@@ -145,91 +161,8 @@ def check_path():
 def run_command(command):
     return subprocess.call(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-
-def update():
-    internal_version = int(Internal_version)
-    online_update_version = -1
-    local_update_version = int(local_update())
-
-    if internal_version >= online_update_version and internal_version >= local_update_version:
-        return
-
-    if online_update_version >= local_update_version:
-
-        execute_update = tk.messagebox.askokcancel(
-            'Update Available',
-            'A new version is available.\n'
-            f'Do you want to download {online_update_version}'
-            'Please ask Arthur_xyz<Arthur_xyz@outlook.com> for the update.\n\n'
-        )
-
-        if execute_update:
-            print('⚠☣Downloading☣⚠')
-
-            return
-
-        else:
-            tk.messagebox.showwarning(
-                'Update Available',
-                'A new version is available.\n'
-                'Please ask Arthur_xyz<Arthur_xyz@outlook.com> for the update.\n\n'
-            )
-
-    else:
-        tk.messagebox.showwarning(
-            'Update Available',
-            'A new version is available.\n'
-            'Please ask Arthur_xyz<Arthur_xyz@outlook.com> for the update.\n\n'
-        )
-
-    exit('UPDATE AVAILABLE')
-
-
-def local_update():
-    if os.path.exists(f'{file_directory}/Config/Local_Update.Elysia'):
-
-        with open(f'{file_directory}/Config/Local_Update.Elysia', 'r') as local_update_config:
-            local_version = local_update_config.read()
-
-        if is_legal_version(local_version):
-
-            if int(Internal_version) <= int(local_version):
-                return local_version
-
-    build_local_update_config()
-    return -1
-
-
-def is_legal_version(local_version):
-    # Check whether local_version is legal
-
-    local_version = str(local_version)
-    digit_is_int = 0
-
-    if len(local_version) != 9:
-        return False
-
-    for tmp_local_version in local_version:
-
-        for tmp_num in range(10):
-
-            if tmp_local_version == str(tmp_num):
-                digit_is_int += 1
-
-    if digit_is_int == 9:
-        return True
-    else:
-        return False
-
-
-def build_local_update_config():
-    if os.path.exists(f'{file_directory}/Config/Local_Update.Elysia'):
-        run_command(f'attrib -r -h {file_directory}/Config/Local_Update.Elysia')
-
-    with open(f'{file_directory}/Config/Local_Update.Elysia', 'w', encoding="UTF-8") as local_version:
-        local_version.write(Internal_version)
-
-    run_command(f'attrib +r +h {file_directory}/Config/Local_Update.Elysia')
+def subprocess_run(command):
+    return subprocess.run(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 
 def log():
@@ -238,7 +171,6 @@ def log():
     build_Log = log_configuration()
 
     easy_clean_log()
-
 
 
 # Config Module: Read & Check Config
@@ -292,6 +224,129 @@ def easy_clean_log():
 
 
 
+# Check for updates
+def update():
+    internal_version = int(Internal_version)
+    online_update_version = -1
+    local_update_version = int(local_update())
+
+    if internal_version >= online_update_version and internal_version >= local_update_version:
+        return
+
+    if online_update_version >= local_update_version:
+
+        execute_update = tk.messagebox.askokcancel(
+            'Update Available',
+            'A new version is available.\n'
+            'Do you want to download the new version?\n\n'
+            'You can also ask Arthur_xyz<Arthur_xyz@outlook.com> for the update.\n\n'
+        )
+
+        if execute_update:
+            print('⚠☣Downloading☣⚠')
+
+            return
+
+        else:
+            tk.messagebox.showwarning(
+                'Update Available',
+                'A new version is available.\n'
+                'Please ask Arthur_xyz<Arthur_xyz@outlook.com> for the update.\n\n'
+            )
+
+    else:
+        tk.messagebox.showwarning(
+            'Update Available',
+            'A new version is available.\n'
+            'Please ask Arthur_xyz<Arthur_xyz@outlook.com> for the update.\n\n'
+        )
+
+    exit('UPDATE AVAILABLE')
+
+
+def local_update():
+    if os.path.exists(f'{file_directory}/Config/Local_Update.Elysia'):
+
+        with open(f'{file_directory}/Config/Local_Update.Elysia', 'r') as local_update_config:
+            local_version = local_update_config.read()
+
+        if is_legal_version(local_version):
+
+            if int(Internal_version) <= int(local_version):
+                return local_version
+
+    build_local_update_config()
+    return -1
+
+
+# Check whether local_version is legal
+def is_legal_version(local_version):
+    local_version = str(local_version)
+    digit_is_int = 0
+
+    if len(local_version) != 9:
+        return False
+
+    for tmp_local_version in local_version:
+        for tmp_num in range(10):
+            if tmp_local_version == str(tmp_num):
+                digit_is_int += 1
+                break
+
+    if digit_is_int == 9:
+        return True
+    else:
+        return False
+
+
+def build_local_update_config():
+    if os.path.exists(f'{file_directory}/Config/Local_Update.Elysia'):
+        run_command(f'attrib -r -h {file_directory}/Config/Local_Update.Elysia')
+
+    with open(f'{file_directory}/Config/Local_Update.Elysia', 'w', encoding="UTF-8") as local_version:
+        local_version.write(Internal_version)
+
+    run_command(f'attrib +r +h {file_directory}/Config/Local_Update.Elysia')
+
+
+def get_drives_and_types():
+
+    # Execute the WMIC command to obtain disk information
+    result = subprocess.run(
+        'wmic logicaldisk get caption, description',
+        capture_output=True,
+        text=True,
+        encoding='gbk',  # Chinese system uses GBK encoding
+        shell=True
+    )
+
+    drives = []
+    drives_type = []
+    # Parsing output results
+    output = result.stdout.strip()
+    for line in output.split('\n'):
+        # Skip empty lines and header lines
+        if not line.strip() or line.startswith('Caption'):
+            continue
+
+        # Clean extra spaces and split columns
+        parts = list(filter(None, line.split()))
+        drives.append(parts[0])
+        drives_type.append(parts[1])
+
+    return drives, drives_type
+
+def get_removable_disks():
+    drives, drives_type = get_drives_and_types()
+    removable_disks = []
+
+    for cnt in range(len(drives)):
+        if drives_type[cnt] == '可移动磁盘':
+            removable_disks.append(drives[cnt].rstrip(':'))
+
+    return removable_disks
+
+
 # Virus killer main module
 def kill_viruses():
 
@@ -305,9 +360,9 @@ def kill_viruses():
 
     var.set("FINISH")
 
-    # notify('Antivirus completed')
+    # wintoast('Antivirus completed')
 
-    rename_virus_files()
+    handle_virus_files()
 
 
 # Virus killer module: Taskkill virus processes
@@ -318,55 +373,92 @@ def taskkill_processes(process_name):
     if result_taskkill == 0:
         condition = 'success'
         output_content = f'The process has been terminated'
-        logger.info(f'The process ({process_name}) has been terminated (With return value {result_taskkill})')
+        logger.info(f'The process ({process_name}) has been terminated (Return code {result_taskkill})')
 
     elif result_taskkill == 128:
         condition = 'failed'
         output_content = f'The process not found'
-        logger.warning(f'The process ({process_name}) not found (With return value {result_taskkill})')
+        logger.warning(f'The process ({process_name}) not found (Return code {result_taskkill})')
 
     elif result_taskkill == 1:
         condition = 'failed'
         output_content = 'The process could not be terminated'
-        logger.warning(f'The process ({process_name}) could not be terminated (With return value {result_taskkill})')
+        logger.warning(f'The process ({process_name}) could not be terminated (Return code {result_taskkill})')
 
     else:
         condition = 'failed'
         output_content = 'Unknown Error: Please tell developers!!'
-        logger.warning(f'Unknown Error (With return value {result_taskkill})')
+        logger.warning(f'Unknown Error (Return code {result_taskkill})')
 
     set_insert(module_name, condition, output_content)
 
 
-# Virus Files Rename Module: Select disks
+def get_volume_label(disk_letter):
+    # Make sure the disk letter format is correct
+    disk_letter = disk_letter.upper().rstrip(':') + ':'
+
+    # Execute the WMIC command to obtain disk information
+    result = subprocess.run(
+        'wmic logicaldisk get name,volumename',
+        capture_output=True,
+        text=True,
+        encoding='gbk',  # Chinese system uses GBK encoding
+        shell=True
+    )
+
+    # Parsing output results
+    output = result.stdout.strip()
+    for line in output.split('\n'):
+        # Skip empty lines and header lines
+        if not line.strip() or line.startswith('Name'):
+            continue
+
+        # Clean extra spaces and split columns
+        parts = list(filter(None, line.split()))
+        if len(parts) >= 2:
+            disk_name = parts[0]
+            disk_label = ' '.join(parts[1:])
+            if disk_name == disk_letter:
+                return disk_label
+
+    return None  # No corresponding drive letter found
+
+
 # Virus Files Rename Module: Rename the Virus Files
-def rename_virus_files():
-    module_name = 'rename_virus_files'
+def handle_virus_files():
+    module_name = 'handle_virus_files'
     condition_list = []
     log_content_list = []
 
     set_insert_simplified('\nRenaming Files:')
 
     # If you want to add more dirs. Add them in here.
-    disks = ['E', 'F', 'G']
+    disks = get_removable_disks()
 
-    for disk_name in disks:
+    if disks:
+        for disk in disks:
+            current_disk_name =get_volume_label(disk)
 
-        if os.path.exists(f"{disk_name}:\\"):
-            result_rename_files = run_command(f"ren {disk_name}:\\*.lnk *.vir")
-            condition_list.append('success')
-            log_content_list.append(f'Success to rename virus files in {disk_name}-disk (With return value {result_rename_files})')
+            if os.path.exists(f'{disk}:\\{current_disk_name}.lnk'):
+                os.remove(f'{disk}:\\{current_disk_name}.lnk')
+                condition_list.append('success')
+                log_content_list.append(f'Success to remove virus files in {disk}-disk')
+                logger.info(f'Success to rename virus files in {disk}-disk')
+            else:
+                condition_list.append('failed')
+                log_content_list.append(f'Virus files not found')
+                logger.warning(f'Virus files not found')
 
-        else:
-            condition_list.append('failed')
-            log_content_list.append(f'{disk_name}-disk not found')
+    else:
+        condition_list.append('failed')
+        logger.warning(f'Removable disk not found')
+        log_content_list.append(f'Removable disk not found')
 
     for cnt in range(0, len(log_content_list)):
         log_content = log_content_list[cnt]
         condition = condition_list[cnt]
 
-        output_content = log_content
-        set_insert(module_name, condition, output_content)
+        set_insert(module_name, condition, log_content)
 
     var.set("FINISH")
 
@@ -376,25 +468,89 @@ def repair_infected_files():
     set_insert_simplified('\nShowing Hidden Files:')
 
     # If you want to add other dirs. Add it in here.
-    disks = ['E', 'F', 'G', 'H']
+    disks = get_removable_disks()
 
     module_name = 'repair_infected_files'
 
     condition_list = []
     log_content_list = []
 
-    for dir_tmp in disks:
+    if disks:
+        for disk in disks:
+            infected_folder_path = f'{disk}:\\ '
+            result_repair_infected_folder = None
 
-        if os.path.exists(f"{dir_tmp}:\\"):
-            result_repair_infected_files = run_command(f"ATTRIB -S -H {dir_tmp}:\\*.* /d /l")
-            condition_list.append('success')
-            logger.info(f'Virus files in {dir_tmp}-disk was renamed')
-            log_content_list.append(f'Virus files in {dir_tmp}-disk was renamed (With return value {result_repair_infected_files})')
+            if os.path.exists(infected_folder_path):
+                subprocess_run(['attrib', '-r', infected_folder_path, '/d', '/s'])
+                result_repair_infected_folder = subprocess_run(['attrib', '-s', '-h', '-r', infected_folder_path, '/d']).returncode
 
-        else:
-            condition_list.append('failed')
-            logger.warning(f'{dir_tmp}-disk not found')
-            log_content_list.append(f'{dir_tmp}-disk not found')
+                if result_repair_infected_folder == 0:
+                    logger.info(f'The attribute of the Infected folder in {disk}-disk has been changed (Return code {result_repair_infected_folder})')
+                    condition_list.append('success')
+                    log_content_list.append(f'The attribute of the Infected folder in {disk}-disk was changed')
+
+                else:
+                    logger.warning(f'The attribute of the Infected folder cannot be changed')
+                    condition_list.append('failed')
+                    log_content_list.append(f'The attribute of the Infected folder cannot be changed')
+
+            if os.path.exists(f'{disk}:\\ \\desktop.ini'):
+                result_change_attrib_of_virus_files = subprocess_run(['attrib', '-s', '-h', '-R', f'{disk}:\\ \\desktop.ini', "/d"])
+
+                if result_change_attrib_of_virus_files.returncode == 0:
+                    logger.info(f'The attribute of the virus file ({disk}:\\xa0\\desktop.ini) has been changed (Return {result_change_attrib_of_virus_files})')
+                    condition_list.append('success')
+                    log_content_list.append(f'The attribute of the virus file in {disk}-disk was changed')
+
+                    os.remove(f'{disk}:\\ \\desktop.ini')
+                    logger.info(f'Virus file ({disk}:\\xa0\\desktop.ini) has been removed')
+                    condition_list.append('success')
+                    log_content_list.append(f'Virus file in {disk}-disk was renamed')
+
+                else:
+                    logger.warning(f'The attribute of the virus file cannot be changed')
+                    condition_list.append('failed')
+                    log_content_list.append(f'The attribute of the virus file cannot be changed')
+
+            if result_repair_infected_folder == 0 and os.path.exists(infected_folder_path):
+                # os.rename(infected_folder_path, f'{disk}:\\Files Hidden by Viruses')
+                # os.rename(infected_folder_path, f'{disk}:\\被病毒隐藏的文件')
+
+                # logger.info(f'Infected folder in {disk}-disk has been renamed')
+                # condition_list.append('success')
+                # log_content_list.append(f'Infected folder in {disk}-disk was renamed')
+
+                try:
+                    os.rename(infected_folder_path, f'{disk}:\\Files Hidden by Viruses')
+                    # os.rename(infected_folder_path, f'{disk}:\\被病毒隐藏的文件')
+                    logger.info(f'Infected folder in {disk}-disk has been renamed')
+                    # print(f'Successfully renamed')
+                except PermissionError as error:
+                    logger.error(f'Permission denied: {error}')
+                    condition_list.append('failed')
+                    log_content_list.append(f'Permission denied')
+                    # print('Permission denied. Please run the script as an administrator.')
+                except FileNotFoundError:
+                    logger.error(f'The directory does not exist')
+                    condition_list.append('failed')
+                    log_content_list.append(f'The directory does not exist')
+                    # print(f'The directory does not exist.')
+                except Exception as error:
+                    logger.error(f'An error occurred: {error}')
+                    condition_list.append('failed')
+                    log_content_list.append(f'An error occurred: {error}')
+                    # print(f'An error occurred: {error}')
+
+            else:
+                logger.warning(f'The directory does not exist')
+                condition_list.append('failed')
+                log_content_list.append(f'The directory does not exist')
+                # print(f'The directory does not exist.')
+
+    else:
+        logger.warning(f'Removable disk not found')
+        condition_list.append('failed')
+        log_content_list.append(f'Removable disk not found')
 
     for cnt in range(0, len(log_content_list)):
         log_content = log_content_list[cnt]
@@ -403,14 +559,13 @@ def repair_infected_files():
         output_content = log_content
         set_insert(module_name, condition, output_content)
 
-    # notify('Repair Infected Files completed')
+    # wintoast('Repair Infected Files completed')
 
     var.set("FINISH")
 
 
+# Call two functions
 def auto_kill():
-    # Call two functions
-
     kill_viruses()
     repair_infected_files()
 
@@ -427,10 +582,10 @@ def clean_button():
     easter_egg()
 
 
+# Easter_Egg module
 def easter_egg():
     global Easter_Egg
 
-    # Easter_Egg module
     if Easter_Egg < 0:
         pass
     elif Easter_Egg < 4:
@@ -480,8 +635,8 @@ def debug_combobox_on_select(event):
         handler.setLevel(logging.CRITICAL)
         logger.setLevel(level=logging.CRITICAL)
     elif selected_value == 'Silent':
-        handler.setLevel(logging.CRITICAL + 1)
-        logger.setLevel(level=logging.CRITICAL + 1)
+        handler.setLevel(100)
+        logger.setLevel(100)
     # print("Current log level:", selected_value)
     # print(logger)
 
@@ -507,8 +662,22 @@ def set_insert(module, condition, content):
     output_text.configure(state='disabled')
 
 
-
 start()
+
+
+# Set logger
+logger = logging.getLogger(__name__)
+handler = logging.FileHandler(f'{file_directory}/Log/Log_{time.time():.7f}.avk')
+if build_Log:
+    handler.setLevel(logging.DEBUG)
+    logger.setLevel(level=logging.DEBUG)
+else:
+    handler.setLevel(100)
+    logger.setLevel(100)
+formatter = logging.Formatter('%(asctime)s - %(pathname)s - %(name)s - %(funcName)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+
 
 # Main Window (GUI)
 window = tk.Tk()
@@ -517,27 +686,11 @@ window.geometry("1360x720")
 window.minsize(1360, 720)
 window.maxsize(3840, 2160)
 
-
 # Set icon
-# https://www.cnblogs.com/duanminkid/p/14208356.html
-with open("tmp.ico", "wb+") as tmp:
-    tmp.write(base64.b64decode(img))
-window.iconbitmap("tmp.ico")
-os.remove("tmp.ico")
-
-
-# Set logger
-logger = logging.getLogger(__name__)
-handler = logging.FileHandler(f'{file_directory}/Log/Log{'%.7f' % time.time()}.avk')
-if build_Log:
-    handler.setLevel(logging.DEBUG)
-    logger.setLevel(level=logging.DEBUG)
-else:
-    handler.setLevel(logging.CRITICAL + 1)
-    logger.setLevel(level=logging.CRITICAL + 1)
-formatter = logging.Formatter('%(asctime)s - %(pathname)s - %(name)s - %(funcName)s - %(levelname)s - %(message)s')
-handler.setFormatter(formatter)
-logger.addHandler(handler)
+with tempfile.NamedTemporaryFile(suffix='.ico', delete=False) as tmp:
+    tmp.write(base64.b64decode(icon.img))
+window.iconbitmap(tmp.name)
+os.unlink(tmp.name)
 
 
 var = tk.StringVar()
