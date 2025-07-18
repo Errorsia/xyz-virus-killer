@@ -1,5 +1,10 @@
 # XYZ Virus Killer
 
+![Python](https://img.shields.io/badge/python-3.8%2B-blue)
+![License](https://img.shields.io/badge/license-GPLv3-green)
+![Stars](https://img.shields.io/github/stars/Errorsia/xyz-virus-killer?style=social)
+![Last Update](https://img.shields.io/github/last-commit/Errorsia/xyz-virus-killer)
+
 ---
 
 ## 项目简介
@@ -36,7 +41,7 @@ pip install tkinter
 ## 代码结构
 
 ```
-random-number-generator/
+xyz-virus-killer/
 │── xyz-virus-killer.py                   # 主程序文件
 ```
 
