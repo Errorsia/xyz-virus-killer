@@ -21,22 +21,12 @@ THE PROGRAMME ONLY RUNS ON WINDOWS(NT) !
 I don't think someone will run an EXE programme on Linux(except wine) and MacOS etc.
 
 Update Log:
-Rebuild repair_infected_files module
-Change the name of rename_virus_files to handle_virus_files
-Added logging to handle_virus_files
-Added a module to obtain the drive letters
-Added a module to obtain the drive letter of removable disks
-Added a module to obtain the volume label of disks
-Optimize the logic of judging whether a string can be formatted into an integer
+Removed copyright related statements as they do not comply with GPL v3.0+open source license
+I am very sorry about what I have written
 
 更新日志:
-重构了修复被感染的文件(repair_infected_files)模块
-将rename_virus_files的名字改为handle_virus_files
-在处理病毒文件(handle_virus_files)中加入了日志记录
-新增获取磁盘盘符模块
-新增获取可移动磁盘盘符模块
-新增获取磁盘名称模块
-优化判断字符串是否可以格式化成整型的逻辑
+删除了版权相关的声明, 因为这不符合GPL v3.0+ 开源协议
+我对我写的内容非常抱歉
 
 
 Author's message:
@@ -46,15 +36,15 @@ Author's message:
 """
 
 '''
-File name: xyzvk_v2.0.2.py
-Copyright: Copyright ©  2024 - 2070 Arthur_xyz.All Rights Reserved
+File name: xyzvk_v2.0.3.py
+Copyright: Copyright ©  2024 Arthur_xyz
 Description: XYZ Virus Killer XYZ virus killer program (Code: Pardofelis)
 Modified by: xyz
 Modified on: February 07, 2025
 Modified content: Addition and refactoring
 
-文件名：xyzvk_v2.0.2.py
-版权：Copyright © 2024 - 2070 Arthur_xyz.All Rights Reserved
+文件名：xyzvk_v2.0.3.py
+版权：Copyright © 2024 Arthur_xyz
 描述：XYZ Virus Killer XYZ病毒杀手程序 (代号: Pardofelis)
 修改人：xyz
 修改时间：2024-02-07
@@ -62,8 +52,7 @@ Modified content: Addition and refactoring
 '''
 
 '''
-Copyright © 2024
-Copyright © 2024 - 2070 Arthur_xyz.All Rights Reserved
+Copyright © 2024 Arthur_xyz
 © 2024 - 2070 Arthur_xyz版权所有
 
 如果您意外获取了源码，请联系 Arthur_xyz (Arthur_xyz@outlook.com)
@@ -100,13 +89,13 @@ Kevin, Elysia, Aponia, Eden, Vill-V, Kalpas, Su, Sakura, Kosma, Mobius, Griseo, 
 # General Information
 # general = {
 #     'Name': 'Virus Killer',
-#     'version': '2.0.0',
+#     'version': '2.0.3',
 #     # 'Full_version' : f'{name} V{version}',
 # }
 programme_name = 'Virus Killer'
 version = '2.0.2'
 Full_version = f'{programme_name} V{version}'
-Internal_version = '%03d%03d%03d' % (2, 0, 2)
+Internal_version = '%03d%03d%03d' % (2, 0, 3)
 code_name = 'Pardofelis'
 nickname = 'Ego'
 
@@ -591,14 +580,14 @@ def easter_egg():
     elif Easter_Egg < 4:
         Easter_Egg += 1
     else:
-        var.set("Copyright © 2024 - 2030 Arthur_xyz.All Rights Reserved")
+        var.set("Copyright © 2024 - 2030 Arthur_xyz")
 
-        logger.debug('=' * 52)
-        logger.debug('Copyright 2024 - 2030 Arthur_xyz.All Rights Reserved')
+        logger.debug('=' * 37)
+        logger.debug('Copyright 2024 - 2030 Arthur_xyz')
         logger.debug('The Easter Egg was discovered by you!')
         logger.debug('Developer:\tArthur_xyz')
         logger.debug('Email:\tArthur_xyz@outlook.com')
-        logger.debug('=' * 52)
+        logger.debug('=' * 37)
 
         Easter_Egg = 0
 
