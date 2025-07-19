@@ -23,22 +23,12 @@ THE PROGRAMME ONLY RUNS ON WINDOWS(NT) !
 I don't think someone will run an EXE programme on Linux(except wine) and MacOS etc.
 
 Update Log:
-Rebuild repair_infected_files module
-Change the name of rename_virus_files to handle_virus_files
-Added logging to handle_virus_files
-Added a module to obtain the drive letters
-Added a module to obtain the drive letter of removable disks
-Added a module to obtain the volume label of disks
-Optimize the logic of judging whether a string can be formatted into an integer
+Removed copyright related statements as they do not comply with GPL v3.0+open source license
+I am very sorry about what I have written
 
 更新日志:
-重构了修复被感染的文件(repair_infected_files)模块
-将rename_virus_files的名字改为handle_virus_files
-在处理病毒文件(handle_virus_files)中加入了日志记录
-新增获取磁盘盘符模块
-新增获取可移动磁盘盘符模块
-新增获取磁盘名称模块
-优化判断字符串是否可以格式化成整型的逻辑
+删除了版权相关的声明, 因为这不符合GPL v3.0+ 开源协议
+我对我写的内容非常抱歉
 
 
 Author's message:
@@ -48,15 +38,15 @@ Author's message:
 """
 
 '''
-File name: xyzvk_v2.0.1.py
-Copyright: Copyright ©  2024 - 2070 Arthur_xyz.All Rights Reserved
+File name: xyzvk_v2.0.3_ttkbs.py
+Copyright: Copyright ©  2024 Arthur_xyz
 Description: XYZ Virus Killer XYZ virus killer program (Code: Pardofelis)
 Modified by: xyz
 Modified on: February 07, 2025
 Modified content: Addition and refactoring
 
-文件名：xyzvk_v2.0.1.py
-版权：Copyright © 2024 - 2070 Arthur_xyz.All Rights Reserved
+文件名：xyzvk_v2.0.3_ttkbs.py
+版权：Copyright © 2024 Arthur_xyz
 描述：XYZ Virus Killer XYZ病毒杀手程序 (代号: Pardofelis)
 修改人：xyz
 修改时间：2024-02-07
@@ -64,8 +54,7 @@ Modified content: Addition and refactoring
 '''
 
 '''
-Copyright © 2024
-Copyright © 2024 - 2070 Arthur_xyz.All Rights Reserved
+Copyright © 2024 Arthur_xyz
 © 2024 - 2070 Arthur_xyz版权所有
 
 如果您意外获取了源码，请联系 Arthur_xyz (Arthur_xyz@outlook.com)
@@ -102,13 +91,13 @@ Kevin, Elysia, Aponia, Eden, Vill-V, Kalpas, Su, Sakura, Kosma, Mobius, Griseo, 
 # General Information
 # general = {
 #     'Name': 'Virus Killer',
-#     'version': '2.0.0',
+#     'version': '2.0.3',
 #     # 'Full_version' : f'{name} V{version}',
 # }
 programme_name = 'Virus Killer'
-version = '2.0.1'
+version = '2.0.3'
 Full_version = f'{programme_name} V{version}'
-Internal_version = '%03d%03d%03d' % (2, 0, 1)
+Internal_version = '%03d%03d%03d' % (2, 0, 3)
 code_name = 'Pardofelis'
 nickname = 'Ego'
 
@@ -593,14 +582,14 @@ def easter_egg():
     elif Easter_Egg < 4:
         Easter_Egg += 1
     else:
-        var.set("Copyright © 2024 - 2030 Arthur_xyz.All Rights Reserved")
+        var.set("Copyright © 2024 - 2030 Arthur_xyz")
 
-        logger.debug('=' * 52)
-        logger.debug('Copyright 2024 - 2030 Arthur_xyz.All Rights Reserved')
+        logger.debug('=' * 37)
+        logger.debug('Copyright 2024 - 2030 Arthur_xyz')
         logger.debug('The Easter Egg was discovered by you!')
         logger.debug('Developer:\tArthur_xyz')
         logger.debug('Email:\tArthur_xyz@outlook.com')
-        logger.debug('=' * 52)
+        logger.debug('=' * 37)
 
         Easter_Egg = 0
 
@@ -616,7 +605,7 @@ def debugger_button():
         debug_frame_disable = True
 
 
-# Define a function to get the value of the combobox automatically
+# Get the value of the combobox automatically and set the level of the logger & handler
 # noinspection PyUnusedLocal
 def debug_combobox_on_select(event):
     selected_value = debug_combobox1.get()
@@ -664,6 +653,15 @@ def set_insert(module, condition, content):
     output_text.configure(state='disabled')
 
 
+def handle_close_event():
+    logger.info('Application shutdown initiated by user')
+    logger.info('Graceful termination completed')
+    root.destroy()
+
+
+# def set_root(ui):
+#     pass
+
 start()
 
 
@@ -682,30 +680,30 @@ logger.addHandler(handler)
 
 
 # Main Window (GUI)
-window = tk.Tk()
-window.title(Full_version)
-window.geometry("1360x720")
-window.minsize(1360, 720)
-window.maxsize(3840, 2160)
+root = tk.Tk()
+root.title(Full_version)
+root.geometry("1360x720")
+root.minsize(1360, 720)
+root.maxsize(3840, 2160)
 
 # Set icon
 with tempfile.NamedTemporaryFile(suffix='.ico', delete=False) as tmp:
     tmp.write(base64.b64decode(icon.img))
-window.iconbitmap(tmp.name)
+root.iconbitmap(tmp.name)
 os.unlink(tmp.name)
 
 
 var = tk.StringVar()
 
 
-label1 = tk.Label(window, textvariable=var, bg="lightcyan", width=44, font=("Arial", 40), height=2)
+label1 = tk.Label(root, textvariable=var, bg="lightcyan", width=44, font=("Arial", 40), height=2)
 label1.grid(row=0, column=0, columnspan=4)
 
-label2 = tk.Label(window, width=10, font=20, height=2)
+label2 = tk.Label(root, width=10, font=20, height=2)
 label2.grid(row=1, column=0, columnspan=4)
 
 
-button_frame = tk.Frame(window)
+button_frame = tk.Frame(root)
 
 # noinspection PyArgumentList
 button1 = ttkbs.Button(button_frame, text="Kill Viruses", width=40, bootstyle=SUCCESS, command=kill_viruses)
@@ -731,7 +729,7 @@ button5.grid(row=2, column=0, padx=10, pady=20)
 button_frame.grid(row=2, column=0, rowspan=4, columnspan=2)
 
 
-debug_frame = tk.Frame(window)
+debug_frame = tk.Frame(root)
 
 debug_label1 = tk.Label(debug_frame, text="Debugger Output:", width=17, font=('TkDefaultFont', 20), height=1)
 debug_label1.pack()
@@ -760,4 +758,4 @@ debug_frame_sub1.pack(pady=10)
 
 var.set("Virus Killer")
 
-window.mainloop()
+root.mainloop()
