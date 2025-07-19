@@ -46,14 +46,14 @@ Author's message:
 """
 
 '''
-File name: xyzvk_v2.0.1.py
+File name: xyzvk_v2.0.2.py
 Copyright: Copyright ©  2024 - 2070 Arthur_xyz.All Rights Reserved
 Description: XYZ Virus Killer XYZ virus killer program (Code: Pardofelis)
 Modified by: xyz
 Modified on: February 07, 2025
 Modified content: Addition and refactoring
 
-文件名：xyzvk_v2.0.1.py
+文件名：xyzvk_v2.0.2.py
 版权：Copyright © 2024 - 2070 Arthur_xyz.All Rights Reserved
 描述：XYZ Virus Killer XYZ病毒杀手程序 (代号: Pardofelis)
 修改人：xyz
@@ -104,9 +104,9 @@ Kevin, Elysia, Aponia, Eden, Vill-V, Kalpas, Su, Sakura, Kosma, Mobius, Griseo, 
 #     # 'Full_version' : f'{name} V{version}',
 # }
 programme_name = 'Virus Killer'
-version = '2.0.1'
+version = '2.0.2'
 Full_version = f'{programme_name} V{version}'
-Internal_version = '%03d%03d%03d' % (2, 0, 1)
+Internal_version = '%03d%03d%03d' % (2, 0, 2)
 code_name = 'Pardofelis'
 nickname = 'Ego'
 
@@ -614,7 +614,7 @@ def debugger_button():
         debug_frame_disable = True
 
 
-# Define a function to get the value of the combobox automatically
+# Get the value of the combobox automatically and set the level of the logger & handler
 # noinspection PyUnusedLocal
 def debug_combobox_on_select(event):
     selected_value = debug_combobox1.get()
@@ -662,6 +662,15 @@ def set_insert(module, condition, content):
     output_text.configure(state='disabled')
 
 
+def handle_close_event():
+    logger.info('Application shutdown initiated by user')
+    logger.info('Graceful termination completed')
+    root.destroy()
+
+
+# def set_root(ui):
+#     pass
+
 start()
 
 
@@ -680,30 +689,31 @@ logger.addHandler(handler)
 
 
 # Main Window (GUI)
-window = tk.Tk()
-window.title(Full_version)
-window.geometry("1360x720")
-window.minsize(1360, 720)
-window.maxsize(3840, 2160)
+root = tk.Tk()
+root.title(Full_version)
+root.geometry("1360x720")
+root.minsize(1360, 720)
+root.maxsize(3840, 2160)
+root.protocol("WM_DELETE_WINDOW", handle_close_event)
 
 # Set icon
 with tempfile.NamedTemporaryFile(suffix='.ico', delete=False) as tmp:
     tmp.write(base64.b64decode(icon.img))
-window.iconbitmap(tmp.name)
+root.iconbitmap(tmp.name)
 os.unlink(tmp.name)
 
 
 var = tk.StringVar()
 
 
-label1 = tk.Label(window, textvariable=var, bg="lightcyan", width=44, font=("Arial", 40), height=2)
+label1 = tk.Label(root, textvariable=var, bg="lightcyan", width=44, font=("Arial", 40), height=2)
 label1.grid(row=0, column=0, columnspan=4)
 
-label2 = tk.Label(window, width=10, font=20, height=2)
+label2 = tk.Label(root, width=10, font=20, height=2)
 label2.grid(row=1, column=0, columnspan=4)
 
 
-button_frame = tk.Frame(window)
+button_frame = tk.Frame(root, bg='palegreen')
 
 button1 = tk.Button(button_frame, text="Kill Viruses", font=30, width=40, height=2, command=kill_viruses)
 button1.grid(row=0, column=0, padx=10, pady=20)
@@ -724,7 +734,7 @@ button5.grid(row=2, column=0, padx=10, pady=20)
 button_frame.grid(row=2, column=0, rowspan=4, columnspan=2)
 
 
-debug_frame = tk.Frame(window)
+debug_frame = tk.Frame(root, bg='red')
 
 debug_label1 = tk.Label(debug_frame, text="Debugger Output:", width=17, font=('TkDefaultFont', 20), height=1)
 debug_label1.pack()
@@ -753,4 +763,4 @@ debug_frame_sub1.pack(pady=10)
 
 var.set("Virus Killer")
 
-window.mainloop()
+root.mainloop()
