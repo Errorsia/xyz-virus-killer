@@ -93,7 +93,7 @@ Kevin, Elysia, Aponia, Eden, Vill-V, Kalpas, Su, Sakura, Kosma, Mobius, Griseo, 
 #     # 'Full_version' : f'{name} V{version}',
 # }
 programme_name = 'Virus Killer'
-version = '2.0.2'
+version = '2.0.3'
 Full_version = f'{programme_name} V{version}'
 Internal_version = '%03d%03d%03d' % (2, 0, 3)
 code_name = 'Pardofelis'
