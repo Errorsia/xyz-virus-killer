@@ -37,3 +37,12 @@ class ErrorsiaVirusKillerLogic:
         # Whether show Easter Egg
         # Current condition: On (If Easter_Egg < 0, it's Off)
         self.Easter_Egg = 0
+
+    def set_log(self, log):
+        # self.logging = log['logging']
+        # self.logger = log['logger']
+        # self.handler = log['handler']
+        # Saftier
+        self.logging = log.get('logging')
+        self.logger = log.get('logger')
+        self.handler = log.get('handler')
