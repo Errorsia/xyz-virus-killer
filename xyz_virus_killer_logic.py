@@ -74,3 +74,8 @@ class ErrorsiaVirusKillerLogic:
     def run_command(command):
         return subprocess.call(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                stderr=subprocess.PIPE)
+
+    @staticmethod
+    def subprocess_run(command):
+        return subprocess.run(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                              stderr=subprocess.PIPE)
