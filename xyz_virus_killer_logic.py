@@ -83,3 +83,29 @@ class ErrorsiaVirusKillerLogic:
     # Config Module: Read & Check Config
     def read_log_config(self):
         config_path = f'{self.file_directory}/Config/VirusKiller_Configuration.Elysia'
+
+        # Try to read config
+        if not os.path.isfile(config_path):
+            return -1
+
+            # try:
+            #     with open(config_path, "r", encoding="UTF-8") as file:
+            #         read_config = file.read()
+            # except PermissionError:
+            #     return -1
+
+        with open(config_path, "r", encoding="UTF-8") as file:
+            read_config = file.read()
+
+        enable_log = read_config[0]
+
+        if enable_log == "1":
+            return 1
+            # log_get_message = False
+            # _build_log = True
+            # log_config = 1
+
+        elif enable_log == "0":
+            return 0
+        else:
+            return -1
