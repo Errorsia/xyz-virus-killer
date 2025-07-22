@@ -69,3 +69,8 @@ class ErrorsiaVirusKillerLogic:
             dir_tmp = father_directory + dir_tmp
             if not os.path.exists(dir_tmp):
                 os.mkdir(dir_tmp)
+
+    @staticmethod
+    def run_command(command):
+        return subprocess.call(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                               stderr=subprocess.PIPE)
