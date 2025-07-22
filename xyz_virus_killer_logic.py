@@ -79,3 +79,7 @@ class ErrorsiaVirusKillerLogic:
     def subprocess_run(command):
         return subprocess.run(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                               stderr=subprocess.PIPE)
+
+    # Config Module: Read & Check Config
+    def read_log_config(self):
+        config_path = f'{self.file_directory}/Config/VirusKiller_Configuration.Elysia'
