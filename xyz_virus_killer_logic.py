@@ -46,3 +46,10 @@ class ErrorsiaVirusKillerLogic:
         self.logging = log.get('logging')
         self.logger = log.get('logger')
         self.handler = log.get('handler')
+
+    def initialization(self):
+        self.check_operate_system()
+
+        self.run_command('chcp 65001')
+
+        self.check_path()
