@@ -125,3 +125,42 @@ class ErrorsiaVirusKillerLogic:
             with open(f"{self.file_directory}/Log/Clean_Log.bat", "w", encoding="UTF-8") as file:
                 file.write(f"del /f /q *.avk \ndel /f /q *.bat")
         # print(self.build_Log)
+
+    # Check for updates
+    def update(self):
+        internal_version = int(config.INTERNAL_VERSION)
+        online_update_version = -1
+        local_update_version = int(self.local_update())
+
+        if internal_version >= online_update_version and internal_version >= local_update_version:
+            return
+
+        if online_update_version >= local_update_version:
+
+            execute_update = tk.messagebox.askokcancel(
+                'Update Available',
+                'A new version is available.\n'
+                'Do you want to download the new version?\n\n'
+                'You can also ask Arthur_xyz<Arthur_xyz@outlook.com> for the update.\n\n'
+            )
+
+            if execute_update:
+                print('⚠☣Downloading☣⚠')
+
+                return
+
+            else:
+                tk.messagebox.showwarning(
+                    'Update Available',
+                    'A new version is available.\n'
+                    'Please ask Arthur_xyz<Arthur_xyz@outlook.com> for the update.\n\n'
+                )
+
+        else:
+            tk.messagebox.showwarning(
+                'Update Available',
+                'A new version is available.\n'
+                'Please ask Arthur_xyz<Arthur_xyz@outlook.com> for the update.\n\n'
+            )
+
+        exit('UPDATE AVAILABLE')
