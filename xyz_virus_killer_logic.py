@@ -178,4 +178,43 @@ class ErrorsiaVirusKillerLogic:
                     return local_version
 
         self.build_local_update_config()
-        return -1
+        return -11
+
+    # Check whether local_version is legal
+    @staticmethod
+    def is_legal_version(local_version):
+        local_version = str(local_version)
+        digit_is_int = 0
+
+        if len(local_version) != 9:
+            return False
+
+        for tmp_local_version in local_version:
+            for tmp_num in range(10):
+                if tmp_local_version == str(tmp_num):
+                    digit_is_int += 1
+                    break
+
+        if digit_is_int == 9:
+            return True
+        else:
+            return False
+
+    def build_local_update_config(self):
+        if os.path.exists(f'{self.file_directory}/Config/Local_Update.Elysia'):
+            self.run_command(f'attrib -r -h {self.file_directory}/Config/Local_Update.Elysia')
+
+        with open(f'{self.file_directory}/Config/Local_Update.Elysia', 'w', encoding="UTF-8") as local_version:
+            local_version.write(config.INTERNAL_VERSION)
+
+        self.run_command(f'attrib +r +h {self.file_directory}/Config/Local_Update.Elysia')
+
+    def get_removable_disks(self):
+        drives, drives_type = self.get_drives_and_types()
+        removable_disks = []
+
+        for cnt in range(len(drives)):
+            if drives_type[cnt] == '可移动磁盘':
+                removable_disks.append(drives[cnt].rstrip(':'))
+
+        return removable_disks
