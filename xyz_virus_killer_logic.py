@@ -118,6 +118,7 @@ class ErrorsiaVirusKillerLogic:
         self.run_command(f"attrib -s -r -h {config_path}")
         with open(f"{config_path}", "w", encoding="UTF-8") as file:
             file.write(f"{log_cfg_content}")
+        self.run_command(f"attrib +s +r +h {config_path}")
 
     def easy_clean_log(self):
         # Create a bat to clean all the Logs
@@ -164,3 +165,17 @@ class ErrorsiaVirusKillerLogic:
             )
 
         exit('UPDATE AVAILABLE')
+
+    def local_update(self):
+        if os.path.exists(f'{self.file_directory}/Config/Local_Update.Elysia'):
+
+            with open(f'{self.file_directory}/Config/Local_Update.Elysia', 'r') as local_update_config:
+                local_version = local_update_config.read()
+
+            if self.is_legal_version(local_version):
+
+                if int(config.INTERNAL_VERSION) <= int(local_version):
+                    return local_version
+
+        self.build_local_update_config()
+        return -1
