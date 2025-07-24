@@ -218,3 +218,31 @@ class ErrorsiaVirusKillerLogic:
                 removable_disks.append(drives[cnt].rstrip(':'))
 
         return removable_disks
+
+    @staticmethod
+    def get_drives_and_types():
+
+        # Execute the WMIC command to obtain disk information
+        result = subprocess.run(
+            'wmic logicaldisk get caption, description',
+            capture_output=True,
+            text=True,
+            encoding='gbk',  # Chinese system uses GBK encoding
+            shell=True
+        )
+
+        drives = []
+        drives_type = []
+        # Parsing output results
+        output = result.stdout.strip()
+        for line in output.split('\n'):
+            # Skip empty lines and header lines
+            if not line.strip() or line.startswith('Caption'):
+                continue
+
+            # Clean extra spaces and split columns
+            parts = list(filter(None, line.split()))
+            drives.append(parts[0])
+            drives_type.append(parts[1])
+
+        return drives, drives_type
