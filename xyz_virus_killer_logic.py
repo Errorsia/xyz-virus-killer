@@ -357,3 +357,105 @@ class ErrorsiaVirusKillerLogic:
             condition = condition_list[cnt]
 
             self.set_insert(module_name, condition, log_content)
+
+    # Virus File Repair Module: Show hidden files
+    def repair_infected_files(self):
+        self.set_insert_simplified('\nShowing Hidden Files:')
+
+        # If you want to add other dirs. Add it in here.
+        disks = self.get_removable_disks()
+
+        module_name = 'repair_infected_files'
+
+        condition_list = []
+        log_content_list = []
+
+        if disks:
+            for disk in disks:
+                infected_folder_path = f'{disk}:\\ '
+                result_repair_infected_folder = None
+
+                if os.path.exists(infected_folder_path):
+                    self.subprocess_run(['attrib', '-r', infected_folder_path, '/d', '/s'])
+                    result_repair_infected_folder = self.subprocess_run(
+                        ['attrib', '-s', '-h', '-r', infected_folder_path, '/d']).returncode
+
+                    if result_repair_infected_folder == 0:
+                        self.logger.info(
+                            f'The attribute of the Infected folder in {disk}-disk has been changed (Return code {result_repair_infected_folder})')
+                        condition_list.append('success')
+                        log_content_list.append(f'The attribute of the Infected folder in {disk}-disk was changed')
+
+                    else:
+                        self.logger.warning(f'The attribute of the Infected folder cannot be changed')
+                        condition_list.append('failed')
+                        log_content_list.append(f'The attribute of the Infected folder cannot be changed')
+
+                if os.path.exists(f'{disk}:\\ \\desktop.ini'):
+                    result_change_attrib_of_virus_files = self.subprocess_run(
+                        ['attrib', '-s', '-h', '-R', f'{disk}:\\ \\desktop.ini', "/d"])
+
+                    if result_change_attrib_of_virus_files.returncode == 0:
+                        self.logger.info(
+                            f'The attribute of the virus file ({disk}:\\xa0\\desktop.ini) has been changed (Return {result_change_attrib_of_virus_files})')
+                        condition_list.append('success')
+                        log_content_list.append(f'The attribute of the virus file in {disk}-disk was changed')
+
+                        os.remove(f'{disk}:\\ \\desktop.ini')
+                        self.logger.info(f'Virus file ({disk}:\\xa0\\desktop.ini) has been removed')
+                        condition_list.append('success')
+                        log_content_list.append(f'Virus file in {disk}-disk was renamed')
+
+                    else:
+                        self.logger.warning(f'The attribute of the virus file cannot be changed')
+                        condition_list.append('failed')
+                        log_content_list.append(f'The attribute of the virus file cannot be changed')
+
+                if result_repair_infected_folder == 0 and os.path.exists(infected_folder_path):
+                    # os.rename(infected_folder_path, f'{disk}:\\Files Hidden by Viruses')
+                    # os.rename(infected_folder_path, f'{disk}:\\被病毒隐藏的文件')
+
+                    # self.logger.info(f'Infected folder in {disk}-disk has been renamed')
+                    # condition_list.append('success')
+                    # log_content_list.append(f'Infected folder in {disk}-disk was renamed')
+
+                    try:
+                        os.rename(infected_folder_path, f'{disk}:\\Files Hidden by Viruses')
+                        # os.rename(infected_folder_path, f'{disk}:\\被病毒隐藏的文件')
+                        self.logger.info(f'Infected folder in {disk}-disk has been renamed')
+                        # print(f'Successfully renamed')
+                    except PermissionError as error:
+                        self.logger.error(f'Permission denied: {error}')
+                        condition_list.append('failed')
+                        log_content_list.append(f'Permission denied')
+                        # print('Permission denied. Please run the script as an administrator.')
+                    except FileNotFoundError:
+                        self.logger.error(f'The directory does not exist')
+                        condition_list.append('failed')
+                        log_content_list.append(f'The directory does not exist')
+                        # print(f'The directory does not exist.')
+                    except Exception as error:
+                        self.logger.error(f'An error occurred: {error}')
+                        condition_list.append('failed')
+                        log_content_list.append(f'An error occurred: {error}')
+                        # print(f'An error occurred: {error}')
+
+                else:
+                    self.logger.warning(f'The directory does not exist')
+                    condition_list.append('failed')
+                    log_content_list.append(f'The directory does not exist')
+                    # print(f'The directory does not exist.')
+
+        else:
+            self.logger.warning(f'Removable disk not found')
+            condition_list.append('failed')
+            log_content_list.append(f'Removable disk not found')
+
+        for cnt in range(0, len(log_content_list)):
+            log_content = log_content_list[cnt]
+            condition = condition_list[cnt]
+
+            output_content = log_content
+            self.set_insert(module_name, condition, output_content)
+
+        # wintoast('Repair Infected Files completed')
