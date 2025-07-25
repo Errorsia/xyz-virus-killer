@@ -474,3 +474,22 @@ class ErrorsiaVirusKillerLogic:
         self.gui.output_text.configure(state='disabled')
 
         self.easter_egg()
+
+    # Easter_Egg module
+    def easter_egg(self):
+
+        if self.Easter_Egg < 0:
+            pass
+        elif self.Easter_Egg < 4:
+            self.Easter_Egg += 1
+        else:
+            self.gui.var.set("Copyright © 2024 - 2030 Arthur_xyz.All Rights Reserved")
+
+            self.logger.debug('=' * 52)
+            self.logger.debug('Copyright 2024 - 2030 Arthur_xyz.All Rights Reserved')
+            self.logger.debug('The Easter Egg was discovered by you!')
+            self.logger.debug('Developer:\tArthur_xyz')
+            self.logger.debug('Email:\tArthur_xyz@outlook.com')
+            self.logger.debug('=' * 52)
+
+            self.Easter_Egg = 0
