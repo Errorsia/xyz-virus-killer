@@ -459,3 +459,8 @@ class ErrorsiaVirusKillerLogic:
             self.set_insert(module_name, condition, output_content)
 
         # wintoast('Repair Infected Files completed')
+
+    # Call two functions
+    def auto_kill(self):
+        self.kill_viruses()
+        self.repair_infected_files()
