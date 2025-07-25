@@ -523,3 +523,11 @@ class ErrorsiaVirusKillerLogic:
         elif level == 'Silent':
             self.handler.setLevel(100)
             self.logger.setLevel(100)
+
+    def set_insert_simplified(self, content):
+        minus_sign_quantity = '-' * 50
+        output = f'{minus_sign_quantity}{content}\n\n'
+
+        self.gui.output_text.configure(state='normal')
+        self.gui.output_text.insert('end', output)
+        self.gui.output_text.configure(state='disabled')
