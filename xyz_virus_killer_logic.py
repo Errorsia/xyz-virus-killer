@@ -493,3 +493,11 @@ class ErrorsiaVirusKillerLogic:
             self.logger.debug('=' * 52)
 
             self.Easter_Egg = 0
+
+    def debugger_button(self):
+        if self.disable_debug_frame:
+            self.gui.debug_frame.grid(row=2, column=2, rowspan=10, columnspan=2)
+            self.disable_debug_frame = False
+        else:
+            self.gui.debug_frame.grid_forget()
+            self.disable_debug_frame = True
