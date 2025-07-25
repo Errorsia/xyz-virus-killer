@@ -12,7 +12,7 @@ import time
 import tkinter as tk
 from tkinter import messagebox
 import subprocess
-import xyzvk_v3_0_0_config as config
+import xyz_virus_killer_config as config
 
 
 class ErrorsiaVirusKillerLogic:
