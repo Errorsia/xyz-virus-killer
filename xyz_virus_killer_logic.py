@@ -501,3 +501,25 @@ class ErrorsiaVirusKillerLogic:
         else:
             self.gui.debug_frame.grid_forget()
             self.disable_debug_frame = True
+
+    # Get the value of the combobox automatically and set the level of the logger & handler
+    # noinspection PyUnusedLocal
+    def set_log_level(self, level):
+        if level == 'Debug':
+            self.handler.setLevel(self.logging.DEBUG)
+            self.logger.setLevel(level=self.logging.DEBUG)
+        elif level == 'Info':
+            self.handler.setLevel(self.logging.INFO)
+            self.logger.setLevel(level=self.logging.INFO)
+        elif level == 'Warning':
+            self.handler.setLevel(self.logging.WARNING)
+            self.logger.setLevel(level=self.logging.WARNING)
+        elif level == 'Error':
+            self.handler.setLevel(self.logging.ERROR)
+            self.logger.setLevel(level=self.logging.ERROR)
+        elif level == 'Critical':
+            self.handler.setLevel(self.logging.CRITICAL)
+            self.logger.setLevel(level=self.logging.CRITICAL)
+        elif level == 'Silent':
+            self.handler.setLevel(100)
+            self.logger.setLevel(100)
