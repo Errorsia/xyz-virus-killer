@@ -178,7 +178,7 @@ class ErrorsiaVirusKillerLogic:
                     return local_version
 
         self.build_local_update_config()
-        return -11
+        return -1
 
     # Check whether local_version is legal
     @staticmethod
@@ -542,3 +542,8 @@ class ErrorsiaVirusKillerLogic:
         self.gui.output_text.configure(state='normal')
         self.gui.output_text.insert('end', output)
         self.gui.output_text.configure(state='disabled')
+
+    def handle_close_event(self):
+        self.logger.info('Application shutdown initiated by user')
+        self.logger.info('Graceful termination completed')
+        self.gui.root.destroy()
