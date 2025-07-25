@@ -531,3 +531,14 @@ class ErrorsiaVirusKillerLogic:
         self.gui.output_text.configure(state='normal')
         self.gui.output_text.insert('end', output)
         self.gui.output_text.configure(state='disabled')
+
+    def set_insert(self, module, condition, content):
+        current_time = time.asctime()[-13:-5]
+
+        module = module.upper()
+        condition = condition.upper()
+
+        output = f'{current_time} | [{module}]\t|\t{condition}\t|\t{content}\n'
+        self.gui.output_text.configure(state='normal')
+        self.gui.output_text.insert('end', output)
+        self.gui.output_text.configure(state='disabled')
