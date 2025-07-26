@@ -24,8 +24,11 @@ class ErrorsiaVirusKillerGUI:
         self.var = var
         self.logger = logger
         self.logic = logic
+        # Define widgets
         self.label1 = None
         self.debug_frame = self.debug_combobox1 = self.output_text = None
+        self.button1 = self.button2 = self.button3 = self.button4 = self.button5 = None
+        self.widgets = None
 
     def initialization_root(self):
         self.root.title(config.FULL_VERSION)
