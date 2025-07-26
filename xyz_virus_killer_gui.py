@@ -140,6 +140,18 @@ class ErrorsiaVirusKillerGUI:
 
         self.var.set("FINISH")
 
+    def auto_kill_main(self):
+        self.disable_widgets()
+
+        self.var.set('Auto Kill')
+        self.label1.update()
+
+        self.logic.auto_kill()
+
+        self.enable_widgets()
+
+        self.var.set("FINISH")
+
     # Get the value of the combobox automatically and set the level of the logger & handler
     # noinspection PyUnusedLocal
     def debug_combobox_on_select(self, event):
