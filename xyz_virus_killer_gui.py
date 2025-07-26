@@ -28,7 +28,7 @@ from tkinter import ttk
 
 # Private Libraries
 import icon
-import xyzvk_config as config
+import xyz_virus_killer_config as config
 
 
 class ErrorsiaVirusKillerGUI:
