@@ -54,25 +54,25 @@ class ErrorsiaVirusKillerGUI:
 
         button_frame = tk.Frame(self.root, bg='palegreen')
 
-        button1 = tk.Button(button_frame, text="Kill Viruses", font=30, width=40, height=2,
-                            command=self.logic.kill_viruses)
-        button1.grid(row=0, column=0, padx=10, pady=20)
+        self.button1 = tk.Button(button_frame, text="Kill Viruses", font=30, width=40, height=2,
+                                 command=self.kill_virus_main)
+        self.button1.grid(row=0, column=0, padx=10, pady=20)
 
-        button2 = tk.Button(button_frame, text="Repair Infected Files", font=30, width=40, height=2,
-                            command=self.logic.repair_infected_files)
-        button2.grid(row=0, column=1, padx=10, pady=20)
+        self.button2 = tk.Button(button_frame, text="Repair Infected Files", font=30, width=40, height=2,
+                                 command=self.logic.repair_infected_files)
+        self.button2.grid(row=0, column=1, padx=10, pady=20)
 
-        button3 = tk.Button(button_frame, text="Auto Kill(Do #1 And #2)", font=30, width=40, height=2,
-                            command=self.logic.auto_kill)
-        button3.grid(row=1, column=0, padx=10, pady=20)
+        self.button3 = tk.Button(button_frame, text="Auto Kill(Do #1 And #2)", font=30, width=40, height=2,
+                                 command=self.auto_kill_main)
+        self.button3.grid(row=1, column=0, padx=10, pady=20)
 
-        button4 = tk.Button(button_frame, text="Clean Screen", font=30, width=40, height=2,
-                            command=self.logic.clean_button)
-        button4.grid(row=1, column=1, padx=10, pady=20)
+        self.button4 = tk.Button(button_frame, text="Clean Screen", font=30, width=40, height=2,
+                                 command=self.logic.clean_button)
+        self.button4.grid(row=1, column=1, padx=10, pady=20)
 
-        button5 = tk.Button(button_frame, text="Debugger", font=30, width=40, height=2,
-                            command=self.logic.debugger_button)
-        button5.grid(row=2, column=0, padx=10, pady=20)
+        self.button5 = tk.Button(button_frame, text="Debugger", font=30, width=40, height=2,
+                                 command=self.logic.debugger_button)
+        self.button5.grid(row=2, column=0, padx=10, pady=20)
 
         button_frame.grid(row=2, column=0, rowspan=4, columnspan=2)
 
@@ -96,12 +96,22 @@ class ErrorsiaVirusKillerGUI:
         self.debug_combobox1.pack(side='left', padx=10)
 
         # Set default values
+        # There is still bug here
         self.debug_combobox1.current(0)
 
         # Bind events to combobox
         self.debug_combobox1.bind("<<ComboboxSelected>>", self.debug_combobox_on_select)
 
         debug_frame_sub1.pack(pady=10)
+
+        self.widgets = [
+            self.button1,
+            self.button2,
+            self.button3,
+            self.button4,
+            self.button5,
+            self.debug_combobox1
+        ]
 
         self.var.set(config.FULL_VERSION)
 
