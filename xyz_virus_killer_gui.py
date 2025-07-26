@@ -118,6 +118,11 @@ class ErrorsiaVirusKillerGUI:
 
         self.var.set(config.FULL_VERSION)
 
+    def disable_widgets(self):
+        for widget in self.widgets:
+            widget.configure(state='disabled')
+            widget.update()
+
     # Get the value of the combobox automatically and set the level of the logger & handler
     # noinspection PyUnusedLocal
     def debug_combobox_on_select(self, event):
