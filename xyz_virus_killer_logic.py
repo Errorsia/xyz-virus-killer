@@ -143,7 +143,7 @@ class ErrorsiaVirusKillerLogic:
                 file.write(f"del /f /q *.avk \ndel /f /q *.bat")
 
     # Check for updates
-    def update(self):
+    def check_update(self):
         internal_version = int(config.INTERNAL_VERSION)
         online_update_version = -1
         local_update_version = int(self.local_update())
