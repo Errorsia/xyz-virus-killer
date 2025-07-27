@@ -279,6 +279,11 @@ class ErrorsiaVirusKillerLogic:
 
     # Virus killer main module
     def kill_viruses(self):
+        # self.gui.button1.configure(state='disabled')
+        # self.gui.button1.update()
+        #
+        # self.gui.var.set('Killing Virus Processes')
+        # self.gui.label1.update()
 
         self.set_insert_simplified('\nKilling Processes:')
 
@@ -287,12 +292,11 @@ class ErrorsiaVirusKillerLogic:
 
         for processes in virus_processes:
             self.taskkill_processes(processes)
-
-        self.gui.var.set("FINISH")
-
         # wintoast('Antivirus completed')
 
         self.handle_virus_files()
+
+        # self.gui.button1.configure(state='normal')
 
     # Virus killer module: Taskkill virus processes
     def taskkill_processes(self, process_name):
