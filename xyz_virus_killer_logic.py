@@ -58,10 +58,11 @@ class ErrorsiaVirusKillerLogic:
         # self.logging = log['logging']
         # self.logger = log['logger']
         # self.handler = log['handler']
-        # Saftier
+        # Safer
         self.logging = log.get('logging')
         self.logger = log.get('logger')
         self.handler = log.get('handler')
+        self._log_ready = all([self.logger, self.handler])
 
     def initialization(self):
         self.check_operate_system()
