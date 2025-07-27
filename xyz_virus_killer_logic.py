@@ -38,13 +38,10 @@ class ErrorsiaVirusKillerLogic:
     def __init__(self, gui):
         self.gui = gui
         self.logging = self.logger = self.handler = None
+        self._log_ready = False
 
         # Whether TSET ENVIRONMENT
         # test = True
-
-        # Build log(Messagebox return)
-        # log_dictionary = {'build_Log': None}a
-        self.build_Log = None
 
         self.disable_debug_frame = True
 
