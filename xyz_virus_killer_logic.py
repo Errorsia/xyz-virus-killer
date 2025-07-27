@@ -128,7 +128,6 @@ class ErrorsiaVirusKillerLogic:
             return -1
 
     def write_log_config(self, build_log):
-        # print(self.build_Log)
         log_cfg_content = 1 if build_log else 0
         config_path = f'{self.file_directory}/Config/VirusKiller_Configuration.Elysia'
 
@@ -142,7 +141,6 @@ class ErrorsiaVirusKillerLogic:
         if not os.path.exists(f"{self.file_directory}/Log/Clean_Log.bat"):
             with open(f"{self.file_directory}/Log/Clean_Log.bat", "w", encoding="UTF-8") as file:
                 file.write(f"del /f /q *.avk \ndel /f /q *.bat")
-        # print(self.build_Log)
 
     # Check for updates
     def update(self):
