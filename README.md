@@ -33,6 +33,12 @@
 
 本项目基于 `Python 3.x` 运行，GUI仅使用标准库，逻辑模块需额外安装第三方库 `Win32API` 。
 
+如有需要，请安装 `pywin32` 库：
+
+```bash
+pip install pywin32
+```
+
 如有需要，请安装 `Tkinter` 库：
 
 ```bash
