@@ -559,6 +559,10 @@ class ErrorsiaVirusKillerLogic:
         elif level == 'Silent':
             self.handler.setLevel(100)
             self.logger.setLevel(100)
+        else:
+            # This won't happen
+            self.handler.setLevel(self.logging.INFO)
+            self.logger.setLevel(level=self.logging.INFO)
 
     def set_insert_simplified(self, content):
         minus_sign_quantity = '-' * 50
