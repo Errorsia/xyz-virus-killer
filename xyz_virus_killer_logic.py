@@ -21,6 +21,10 @@
 Logic module for xyzvk
 """
 
+# Update:
+# Rebuild get_removable_drives function
+# Rebuild get_volume_label function
+
 import os
 import subprocess
 import time
@@ -325,36 +329,47 @@ class ErrorsiaVirusKillerLogic:
 
         self.set_insert(module_name, condition, output_content)
 
-    @staticmethod
-    def get_volume_label(disk_letter):
-        # Make sure the disk letter format is correct
-        disk_letter = disk_letter.upper().rstrip(':') + ':'
+    # @staticmethod
+    # def get_volume_label(disk_letter):
+    #     # Make sure the disk letter format is correct
+    #     disk_letter = disk_letter.upper().rstrip(':') + ':'
+    #
+    #     # Execute the WMIC command to obtain disk information
+    #     result = subprocess.run(
+    #         'wmic logicaldisk get name,volumename',
+    #         capture_output=True,
+    #         text=True,
+    #         encoding='gbk',  # Chinese system uses GBK encoding
+    #         shell=True
+    #     )
+    #
+    #     # Parsing output results
+    #     output = result.stdout.strip()
+    #     for line in output.split('\n'):
+    #         # Skip empty lines and header lines
+    #         if not line.strip() or line.startswith('Name'):
+    #             continue
+    #
+    #         # Clean extra spaces and split columns
+    #         parts = list(filter(None, line.split()))
+    #         if len(parts) >= 2:
+    #             disk_name = parts[0]
+    #             disk_label = ' '.join(parts[1:])
+    #             if disk_name == disk_letter:
+    #                 return disk_label
+    #
+    #     return None  # No corresponding drive letter found
 
-        # Execute the WMIC command to obtain disk information
-        result = subprocess.run(
-            'wmic logicaldisk get name,volumename',
-            capture_output=True,
-            text=True,
-            encoding='gbk',  # Chinese system uses GBK encoding
-            shell=True
-        )
-
-        # Parsing output results
-        output = result.stdout.strip()
-        for line in output.split('\n'):
-            # Skip empty lines and header lines
-            if not line.strip() or line.startswith('Name'):
-                continue
-
-            # Clean extra spaces and split columns
-            parts = list(filter(None, line.split()))
-            if len(parts) >= 2:
-                disk_name = parts[0]
-                disk_label = ' '.join(parts[1:])
-                if disk_name == disk_letter:
-                    return disk_label
-
-        return None  # No corresponding drive letter found
+    def get_volume_label(self, drive_letter):
+        drive = drive_letter.upper().rstrip(':\\') + ':\\'
+        try:
+            # noinspection PyUnresolvedReferences
+            volume_info = win32api.GetVolumeInformation(drive)
+            return volume_info[0]  # 第一个元素是卷标
+        except Exception as err:
+            print(f"An error occurred: {err}")
+            self.logger.error(f"An error occurred: {err}")
+            return None
 
     # Virus Files Rename Module: Rename the Virus Files
     def handle_virus_files(self):
@@ -364,11 +379,12 @@ class ErrorsiaVirusKillerLogic:
 
         self.set_insert_simplified('\nRenaming Files:')
 
-        # If you want to add more dirs. Add them in here.
-        disks = self.get_removable_disks()
+        # If you want to add more dirs. Add them in here. <--Old comment
+        # Auto get removable drives
+        removable_drives = self.get_removable_drives()
 
-        if disks:
-            for disk in disks:
+        if removable_drives:
+            for disk in removable_drives:
                 current_disk_name = self.get_volume_label(disk)
 
                 if os.path.exists(f'{disk}:\\{current_disk_name}.lnk'):
@@ -397,7 +413,7 @@ class ErrorsiaVirusKillerLogic:
         self.set_insert_simplified('\nShowing Hidden Files:')
 
         # If you want to add other dirs. Add it in here.
-        disks = self.get_removable_disks()
+        disks = self.get_removable_drives()
 
         module_name = 'repair_infected_files'
 
