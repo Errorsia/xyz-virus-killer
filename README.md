@@ -50,6 +50,7 @@ pip install tkinter
 ```
 xyz-virus-killer/
 │── xyz_virus_killer_main.py                   # 主程序文件
+│── xyz_virus_killer_gui.py                    # GUI模块文件
 ```
 
 ## 贡献
