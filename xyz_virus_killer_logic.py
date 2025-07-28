@@ -35,7 +35,7 @@ import win32api
 import win32file
 
 # Mudules
-import xyzvk_config as config
+import xyz_virus_killer_config as config
 
 
 class ErrorsiaVirusKillerLogic:
