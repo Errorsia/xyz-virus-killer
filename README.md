@@ -49,7 +49,7 @@ pip install tkinter
 
 ```
 xyz-virus-killer/
-│── xyz-virus-killer.py                   # 主程序文件
+│── xyz_virus_killer_main.py                   # 主程序文件
 ```
 
 ## 贡献
