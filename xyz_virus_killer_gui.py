@@ -170,4 +170,3 @@ class ErrorsiaVirusKillerGUI:
     def debug_combobox_on_select(self, event):
         selected_value = self.debug_combobox1.get()
         self.logic.set_log_level(selected_value)
-
