@@ -48,8 +48,8 @@ import tkinter as tk
 from tkinter import messagebox
 
 # Private Libraries
-import xyzvk_gui as gui_module
-import xyzvk_logic as logic_module
+import xyz_virus_killer_gui as gui_module
+import xyz_virus_killer_logic as logic_module
 
 
 # import win11toast
