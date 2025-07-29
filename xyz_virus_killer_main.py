@@ -54,23 +54,6 @@ import xyz_virus_killer_logic as logic_module
 
 # import win11toast
 
-"""
-THE PROGRAMME ONLY RUNS ON WINDOWS(NT) !
-I don't think someone will run an EXE programme on Linux(except wine), MacOS etc.
-
-Update Log:
-Rebuild all files
-
-更新日志:
-重构所有文件
-
-
-Author's message:
-    Why the codes is more and more complex, while the lines are fewer and fewer?
-    There is no bugs at present!
-    But programme is still TESTING!
-"""
-
 
 class ErrorsiaVirusKillerApp:
     def __init__(self):
@@ -79,18 +62,14 @@ class ErrorsiaVirusKillerApp:
 
         self.debug_frame_disable = True
 
-        # Get the value of the environment variable %appdata%
-        self.appdata = os.getenv("APPDATA")
-        # appdata = os.path.expandvars("%APPDATA%")
-        self.file_directory = self.appdata + '/Arthur/VirusKiller'
-
-        # Whether show Easter Egg
-        # Current condition: On (If Easter_Egg < 0, it's Off)
-        self.Easter_Egg = 0
-
         self.logic = logic_module.ErrorsiaVirusKillerLogic(gui=None)
 
         self.logic.initialization()
+
+        # Get the value of the environment variable %appdata%
+        self.appdata = self.logic.appdata
+        # Get config and log directory
+        self.file_directory = self.logic.file_directory
 
         self.logger = logging.getLogger(__name__)
         self.handler = logging.FileHandler(f'{self.file_directory}/Log/Log_{time.time():.7f}.avk')
@@ -104,14 +83,15 @@ class ErrorsiaVirusKillerApp:
             'handler': self.handler
         }
 
-        self.logic.set_log(self.log)
+        self.handle_log_config()
+        self.initialization_logger_level()
 
+        self.logic.set_log(self.log)
         self.logger.info('Successfully initialized logic module')
 
-        self.handle_log_config()
-        self.initialization_logger()
-
         self.logic.easy_clean_log()
+
+        self.logic.check_update()
 
         self.root = tk.Tk()
         self.var = tk.StringVar()
