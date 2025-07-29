@@ -107,7 +107,7 @@ class ErrorsiaVirusKillerApp:
 
         self.root.mainloop()
 
-    def initialization_logger(self):
+    def initialization_logger_level(self):
         print(self.build_Log)
         if self.build_Log:
             self.handler.setLevel(logging.DEBUG)
