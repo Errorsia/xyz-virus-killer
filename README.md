@@ -33,7 +33,7 @@
 
 本项目基于 `Python 3.x` 运行，GUI仅使用标准库，逻辑模块需额外安装第三方库 `pywin32` 。
 
-如有需要，请安装 `pywin32` 库：
+请安装 `pywin32` 库：
 
 ```bash
 pip install pywin32
@@ -49,9 +49,11 @@ pip install tkinter
 
 ```
 xyz-virus-killer/
-│── xyz_virus_killer_main.py                   # 主程序文件
-│── xyz_virus_killer_gui.py                    # GUI模块文件
-│── xyz_virus_killer_logic.py                  # Logic模块文件
+│── xyz_virus_killer_main.py     # 主程序文件
+│── xyz_virus_killer_gui.py      # GUI模块文件
+│── xyz_virus_killer_logic.py    # Logic模块文件
+│── xyz_virus_killer_config.py   # 程序配置文件
+│── icon.py                      # 程序图标文件
 ```
 
 ## 贡献
