@@ -109,14 +109,11 @@ class ErrorsiaVirusKillerLogic:
         if not os.path.isfile(config_path):
             return -1
 
-            # try:
-            #     with open(config_path, "r", encoding="UTF-8") as file:
-            #         read_config = file.read()
-            # except PermissionError:
-            #     return -1
-
-        with open(config_path, "r", encoding="UTF-8") as file:
-            read_config = file.read()
+        try:
+            with open(config_path, "r", encoding="UTF-8") as file:
+                read_config = file.read()
+        except PermissionError:
+            return -2
 
         enable_log = read_config[0]
 
