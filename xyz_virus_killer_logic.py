@@ -119,7 +119,6 @@ class ErrorsiaVirusKillerLogic:
 
         if enable_log == "1":
             return 1
-
         elif enable_log == "0":
             return 0
         else:
@@ -390,7 +389,6 @@ class ErrorsiaVirusKillerLogic:
                         os.rename(infected_folder_path, f'{disk}:\\Files Hidden by Viruses')
                         # os.rename(infected_folder_path, f'{disk}:\\被病毒隐藏的文件')
                         self.logger.info(f'Infected folder in {disk}-disk has been renamed')
-                        # print(f'Successfully renamed')
                     except PermissionError as error:
                         self.logger.error(f'Permission denied: {error}')
                         condition_list.append('failed')
