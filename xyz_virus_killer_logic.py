@@ -239,12 +239,6 @@ class ErrorsiaVirusKillerLogic:
 
     # Virus killer main module
     def kill_viruses(self):
-        # self.gui.button1.configure(state='disabled')
-        # self.gui.button1.update()
-        #
-        # self.gui.var.set('Killing Virus Processes')
-        # self.gui.label1.update()
-
         self.set_insert_simplified('\nKilling Processes:')
 
         # If you want to add more viruses' processes. Add them in here.
