@@ -32,10 +32,11 @@ import xyz_virus_killer_config as config
 
 
 class ErrorsiaVirusKillerGUI:
-    def __init__(self, root, var, logger, logic):
+    def __init__(self, root, var, logger, build_log, logic):
         self.root = root
         self.var = var
         self.logger = logger
+        self.build_log = build_log
         self.logic = logic
         # Define widgets
         self.label1 = None
@@ -112,8 +113,7 @@ class ErrorsiaVirusKillerGUI:
         self.debug_combobox1.pack(side='left', padx=10)
 
         # Set default values
-        # There is still bug here
-        self.debug_combobox1.current(0)
+        self.debug_combobox1.current(0 if self.build_log else 5)
 
         # Bind events to combobox
         self.debug_combobox1.bind("<<ComboboxSelected>>", self.debug_combobox_on_select)
