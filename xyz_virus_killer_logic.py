@@ -119,9 +119,6 @@ class ErrorsiaVirusKillerLogic:
 
         if enable_log == "1":
             return 1
-            # log_get_message = False
-            # _build_log = True
-            # log_config = 1
 
         elif enable_log == "0":
             return 0
