@@ -250,8 +250,6 @@ class ErrorsiaVirusKillerLogic:
 
         self.handle_virus_files()
 
-        # self.gui.button1.configure(state='normal')
-
     # Virus killer module: Taskkill virus processes
     def taskkill_processes(self, process_name):
         module_name = 'taskkill_processes'
