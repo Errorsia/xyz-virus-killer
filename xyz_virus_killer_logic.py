@@ -285,37 +285,6 @@ class ErrorsiaVirusKillerLogic:
 
         self.set_insert(module_name, condition, output_content)
 
-    # @staticmethod
-    # def get_volume_label(disk_letter):
-    #     # Make sure the disk letter format is correct
-    #     disk_letter = disk_letter.upper().rstrip(':') + ':'
-    #
-    #     # Execute the WMIC command to obtain disk information
-    #     result = subprocess.run(
-    #         'wmic logicaldisk get name,volumename',
-    #         capture_output=True,
-    #         text=True,
-    #         encoding='gbk',  # Chinese system uses GBK encoding
-    #         shell=True
-    #     )
-    #
-    #     # Parsing output results
-    #     output = result.stdout.strip()
-    #     for line in output.split('\n'):
-    #         # Skip empty lines and header lines
-    #         if not line.strip() or line.startswith('Name'):
-    #             continue
-    #
-    #         # Clean extra spaces and split columns
-    #         parts = list(filter(None, line.split()))
-    #         if len(parts) >= 2:
-    #             disk_name = parts[0]
-    #             disk_label = ' '.join(parts[1:])
-    #             if disk_name == disk_letter:
-    #                 return disk_label
-    #
-    #     return None  # No corresponding drive letter found
-
     def get_volume_label(self, drive_letter):
         drive = drive_letter.upper().rstrip(':\\') + ':\\'
         try:
