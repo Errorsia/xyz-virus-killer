@@ -69,7 +69,7 @@ class ErrorsiaVirusKillerGUI:
 
         tk.Label(self.root, width=10, font=20, height=2).grid(row=1, column=0, columnspan=4)
 
-        button_frame = tk.Frame(self.root, bg='palegreen')
+        button_frame = tk.Frame(self.root)
 
         self.button1 = tk.Button(button_frame, text="Kill Viruses", font=30, width=40, height=2,
                                  command=self.kill_virus_main)
@@ -93,7 +93,7 @@ class ErrorsiaVirusKillerGUI:
 
         button_frame.grid(row=2, column=0, rowspan=4, columnspan=2)
 
-        self.debug_frame = tk.Frame(self.root, bg='red')
+        self.debug_frame = tk.Frame(self.root)
 
         debug_label1 = tk.Label(self.debug_frame, text="Debugger Output:", width=17, font=('TkDefaultFont', 20),
                                 height=1)
