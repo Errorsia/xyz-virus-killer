@@ -46,4 +46,4 @@ description when links are shared are language-appropriate
 
 [unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.1.1...HEAD
 [v1.4]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v1.4
-[v1.4]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v1.5
+[v1.5]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v1.5
