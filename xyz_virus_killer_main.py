@@ -48,8 +48,8 @@ import tkinter as tk
 from tkinter import messagebox
 
 # Private Libraries
-import xyz_virus_killer_gui as gui_module
-import xyz_virus_killer_logic as logic_module
+import xyzvk_gui as gui_module
+import xyzvk_logic as logic_module
 
 
 # import win11toast
@@ -138,20 +138,3 @@ class ErrorsiaVirusKillerApp:
 
 if __name__ == '__main__':
     ErrorsiaVirusKillerApp()
-
-# Project Name: [你的项目名称]
-# Author: [你的名字或组织名] <[你的电子邮件或网站]>
-# Copyright (C) [年份] [你的名字或组织名]
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <https://www.gnu.org/licenses/>.
