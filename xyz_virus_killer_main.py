@@ -52,9 +52,6 @@ import xyz_virus_killer_gui as gui_module
 import xyz_virus_killer_logic as logic_module
 
 
-# import win11toast
-
-
 class ErrorsiaVirusKillerApp:
     def __init__(self):
 
