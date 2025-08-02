@@ -66,9 +66,6 @@ class ErrorsiaVirusKillerGUI:
         self.label1 = tk.Label(self.root, textvariable=self.var, bg="lightcyan", width=44, font=("Arial", 40), height=2)
         self.label1.grid(row=0, column=0, columnspan=4)
 
-        # self.label2 = tk.Label(self.root, width=10, font=20, height=2)
-        # self.label2.grid(row=1, column=0, columnspan=4)
-
         tk.Label(self.root, width=10, font=20, height=2).grid(row=1, column=0, columnspan=4)
 
         button_frame = tk.Frame(self.root)
