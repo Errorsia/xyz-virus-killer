@@ -25,6 +25,8 @@ import os
 import tempfile
 import tkinter as tk
 from tkinter import ttk
+import ttkbootstrap as ttkbs
+from ttkbootstrap.constants import *
 
 # Private Libraries
 import icon
@@ -71,23 +73,23 @@ class ErrorsiaVirusKillerGUI:
 
         button_frame = tk.Frame(self.root)
 
-        self.button1 = tk.Button(button_frame, text="Kill Viruses", font=30, width=40, height=2,
+        self.button1 = ttkbs.Button(button_frame, text="Kill Viruses",  width=40, bootstyle=SUCCESS,
                                  command=self.kill_virus_main)
         self.button1.grid(row=0, column=0, padx=10, pady=20)
 
-        self.button2 = tk.Button(button_frame, text="Repair Infected Files", font=30, width=40, height=2,
+        self.button2 = ttkbs.Button(button_frame, text="Repair Infected Files",  width=40, bootstyle=SUCCESS,
                                  command=self.logic.repair_infected_files)
         self.button2.grid(row=0, column=1, padx=10, pady=20)
 
-        self.button3 = tk.Button(button_frame, text="Auto Kill(Do #1 And #2)", font=30, width=40, height=2,
+        self.button3 = ttkbs.Button(button_frame, text="Auto Kill(Do #1 And #2)",  width=40, bootstyle=SUCCESS,
                                  command=self.auto_kill_main)
         self.button3.grid(row=1, column=0, padx=10, pady=20)
 
-        self.button4 = tk.Button(button_frame, text="Clean Screen", font=30, width=40, height=2,
+        self.button4 = ttkbs.Button(button_frame, text="Clean Screen",  width=40, bootstyle=SUCCESS,
                                  command=self.logic.clean_button)
         self.button4.grid(row=1, column=1, padx=10, pady=20)
 
-        self.button5 = tk.Button(button_frame, text="Debugger", font=30, width=40, height=2,
+        self.button5 = ttkbs.Button(button_frame, text="Debugger",  width=40, bootstyle=SUCCESS,
                                  command=self.logic.debugger_button)
         self.button5.grid(row=2, column=0, padx=10, pady=20)
 
