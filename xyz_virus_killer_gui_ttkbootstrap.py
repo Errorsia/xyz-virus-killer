@@ -73,22 +73,27 @@ class ErrorsiaVirusKillerGUI:
 
         button_frame = tk.Frame(self.root)
 
+        # noinspection PyArgumentList
         self.button1 = ttkbs.Button(button_frame, text="Kill Viruses",  width=40, bootstyle=SUCCESS,
                                  command=self.kill_virus_main)
         self.button1.grid(row=0, column=0, padx=10, pady=20)
 
+        # noinspection PyArgumentList
         self.button2 = ttkbs.Button(button_frame, text="Repair Infected Files",  width=40, bootstyle=SUCCESS,
                                  command=self.logic.repair_infected_files)
         self.button2.grid(row=0, column=1, padx=10, pady=20)
 
+        # noinspection PyArgumentList
         self.button3 = ttkbs.Button(button_frame, text="Auto Kill(Do #1 And #2)",  width=40, bootstyle=SUCCESS,
                                  command=self.auto_kill_main)
         self.button3.grid(row=1, column=0, padx=10, pady=20)
 
+        # noinspection PyArgumentList
         self.button4 = ttkbs.Button(button_frame, text="Clean Screen",  width=40, bootstyle=SUCCESS,
                                  command=self.logic.clean_button)
         self.button4.grid(row=1, column=1, padx=10, pady=20)
 
+        # noinspection PyArgumentList
         self.button5 = ttkbs.Button(button_frame, text="Debugger",  width=40, bootstyle=SUCCESS,
                                  command=self.logic.debugger_button)
         self.button5.grid(row=2, column=0, padx=10, pady=20)
