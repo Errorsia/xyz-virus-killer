@@ -129,7 +129,6 @@ class ErrorsiaVirusKillerApp:
                 )
             case -2:
                 self.build_Log = False
-                # tk.messagebox.showerror("PermissionError")
         self.logic.write_log_config(self.build_Log)
 
 
