@@ -32,10 +32,10 @@ Main module for xyzvk
 """
 
 # Update Log:
-# The copyright information has been modified to comply with the open source license
+# Change the colours of ui
 #
 # 更新日志:
-# 修改了版权信息, 以符合开源协议
+# 更改图形化界面的颜色
 
 # Author's message:
 #     Why the codes is more and more complex, while the lines are fewer and fewer?
