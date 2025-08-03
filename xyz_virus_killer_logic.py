@@ -59,9 +59,6 @@ class ErrorsiaVirusKillerLogic:
         self.Easter_Egg = 0
 
     def set_log(self, log):
-        # self.logging = log['logging']
-        # self.logger = log['logger']
-        # self.handler = log['handler']
         # Safer
         self.logging = log.get('logging')
         self.logger = log.get('logger')
@@ -233,7 +230,6 @@ class ErrorsiaVirusKillerLogic:
                 # DRIVE_REMOVABLE = 2
                 if drive_type == win32file.DRIVE_REMOVABLE:
                     drives.append(drive_letter)
-        # print(drives)
         return drives
 
     # Virus killer main module
