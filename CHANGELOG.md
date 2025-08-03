@@ -31,6 +31,14 @@ description when links are shared are language-appropriate
 - Trademark sign previously shown after the project description in version 
 0.3.0 -->
 
+## [v1.6]
+
+### Added 
+
+- Rebuild config module and taskkill module.
+- Change GUI layout.
+- Change name of some variables.
+
 ## [v1.5]
 
 ### Added 
@@ -47,3 +55,4 @@ description when links are shared are language-appropriate
 [unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.1.1...HEAD
 [v1.4]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v1.4
 [v1.5]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v1.5
+[v1.6]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v1.6
