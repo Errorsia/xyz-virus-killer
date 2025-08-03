@@ -227,7 +227,6 @@ class ErrorsiaVirusKillerLogic:
                 drive_letter = f"{chr(65 + i)}"
                 drive_path = f"{chr(65 + i)}:\\"
                 drive_type = win32file.GetDriveType(drive_path)
-                # DRIVE_REMOVABLE = 2
                 if drive_type == win32file.DRIVE_REMOVABLE:
                     drives.append(drive_letter)
         return drives
@@ -241,7 +240,6 @@ class ErrorsiaVirusKillerLogic:
 
         for processes in virus_processes:
             self.taskkill_processes(processes)
-        # wintoast('Antivirus completed')
 
         self.handle_virus_files()
 
