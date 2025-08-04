@@ -33,6 +33,7 @@ description when links are shared are language-appropriate
 - Add application icon
 - Fix some logical vulnerabilities
 - Modify the configuration of the text output box
+- Change name of some variables
 
 ## [v1.6]
 
