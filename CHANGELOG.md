@@ -26,6 +26,14 @@ description when links are shared are language-appropriate
 - Trademark sign previously shown after the project description in version 
 0.3.0 -->
 
+## [v1.6.5]
+
+### Added 
+
+- Rebuild config module and taskkill module.
+- Change GUI layout.
+- Change name of some variables.
+
 ## [v1.6]
 
 ### Added 
