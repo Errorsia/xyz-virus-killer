@@ -30,9 +30,7 @@ description when links are shared are language-appropriate
 
 ### Added 
 
-- Rebuild config module and taskkill module.
-- Change GUI layout.
-- Change name of some variables.
+- Add application icon
 
 ## [v1.6]
 
