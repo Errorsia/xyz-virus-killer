@@ -32,7 +32,7 @@ description when links are shared are language-appropriate
 
 - Add application icon
 - Fix some logical vulnerabilities
-
+- Modify the configuration of the text output box
 
 ## [v1.6]
 
