@@ -51,3 +51,4 @@ description when links are shared are language-appropriate
 [v1.4]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v1.4
 [v1.5]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v1.5
 [v1.6]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v1.6
+[v1.6.5]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v1.6.5
