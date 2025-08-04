@@ -31,6 +31,8 @@ description when links are shared are language-appropriate
 ### Added 
 
 - Add application icon
+- Fix some logical vulnerabilities
+
 
 ## [v1.6]
 
