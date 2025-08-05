@@ -30,7 +30,7 @@ description when links are shared are language-appropriate
 
 ### Added 
 
-- Add application icon
+- Add update module (Local update module)
 
 ### Changed
 
