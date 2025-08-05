@@ -1,6 +1,6 @@
 # XYZ Virus Killer
 
-![Python](https://img.shields.io/badge/python-3.11%2B-blue)
+![Python](https://img.shields.io/badge/python-3.12%2B-blue)
 ![License](https://img.shields.io/badge/license-GPLv3-green)
 ![Stars](https://img.shields.io/github/stars/Errorsia/xyz-virus-killer?style=social)
 <!-- [Dependencies](https://img.shields.io/librariesio/github/Errorsia/xyz-virus-killer) -->
