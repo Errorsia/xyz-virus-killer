@@ -35,8 +35,8 @@ description when links are shared are language-appropriate
 ### Changed
 
 - Fix some logical vulnerabilities
-- Modify the configuration of the text output box
-- Change name of some variables
+- Fix issue: Unable to create configuration folder
+
 
 ## [v1.6.5]
 
