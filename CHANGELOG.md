@@ -31,6 +31,9 @@ description when links are shared are language-appropriate
 ### Added 
 
 - Add application icon
+
+### Changed
+
 - Fix some logical vulnerabilities
 - Modify the configuration of the text output box
 - Change name of some variables
