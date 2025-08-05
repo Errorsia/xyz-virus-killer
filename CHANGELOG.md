@@ -37,6 +37,7 @@ description when links are shared are language-appropriate
 - Fix some logical vulnerabilities
 - Fix issue: Unable to create configuration folder
 - Change the order of code execution
+- Change name of some variables
 
 ## [v1.6.5]
 
