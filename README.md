@@ -21,7 +21,7 @@
 
 ## 使用方法
 
-1. **运行程序**：确保 Python 环境已安装，运行 `xyz-virus-killer.py`。
+1. **运行程序**：确保 Python 环境已安装, 推荐使用python3.12及以上的版本，运行 `xyz-virus-killer.py`。
 2. **点击 `Kill Virus (杀死病毒)`按钮**：
    - 如果有指定的病毒正在运行, 则杀死指定的病毒。
 3. **点击 `Fix What Viruses Make (修复被感染的文件)`按钮**：
