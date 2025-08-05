@@ -26,6 +26,18 @@ description when links are shared are language-appropriate
 - Trademark sign previously shown after the project description in version 
 0.3.0 -->
 
+## [v1.7.0]
+
+### Added 
+
+- Add application icon
+
+### Changed
+
+- Fix some logical vulnerabilities
+- Modify the configuration of the text output box
+- Change name of some variables
+
 ## [v1.6.5]
 
 ### Added 
