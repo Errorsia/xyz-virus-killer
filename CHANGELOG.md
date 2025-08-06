@@ -35,9 +35,9 @@ description when links are shared are language-appropriate
 ### Changed
 
 - Change the code names
-Fixed the problem of black frame popping up during runtime
-Use dictionaries to replace some variables (It seems unnecessary)
-Rebuild log module
+- Fixed the problem of black frame popping up during runtime
+- Use dictionaries to replace some variables (It seems unnecessary)
+- Rebuild log module
 
 ## [v1.7.7]
 
