@@ -26,7 +26,7 @@ description when links are shared are language-appropriate
 - Trademark sign previously shown after the project description in version 
 0.3.0 -->
 
-## [v1.7.0]
+## [v1.7.7]
 
 Nothing
 
