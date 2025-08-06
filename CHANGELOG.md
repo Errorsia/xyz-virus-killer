@@ -28,6 +28,10 @@ description when links are shared are language-appropriate
 
 ## [v1.7.0]
 
+Nothing
+
+## [v1.7.0]
+
 ### Added 
 
 - Add update module (Local update module)
@@ -38,12 +42,6 @@ description when links are shared are language-appropriate
 - Fix issue: Unable to create configuration folder
 - Change the order of code execution
 - Change name of some variables
-
-## [v1.7.0]
-
-### Added 
-
-Nothing
 
 ## [v1.6.5]
 
