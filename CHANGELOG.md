@@ -82,3 +82,4 @@ Nothing
 [v1.6]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v1.6
 [v1.6.5]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v1.6.5
 [v1.7.0]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v1.7.0
+[v1.7.7]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v1.7.7
