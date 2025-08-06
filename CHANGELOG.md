@@ -26,6 +26,19 @@ description when links are shared are language-appropriate
 - Trademark sign previously shown after the project description in version 
 0.3.0 -->
 
+## [v2.0.0]
+
+### Added 
+
+- Add update module (Local update module)
+
+### Changed
+
+- Fix some logical vulnerabilities
+- Fix issue: Unable to create configuration folder
+- Change the order of code execution
+- Change name of some variables
+
 ## [v1.7.7]
 
 Nothing
