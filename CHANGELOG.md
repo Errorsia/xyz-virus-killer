@@ -43,14 +43,7 @@ description when links are shared are language-appropriate
 
 ### Added 
 
-- Add update module (Local update module)
-
-### Changed
-
-- Fix some logical vulnerabilities
-- Fix issue: Unable to create configuration folder
-- Change the order of code execution
-- Change name of some variables
+Nothing
 
 ## [v1.6.5]
 
