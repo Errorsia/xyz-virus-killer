@@ -30,14 +30,14 @@ description when links are shared are language-appropriate
 
 ### Added 
 
-- Add update module (Local update module)
+- Add the debug frame & debugger button 
 
 ### Changed
 
-- Fix some logical vulnerabilities
-- Fix issue: Unable to create configuration folder
-- Change the order of code execution
-- Change name of some variables
+- Change the code names
+Fixed the problem of black frame popping up during runtime
+Use dictionaries to replace some variables (It seems unnecessary)
+Rebuild log module
 
 ## [v1.7.7]
 
