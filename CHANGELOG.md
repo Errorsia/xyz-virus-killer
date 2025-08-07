@@ -30,17 +30,13 @@ description when links are shared are language-appropriate
 
 ### Added 
 
+- Added logging to handle_virus_files
 - Added a module to obtain the drive letters
 - Added a module to obtain the drive letter of removable disks
 - Added a module to obtain the volume label of disks
-
 ### Changed
 
-- Change the code names
-- Fixed the problem of black frame popping up during runtime
-- Use dictionaries to replace some variables (It seems unnecessary)
-- Rebuild log module
-
+- 
 ## [v2.0.0]
 
 ### Added 
