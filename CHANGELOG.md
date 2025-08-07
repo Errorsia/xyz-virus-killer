@@ -39,6 +39,19 @@ description when links are shared are language-appropriate
 - Use dictionaries to replace some variables (It seems unnecessary)
 - Rebuild log module
 
+## [v2.0.0]
+
+### Added 
+
+- Add the debug frame & debugger button 
+
+### Changed
+
+- Change the code names
+- Fixed the problem of black frame popping up during runtime
+- Use dictionaries to replace some variables (It seems unnecessary)
+- Rebuild log module
+
 ## [v1.7.7]
 
 Nothing
