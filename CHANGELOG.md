@@ -26,6 +26,11 @@ description when links are shared are language-appropriate
 - Trademark sign previously shown after the project description in version 
 0.3.0 -->
 
+## [v2.0.3]
+
+### Removed
+- Removed copyright related statements as they do not comply with GPL v3.0+ open source license
+
 ## [v2.0.2]
 
 ### Added 
