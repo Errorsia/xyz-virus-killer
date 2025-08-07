@@ -30,7 +30,8 @@ description when links are shared are language-appropriate
 
 ### Added 
 
-- Add the debug frame & debugger button 
+- Added a module to obtain the drive letters
+- Added a module to obtain the drive letter of removable disks
 
 ### Changed
 
