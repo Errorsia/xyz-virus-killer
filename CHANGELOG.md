@@ -26,6 +26,22 @@ description when links are shared are language-appropriate
 - Trademark sign previously shown after the project description in version 
 0.3.0 -->
 
+## [v2.0.2]
+
+### Added 
+
+- Added logging to handle_virus_files
+- Added a module to obtain the drive letters
+- Added a module to obtain the drive letter of removable disks
+- Added a module to obtain the volume label of disks
+
+### Changed
+
+- Rebuild repair_infected_files module
+- Change the name of rename_virus_files to handle_virus_files
+- Optimize the logic of judging whether a string can be formatted into an integer
+
+
 ## [v2.0.1]
 
 ### Added 
