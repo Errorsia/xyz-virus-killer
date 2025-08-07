@@ -32,6 +32,7 @@ description when links are shared are language-appropriate
 
 - Added a module to obtain the drive letters
 - Added a module to obtain the drive letter of removable disks
+- Added a module to obtain the volume label of disks
 
 ### Changed
 
