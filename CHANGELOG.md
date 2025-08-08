@@ -26,6 +26,12 @@ description when links are shared are language-appropriate
 - Trademark sign previously shown after the project description in version 
 0.3.0 -->
 
+## [v3.1.0]
+
+### Changed
+
+- Rebuild some modules
+
 ## [v3.0.0]
 
 ### Added
