@@ -26,6 +26,12 @@ description when links are shared are language-appropriate
 - Trademark sign previously shown after the project description in version 
 0.3.0 -->
 
+## [v3.2.1]
+
+### Changed
+
+- Change the colours of the layout
+
 ## [v3.2.0]
 
 ### Changed
