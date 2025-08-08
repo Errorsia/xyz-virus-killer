@@ -28,9 +28,13 @@ description when links are shared are language-appropriate
 
 ## [v3.0.0]
 
+### Changed
+
+- Rebuild all files
+
 ### Removed
 
-- Removed copyright related statements as they do not comply with GPL v3.0+ open source license
+- xyz-virus-killer
 
 
 ## [v2.0.3]
