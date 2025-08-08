@@ -28,6 +28,12 @@ description when links are shared are language-appropriate
 
 ## [v3.0.0]
 
+### Added
+
+- xyz_virus_killer_main
+- xyz_virus_killer_logic
+- xyz_virus_killer_gui
+
 ### Changed
 
 - Rebuild all files
