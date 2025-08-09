@@ -62,7 +62,7 @@ xyz-virus-killer/
 
 ## 更新日志
 
-
+详情请见: [CHANGELOG](./CHANGELOG.md)
 
 ## 贡献
 
