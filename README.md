@@ -49,13 +49,15 @@ pip install tkinter
 
 ```
 xyz-virus-killer/
-│── xyz_virus_killer_main.py     # 主程序文件
-│── xyz_virus_killer_gui.py      # GUI模块文件
-│── xyz_virus_killer_logic.py    # Logic模块文件
-│── xyz_virus_killer_config.py   # 程序配置文件
-│── icon.py                      # 程序图标文件
-│── README.md                    # 说明文档
-│── LICENSE                      # GPLv3 开源协议
+│── xyz_virus_killer_main.py              # 主程序文件
+│── xyz_virus_killer_main_ttkbootstrap.py # 基于ttkbootstrap库的主程序文件
+│── xyz_virus_killer_gui.py               # GUI模块文件
+│── xyz_virus_killer_gui_ttkbootstrap.py  # 基于ttkbootstrap库的GUI模块文件
+│── xyz_virus_killer_logic.py             # Logic模块文件
+│── xyz_virus_killer_config.py            # 程序配置文件
+│── icon.py                               # 程序图标文件
+│── README.md                             # 说明文档
+│── LICENSE                               # GPLv3 开源协议
 ```
 
 ## 贡献
