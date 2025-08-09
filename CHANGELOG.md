@@ -32,6 +32,12 @@ description when links are shared are language-appropriate
 
 - Change the colours of the layout
 
+## [v3.2.1]
+
+### Changed
+
+- Change the colours of the layout
+
 ## [v3.2.0]
 
 ### Changed
