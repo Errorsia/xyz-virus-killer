@@ -30,7 +30,7 @@ description when links are shared are language-appropriate
 
 ### Changed
 
-- Change the colours of the layout
+- Change the colours of ui
 
 ## [v3.2.1]
 
