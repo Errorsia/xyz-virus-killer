@@ -28,6 +28,7 @@ Logic module for xyzvk
 import os
 import subprocess
 import time
+import sys
 import tkinter as tk
 from tkinter import messagebox
 
@@ -76,7 +77,7 @@ class ErrorsiaVirusKillerLogic:
     @staticmethod
     def check_operate_system():
         if os.name != 'nt':
-            exit('UNSUPPORTED SYSTEMS')
+            sys.exit('UNSUPPORTED SYSTEMS')
 
     # Check the working directories
     def check_path(self):
@@ -173,7 +174,7 @@ class ErrorsiaVirusKillerLogic:
                 'Please ask Arthur_xyz<Arthur_xyz@outlook.com> for the update.\n\n'
             )
 
-        exit('UPDATE AVAILABLE')
+        sys.exit('UPDATE AVAILABLE')
 
     def local_update(self):
         if os.path.exists(f'{self.file_directory}/Config/Local_Update.Elysia'):

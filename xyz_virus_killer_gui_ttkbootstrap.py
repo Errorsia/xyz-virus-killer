@@ -103,7 +103,7 @@ class ErrorsiaVirusKillerGUI:
                                 height=1)
         debug_label1.pack()
 
-        self.output_text = tk.Text(self.debug_frame, height=30)
+        self.output_text = tk.Text(self.debug_frame, height=25)
         self.output_text.pack()
         self.output_text.configure(state='disabled')
 

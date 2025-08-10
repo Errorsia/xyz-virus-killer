@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Project Name: xyzvk
-# Version: 3.1.0
+# Version: 3.3.0
 # Authors:
 #   - Ariskanyaa <Ariskanyaa@outlook.com>
 #   - Errorsia <Errorsia@outlook.com>
@@ -32,10 +32,10 @@ Main module for xyzvk
 """
 
 # Update Log:
-# Change the colours of ui
+# Fix bug: not import sys
 #
 # 更新日志:
-# 更改图形化界面的颜色
+# 修复没有导入sys库的问题
 
 # Author's message:
 #     Why the codes is more and more complex, while the lines are fewer and fewer?
