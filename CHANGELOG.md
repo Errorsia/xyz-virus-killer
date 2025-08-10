@@ -26,6 +26,12 @@ description when links are shared are language-appropriate
 - Trademark sign previously shown after the project description in version 
 0.3.0 -->
 
+## [v3.3.0]
+
+### Changed
+
+- Fix bug: unexpected exit
+
 ## [v3.2.2]
 
 ### Changed
