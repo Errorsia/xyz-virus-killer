@@ -6,43 +6,23 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 
-<!--
-## [Unreleased]
-
-### Added
-
-- v1.1 Brazilian Portuguese translation.
-
-### Changed
-
-- Use frontmatter title & description in each language version template
-- Replace broken OpenGraph image with an appropriately-sized Keep a Changelog 
-  image that will render properly (although in English for all languages)
-- Fix OpenGraph title & description for all languages so the title and 
-description when links are shared are language-appropriate
-
-### Removed
-
-- Trademark sign previously shown after the project description in version 
-0.3.0 -->
-
 ## [v3.3.0]
 
 ### Changed
 
-- Fix bug: unexpected exit
+- Fixed bug causing unexpected exit
 
 ## [v3.2.2]
 
 ### Changed
 
-- Change the colours of ui
+- Updated UI color scheme
 
 ## [v3.2.1]
 
 ### Changed
 
-- Change the colours of the layout
+- Updated layout color scheme
 
 ## [v3.2.0]
 
@@ -66,7 +46,7 @@ description when links are shared are language-appropriate
 
 ### Changed
 
-- Rebuild all files
+- Refactored entire codebase
 
 ### Removed
 
@@ -83,17 +63,7 @@ description when links are shared are language-appropriate
 
 ### Added 
 
-- Added logging to handle_virus_files
-- Added a module to obtain the drive letters
-- Added a module to obtain the drive letter of removable disks
-- Added a module to obtain the volume label of disks
-
-### Changed
-
-- Rebuild repair_infected_files module
-- Change the name of rename_virus_files to handle_virus_files
-- Optimize the logic of judging whether a string can be formatted into an integer
-
+- Added a close event handler
 
 ## [v2.0.1]
 
@@ -125,7 +95,7 @@ description when links are shared are language-appropriate
 
 ## [v1.7.7]
 
-Nothing
+- No changes recorded for this version.
 
 ## [v1.7.0]
 
@@ -138,7 +108,7 @@ Nothing
 - Fix some logical vulnerabilities
 - Fix issue: Unable to create configuration folder
 - Change the order of code execution
-- Change name of some variables
+- Renamed several variables for clarity
 
 ## [v1.6.5]
 
@@ -150,30 +120,29 @@ Nothing
 
 - Fix some logical vulnerabilities
 - Modify the configuration of the text output box
-- Change name of some variables
+- Renamed several variables for clarity
 
 ## [v1.6]
 
 ### Added 
 
 - Rebuild config module and taskkill module.
-- Change GUI layout.
-- Change name of some variables.
+- Updated GUI layout
+- Renamed several variables for clarity.
 
 ## [v1.5]
 
 ### Added 
 
-- Add create, Read, check config module.
+- Added config module with create, read, and check functionalities
 
 ## [v1.4]
 
 ### Added 
 
-- Add logger.
-- Change the layout
+- Added logger module
+- Updated layout
 
-[unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.1.1...HEAD
 [v1.4]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v1.4
 [v1.5]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v1.5
 [v1.6]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v1.6
