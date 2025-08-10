@@ -189,3 +189,4 @@ Nothing
 [v3.2.0]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v3.2.0
 [v3.2.1]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v3.2.1
 [v3.2.2]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v3.2.2
+[v3.3.0]: https://github.com/Errorsia/xyz-virus-killer/releases/tag/v3.3.0
