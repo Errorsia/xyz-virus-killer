@@ -10,24 +10,20 @@
 
 ## 项目简介
 
-`XYZ Virus Killer` 是一个基于 `Python` 的简单病毒定向清除软件。用户可以通过此程序杀死病毒程序, 处理病毒文件和修复被感染的文件。
+`XYZ Virus Killer` 是一个使用 `Python` 编写的病毒清除工具，支持定向杀毒、文件修复，并提供简洁的图形界面。
 
 ## 功能特色
 
-- **杀死病毒**：自动杀死运行的病毒, 内置支持杀死高达5种病毒。
-- **修复被感染的文件**：修复被感染的文件, 保护使用者的数据不被破坏。
-- **界面友好**：基于 `Tkinter` 创建图形界面, 简单直观。
-- **Easter Egg**：内置隐藏彩蛋, 增加趣味性。
+- **杀死病毒**：自动终止运行中的病毒进程，内置支持杀死高达5种病毒。
+- **修复文件**：恢复被病毒破坏的文件，保护用户数据。
+- **界面友好**：基于 `Tkinter` 构建，操作简单直观。
+- **隐藏彩蛋**：内置趣味元素，提升使用体验。
 
-## 使用方法
+### 操作说明
 
-1. **运行程序**：确保 Python 环境已安装, 推荐使用python3.12及以上的版本, 运行 `xyz-virus-killer.py`。
-2. **点击 `Kill Virus (杀死病毒)`按钮**：
-   - 如果有指定的病毒正在运行, 则杀死指定的病毒。
-3. **点击 `Fix What Viruses Make (修复被感染的文件)`按钮**：
-   - 可修复指定病毒带来的破坏。
-4. **点击 `Auto Kill (自动运行)` 按钮**：
-   - 将自动运行杀死病毒和修复被感染的文件功能。
+- `Kill Virus`：终止指定病毒进程
+- `Fix What Viruses Make`：修复病毒造成的文件损坏
+- `Auto Kill`：自动执行杀毒与修复操作
 
 ## 安装依赖
 
@@ -40,23 +36,34 @@ pip install pywin32
 ```
 
 如有需要, 请安装 `Tkinter` 库：
+> 注意：`Tkinter` 通常随 Python 安装包一同提供，若缺失可通过系统包管理器安装。
 
 ```bash
 pip install tkinter
+```
+
+## 可选组件：ttkbootstrap
+
+本项目支持使用 [`ttkbootstrap`](https://github.com/israel-dryer/ttkbootstrap) 来美化界面，但该库为**可选依赖**，非必须。
+
+如果你希望使用增强版界面（如 `xyz_virus_killer_main_ttkbootstrap.py` 和 `xyz_virus_killer_gui_ttkbootstrap.py`），请安装：
+
+```bash
+pip install ttkbootstrap
 ```
 
 ## 代码结构
 
 ```
 xyz-virus-killer/
-│── xyz_virus_killer_main.py              # 主程序文件
-│── xyz_virus_killer_main_ttkbootstrap.py # 基于ttkbootstrap库的主程序文件
-│── xyz_virus_killer_gui.py               # GUI模块文件
-│── xyz_virus_killer_gui_ttkbootstrap.py  # 基于ttkbootstrap库的GUI模块文件
-│── xyz_virus_killer_logic.py             # Logic模块文件
-│── xyz_virus_killer_config.py            # 程序配置文件
-│── icon.py                               # 程序图标文件
-│── README.md                             # 说明文档
+├── xyz_virus_killer_main.py              # 主程序入口
+├── xyz_virus_killer_main_ttkbootstrap.py # 使用 ttkbootstrap 的主程序
+├── xyz_virus_killer_gui.py               # GUI 控制模块
+├── xyz_virus_killer_gui_ttkbootstrap.py  # 使用 ttkbootstrap 的 GUI 模块
+├── xyz_virus_killer_logic.py             # 核心逻辑模块
+├── xyz_virus_killer_config.py            # 配置管理模块
+├── icon.py                               # 图标资源
+├── README.md                             # 项目说明文档
 │── LICENSE                               # GPLv3 开源协议
 ```
 
@@ -66,6 +73,8 @@ xyz-virus-killer/
 
 ## 贡献
 
-欢迎提供建议或改进代码！如有问题, 请联系作者。
+欢迎提供建议或改进代码!
+欢迎 `提交 Issue` 或 `Pull Request` 来改进本项目。  
+如有建议或问题，请联系作者或在 GitHub 上留言。
 
 Copyright (C) 2025 Errorsia & Ariskanyaa
