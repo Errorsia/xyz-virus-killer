@@ -1,81 +1,88 @@
-# XYZ Virus Killer
-
 ![Python](https://img.shields.io/badge/python-3.12%2B-blue)
 ![License](https://img.shields.io/badge/license-GPLv3-green)
 ![Stars](https://img.shields.io/github/stars/Errorsia/xyz-virus-killer?style=social)
 ![Last Update](https://img.shields.io/github/last-commit/Errorsia/xyz-virus-killer)
 
+
+# XYZ Virus Killer
+
+[English Documentation](README.md) | [中文文档](README-ZH.md)
+
+A lightweight Python-based tool for virus removal and file recovery — with a touch of fun.
+
 ---
 
-## 项目简介
+## Project Overview
 
-`XYZ Virus Killer` 是一个使用 `Python` 编写的病毒清除工具, 支持定向杀毒、文件修复, 并提供简洁的图形界面。
+`XYZ Virus Killer` is a virus removal tool written in `Python`, featuring targeted virus termination, file recovery, and a clean graphical interface.
 
-## 功能特色
+## Key Features
 
-- **杀死病毒**：自动终止运行中的病毒进程, 内置支持杀死高达5种病毒。
-- **修复文件**：恢复被病毒破坏的文件, 保护用户数据。
-- **界面友好**：基于 `Tkinter` 构建, 操作简单直观。
-- **隐藏彩蛋**：内置趣味元素, 提升使用体验。
+- **Kill Viruses**: Automatically terminates running virus processes. Supports up to 5 built-in virus types.
+- **Repair Files**: Restores files damaged by viruses to protect user data.
+- **User-Friendly Interface**: Built with `Tkinter`, offering simple and intuitive operation.
+- **Hidden Easter Eggs**: Includes fun elements to enhance the user experience.
 
-### 操作说明
+### Usage Instructions
 
-- `Kill Virus`：终止指定病毒进程
-- `Fix What Viruses Make`：修复病毒造成的文件损坏
-- `Auto Kill`：自动执行杀毒与修复操作
+- `Kill Virus`: Terminates specified virus processes  
+- `Fix What Viruses Make`: Repairs files damaged by viruses  
+- `Auto Kill`: Automatically performs virus removal and file recovery  
 
-## 安装依赖
+## Installation
 
-本项目基于 `Python 3.x` 运行, GUI仅使用标准库, 逻辑模块需额外安装第三方库 `pywin32` 。
+This project runs on `Python 3.x`. The GUI uses only standard libraries, while the logic module requires the third-party library `pywin32`.
 
-请安装 `pywin32` 库：
+Install the required `pywin32` library:
 
 ```bash
 pip install pywin32
 ```
 
-如有需要, 请安装 `Tkinter` 库：
-> 注意：`Tkinter` 通常随 Python 安装包一同提供, 若缺失可通过系统包管理器安装。
+If needed, install the Tkinter module:
+> Note: Tkinter is usually included with standard Python distributions. If missing, it can be installed via your system's package manager.
 
 ```bash
 pip install tkinter
 ```
 
-## 可选组件：ttkbootstrap
+## Optional Component: ttkbootstrap
 
-本项目支持使用 [`ttkbootstrap`](https://github.com/israel-dryer/ttkbootstrap) 来美化界面, 但该库为**可选依赖**, 非必须。
+This project supports enhanced UI styling via [`ttkbootstrap`](https://github.com/israel-dryer/ttkbootstrap), which is an optional dependency.
 
-如果你希望使用增强版界面 (如 `xyz_virus_killer_main_ttkbootstrap.py` 和 `xyz_virus_killer_gui_ttkbootstrap.py`) , 请安装：
+To use the enhanced interface (e.g., xyz_virus_killer_main_ttkbootstrap.py and xyz_virus_killer_gui_ttkbootstrap.py), install:
 
 ```bash
 pip install ttkbootstrap
 ```
 
-未安装该库时, 增强界面模块将无法运行, 但主程序仍可正常使用。
+Without this library, the enhanced interface modules will not run, but the main program remains fully functional.
 
-## 代码结构
+## Project Structure
 
 ```
 xyz-virus-killer/
-├── xyz_virus_killer_main.py              # 主程序入口
-├── xyz_virus_killer_main_ttkbootstrap.py # 使用 ttkbootstrap 的主程序
-├── xyz_virus_killer_gui.py               # GUI 控制模块
-├── xyz_virus_killer_gui_ttkbootstrap.py  # 使用 ttkbootstrap 的 GUI 模块
-├── xyz_virus_killer_logic.py             # 核心逻辑模块
-├── xyz_virus_killer_config.py            # 配置管理模块
-├── icon.py                               # 图标资源
-├── README.md                             # 项目说明文档
-│── LICENSE                               # GPLv3 开源协议
+├── xyz_virus_killer_main.py              # Main program entry
+├── xyz_virus_killer_main_ttkbootstrap.py # Main program with ttkbootstrap
+├── xyz_virus_killer_gui.py               # GUI controller module
+├── xyz_virus_killer_gui_ttkbootstrap.py  # GUI module with ttkbootstrap
+├── xyz_virus_killer_logic.py             # Core logic module
+├── xyz_virus_killer_config.py            # Configuration management
+├── icon.py                               # Icon resources
+├── README.md                             # English version of the project documentation  
+├── README-ZH.md                          # Chinese version of the project documentation  
+├── CHANGELOG.md                          # Record of updates and changes
+│── LICENSE                               # GPLv3 license
 ```
 
-## 更新日志
+## Changelog
 
-详情请见: [CHANGELOG](./CHANGELOG.md)
+For details, see: [CHANGELOG](./CHANGELOG.md)
 
-## 贡献
+## Contributing
 
-欢迎提供建议或改进代码!
-欢迎提交 Issue 或 Pull Request 来改进本项目。
-如有建议或问题, 请联系作者或在 GitHub 上留言。
+Suggestions and improvements are welcome! 
+Feel free to submit an Issue or Pull Request to help improve the project. 
+For feedback or questions, contact the author or leave a comment on GitHub.
 
 Copyright (C) 2025 Errorsia & Ariskanyaa
